@@ -8,11 +8,11 @@
 
 class DriveSubsystem : public frc2::SubsystemBase {
 public:
-  DriveSubsystem();
+  void Drive(double x1, double y1, double x2, double y2);
 
 private:
   ctre::phoenix6::swerve::SwerveDrivetrain Drivetrain{
-      ctre::phoenix6::swerve::SwerveDrivetrainConstants{},
+      constants::swerve::drivetrainConstants,
       constants::swerve::frontLeftModule, constants::swerve::frontRightModule,
       constants::swerve::rearLeftModule, constants::swerve::rearRightModule};
 };
