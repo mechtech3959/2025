@@ -1,7 +1,6 @@
-#include "Robot.hpp"
-#include "frc/RobotBase.h"
-
 #include <frc2/command/CommandScheduler.h>
+
+#include "Robot.hpp"
 
 void Robot::RobotPeriodic() { frc2::CommandScheduler::GetInstance().Run(); }
 

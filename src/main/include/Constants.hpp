@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ctre/phoenix6/swerve/SwerveDrivetrainConstants.hpp"
-#include "ctre/phoenix6/swerve/SwerveModuleConstants.hpp"
+#include <ctre/phoenix6/swerve/SwerveDrivetrainConstants.hpp>
+#include <ctre/phoenix6/swerve/SwerveModuleConstants.hpp>
 
 namespace constants {
 constexpr char canBus[] = "rio";

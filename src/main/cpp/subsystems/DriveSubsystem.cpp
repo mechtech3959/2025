@@ -1,7 +1,6 @@
+#include <ctre/phoenix6/swerve/SwerveRequest.hpp>
+
 #include "subsystems/DriveSubsystem.hpp"
-#include "Constants.hpp"
-#include "ctre/phoenix6/swerve/SwerveModuleConstants.hpp"
-#include "ctre/phoenix6/swerve/SwerveRequest.hpp"
 
 void DriveSubsystem::Drive(double x1, double y1, double x2, double y2) {
   Drivetrain.SetControl(ctre::phoenix6::swerve::requests::RobotCentric{}

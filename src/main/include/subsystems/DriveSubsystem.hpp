@@ -1,10 +1,9 @@
 #pragma once
 
-#include "Constants.hpp"
-#include "ctre/phoenix6/swerve/SwerveDrivetrainConstants.hpp"
-#include "ctre/phoenix6/swerve/SwerveModuleConstants.hpp"
 #include <ctre/phoenix6/swerve/SwerveDrivetrain.hpp>
 #include <frc2/command/SubsystemBase.h>
+
+#include "Constants.hpp"
 
 class DriveSubsystem : public frc2::SubsystemBase {
 public:
