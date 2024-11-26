@@ -5,6 +5,8 @@
 
 void Robot::RobotPeriodic() { frc2::CommandScheduler::GetInstance().Run(); }
 
+void Robot::TeleopInit() { container.TeleopInit(); }
+
 void Robot::TestInit() { frc2::CommandScheduler::GetInstance().CancelAll(); }
 
 #ifndef RUNNING_FRC_TESTS
