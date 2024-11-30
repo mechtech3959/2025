@@ -26,12 +26,14 @@ constexpr ctre::phoenix6::swerve::SwerveModuleConstants rearRightModule =
     ctre::phoenix6::swerve::SwerveModuleConstantsFactory{}
         .CreateModuleConstants(2, 4, 15, 72.06_deg, 19.35_in, 24.35_in, false,
                                false, false);
-constexpr ctre::phoenix6::swerve::SwerveDrivetrainConstants
-    drivetrainConstants{};
+constexpr ctre::phoenix6::swerve::SwerveDrivetrainConstants drivetrainConstants = 
+    ctre::phoenix6::swerve::SwerveDrivetrainConstants{}.WithPigeon2Id(odometry::kPigeonID);
 }; // namespace swerve
 
 namespace odometry {
-// ctre::phoenix6::hardware::Pigeon2 gyro{9};
+constexpr int kPigeonID = 9;
+ ctre::phoenix6::hardware::Pigeon2 gyro{kPigeonID};
+ 
 // frc::SwerveDriveKinematics<4> m_kinematics;
 }; // namespace odometry
 }; // namespace constants

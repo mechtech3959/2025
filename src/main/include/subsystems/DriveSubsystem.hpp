@@ -8,7 +8,8 @@
 class DriveSubsystem : public frc2::SubsystemBase {
 public:
   void Drive(double x1, double y1, double x2, double y2);
-
+  void DriveFOC(double x1, double y1, double x2, double y2,frc::Rotation2d operatorAngle);
+  
 private:
   ctre::phoenix6::swerve::SwerveDrivetrain Drivetrain{
       constants::swerve::drivetrainConstants,
