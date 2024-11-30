@@ -8,6 +8,8 @@
 namespace constants {
 constexpr char canBus[] = "rio";
 constexpr int driverControllerPort = 0;
+constexpr int kPigeonID = 9;
+
 
 namespace swerve {
 constexpr ctre::phoenix6::swerve::SwerveModuleConstants frontLeftModule =
@@ -27,12 +29,11 @@ constexpr ctre::phoenix6::swerve::SwerveModuleConstants rearRightModule =
         .CreateModuleConstants(2, 4, 15, 72.06_deg, 19.35_in, 24.35_in, false,
                                false, false);
 constexpr ctre::phoenix6::swerve::SwerveDrivetrainConstants drivetrainConstants = 
-    ctre::phoenix6::swerve::SwerveDrivetrainConstants{}.WithPigeon2Id(odometry::kPigeonID);
+    ctre::phoenix6::swerve::SwerveDrivetrainConstants{}.WithPigeon2Id(kPigeonID);
 }; // namespace swerve
 
 namespace odometry {
-constexpr int kPigeonID = 9;
- ctre::phoenix6::hardware::Pigeon2 gyro{kPigeonID};
+ // ctre::phoenix6::hardware::Pigeon2 gyro{constants::kPigeonID};
  
 // frc::SwerveDriveKinematics<4> m_kinematics;
 }; // namespace odometry

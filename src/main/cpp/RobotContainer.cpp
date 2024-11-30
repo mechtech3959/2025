@@ -2,18 +2,21 @@
 
 #include "RobotContainer.hpp"
 
-void RobotContainer::TeleopInit() {
+void RobotContainer::TeleopInit()
+{
   driveSubsystem.SetDefaultCommand(frc2::cmd::Run(
-      [this] {
+      [this]
+      {
         driveSubsystem.Drive(
             driverController.GetLeftX(), driverController.GetLeftY(),
             driverController.GetRightX(), driverController.GetRightY());
       },
       {&driveSubsystem}));
-  driveSubsystem.SetDefaultCommand(frc2::cmd::Run([this] {
-        driveSubsystem.Drive(
-            driverController.GetLeftX(), driverController.GetLeftY(),
-            driverController.GetRightX(), driverController.GetRightY());
-      },
+  driveSubsystem.SetDefaultCommand(frc2::cmd::Run(
+      [this]
+      {
+         driveSubsystem.Drive(
+          driverController.GetLeftX(), driverController.GetLeftY(),
+          driverController.GetRightX(), driverController.GetRightY()); },
       {&driveSubsystem}));
 }
