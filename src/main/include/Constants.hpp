@@ -33,9 +33,9 @@ constexpr ctre::phoenix6::swerve::SwerveDrivetrainConstants
             kPigeonID);
 }; // namespace swerve
 
-namespace odometry {
+// namespace odometry {
 // ctre::phoenix6::hardware::Pigeon2 gyro{constants::kPigeonID};
 
 // frc::SwerveDriveKinematics<4> m_kinematics;
-}; // namespace odometry
+// }; // namespace odometry
 }; // namespace constants
