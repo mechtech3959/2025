@@ -5,8 +5,7 @@
 #include "Constants.hpp"
 #include "subsystems/DriveSubsystem.hpp"
 
-class RobotContainer
-{
+class RobotContainer {
 public:
   void TeleopInit();
 
