@@ -4,7 +4,8 @@
 
 #include "RobotContainer.hpp"
 
-class Robot : public frc::TimedRobot {
+class Robot : public frc::TimedRobot
+{
 public:
   void RobotPeriodic() override;
   void TeleopInit() override;
