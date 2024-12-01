@@ -7,6 +7,7 @@
 
 class RobotContainer {
 public:
+  void RobotPeriodic();
   void TeleopInit();
 
 private:

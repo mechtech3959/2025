@@ -18,3 +18,4 @@ void DriveSubsystem::DriveFOC(double x1, double y1, double x2, double y2,
           .WithForwardPerspective(ctre::phoenix6::swerve::requests::
                                       ForwardPerspectiveValue::BlueAlliance));
 };
+void DriveSubsystem::startOdm() { Drivetrain.GetOdometryThread().Start(); };

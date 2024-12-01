@@ -12,6 +12,7 @@ public:
   void DriveFOC(double x1, double y1, double x2, double y2,
                 frc::Rotation2d operatorAngle);
   void DriveControlSelector(frc::XboxController controller);
+  void startOdm();
 
 private:
   ctre::phoenix6::swerve::SwerveDrivetrain Drivetrain{
