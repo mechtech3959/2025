@@ -13,6 +13,7 @@ public:
                 frc::Rotation2d operatorAngle);
   void DriveControlSelector(frc::XboxController controller);
   void startOdm();
+  void State();
 
 private:
   ctre::phoenix6::swerve::SwerveDrivetrain Drivetrain{
