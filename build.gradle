@@ -101,7 +101,6 @@ model {
 }
 
 nativeUtils.platformConfigs.named("linuxathena").configure {
-    it.cppCompiler.args.add('-Wno-deprecated-declarations')
     it.cppCompiler.args.add('-Wall')
     it.cppCompiler.args.add('-Wextra')
     it.cppCompiler.args.add('-Wpedantic')
