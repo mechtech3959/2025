@@ -19,15 +19,8 @@ void DriveSubsystem::DriveFOC(double x1, double y1, double x2, double y2,
                                       ForwardPerspectiveValue::BlueAlliance));
 };
 void DriveSubsystem::startOdm() { Drivetrain.GetOdometryThread().Start(); };
-// TODO: make a center point for single point pose
 void DriveSubsystem::State() {
-  double fl[2] = {constants::swerve::frontLeftModule.LocationX(),
-                  constants::swerve::frontLeftModule.LocationY()};
-  double fr[2] = {constants::swerve::frontRightModule.LocationX(),
-                  constants::swerve::frontRightModule.LocationY()};
-  double bl[2] = {constants::swerve::rearLeftModule.LocationX(),
-                  constants::swerve::rearLeftModule.LocationY()};
-  double br[2] = {constants::swerve::rearRightModule.LocationX(),
-                  constants::swerve::rearRightModule.LocationY()};
-  frc::Rotation3d rot = Drivetrain.GetRotation3d();
+  frc::Rotation3d m_rot = Drivetrain.GetRotation3d();
+  frc::Pose2d m_pose = Drivetrain.GetState().Pose;
+  frc::ChassisSpeeds m_speed = Drivetrain.GetState().Speeds;
 };

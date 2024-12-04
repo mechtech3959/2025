@@ -2,7 +2,7 @@
 
 #include "RobotContainer.hpp"
 void RobotContainer::RobotInit() { driveSubsystem.startOdm(); }
-void RobotContainer::RobotPeriodic() {}
+void RobotContainer::RobotPeriodic() { driveSubsystem.State(); }
 void RobotContainer::TeleopInit() {
   driveSubsystem.SetDefaultCommand(frc2::cmd::Run(
       [this] {
