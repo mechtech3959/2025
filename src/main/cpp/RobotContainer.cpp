@@ -1,8 +1,11 @@
 #include <frc2/command/Commands.h>
 
 #include "RobotContainer.hpp"
-void RobotContainer::RobotInit() { driveSubsystem.startOdm(); }
-void RobotContainer::RobotPeriodic() { driveSubsystem.State(); }
+
+RobotContainer::RobotContainer() { driveSubsystem.StartOdometryThread(); }
+
+void RobotContainer::Periodic() { driveSubsystem.State(); }
+
 void RobotContainer::TeleopInit() {
   driveSubsystem.SetDefaultCommand(frc2::cmd::Run(
       [this] {

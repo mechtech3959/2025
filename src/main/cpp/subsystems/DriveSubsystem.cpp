@@ -19,12 +19,12 @@ void DriveSubsystem::DriveFOC(double x1, double y1, double x2, double y2,
           .WithRotationalRate(x2 * 1_tr / 1_s)
           .WithForwardPerspective(ctre::phoenix6::swerve::requests::
                                       ForwardPerspectiveValue::BlueAlliance));
+void DriveSubsystem::StartOdometryThread() {
+  drivetrain.GetOdometryThread().Start();
 };
 
-void DriveSubsystem::startOdm() { Drivetrain.GetOdometryThread().Start(); };
-
 void DriveSubsystem::State() {
-  frc::Rotation3d rot = Drivetrain.GetRotation3d();
-  frc::Pose2d pose = Drivetrain.GetState().Pose;
-  frc::ChassisSpeeds speed = Drivetrain.GetState().Speeds;
+  frc::Rotation3d rotation = drivetrain.GetRotation3d();
+  frc::Pose2d pose = drivetrain.GetState().Pose;
+  frc::ChassisSpeeds speed = drivetrain.GetState().Speeds;
 };

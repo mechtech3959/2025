@@ -7,8 +7,8 @@
 
 class RobotContainer {
 public:
-  void RobotInit();
-  void RobotPeriodic();
+  RobotContainer();
+  void Periodic();
   void TeleopInit();
 
 private:
