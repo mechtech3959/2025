@@ -2,6 +2,7 @@
 
 #include <ctre/phoenix6/swerve/SwerveDrivetrain.hpp>
 #include <frc/XboxController.h>
+#include <frc2/command/InstantCommand.h>
 #include <frc2/command/SubsystemBase.h>
 #include <units/angular_velocity.h>
 #include <units/velocity.h>
@@ -17,11 +18,13 @@ public:
   void StartOdometryThread();
   void State();
 
-  bool isFieldCentric = false;
+  frc2::InstantCommand invert{[this] { isFieldCentric = !isFieldCentric; }, {}};
 
 private:
   ctre::phoenix6::swerve::SwerveDrivetrain drivetrain{
       constants::swerve::drivetrainConstants,
       constants::swerve::frontLeftModule, constants::swerve::frontRightModule,
       constants::swerve::rearLeftModule, constants::swerve::rearRightModule};
+
+  bool isFieldCentric = false;
 };

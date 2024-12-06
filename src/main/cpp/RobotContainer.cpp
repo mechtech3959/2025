@@ -11,7 +11,7 @@ RobotContainer::RobotContainer() {
 }
 
 void RobotContainer::ConfigureButtonBindings() {
-  driverController.Start().OnTrue(&invert);
+  driverController.Start().OnTrue(&driveSubsystem.invert);
 }
 
 void RobotContainer::Periodic() { driveSubsystem.State(); }
