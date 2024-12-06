@@ -99,16 +99,3 @@ model {
         }
     }
 }
-
-nativeUtils.platformConfigs.named("linuxathena").configure {
-    it.cppCompiler.args.add('-Wall')
-    it.cppCompiler.args.add('-Wextra')
-    it.cppCompiler.args.add('-Wpedantic')
-    it.cppCompiler.args.add('-Wpointer-arith')
-    it.cppCompiler.args.add('-Wcast-align')
-    it.cppCompiler.args.add('-Wwrite-strings')
-    it.cppCompiler.args.add('-Waggregate-return')
-    it.cppCompiler.args.add('-Wcast-qual')
-    it.cppCompiler.args.add('-Wunreachable-code')
-    it.cppCompiler.args.add('-std=gnu++23')
-}
