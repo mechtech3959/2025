@@ -1,8 +1,18 @@
 #include <frc2/command/Commands.h>
+#include <units/angular_velocity.h>
+#include <units/velocity.h>
 
 #include "RobotContainer.hpp"
+#include "frc2/command/InstantCommand.h"
 
-RobotContainer::RobotContainer() { driveSubsystem.StartOdometryThread(); }
+RobotContainer::RobotContainer() {
+  driveSubsystem.StartOdometryThread();
+  ConfigureButtonBindings();
+}
+
+void RobotContainer::ConfigureButtonBindings() {
+  driverController.Start().OnTrue(&invert);
+}
 
 void RobotContainer::Periodic() { driveSubsystem.State(); }
 
