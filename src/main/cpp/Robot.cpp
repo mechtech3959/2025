@@ -4,7 +4,16 @@
 
 void Robot::RobotPeriodic() { frc2::CommandScheduler::GetInstance().Run(); }
 
-void Robot::TeleopInit() { container.TeleopInit(); }
+void Robot::AutonomousInit() {
+  autonomousCommand = container.GetAutonomousCommand();
+  autonomousCommand->Schedule();
+}
+
+void Robot::TeleopInit() {
+  autonomousCommand->Cancel();
+
+  container.TeleopInit();
+}
 
 void Robot::TestInit() { frc2::CommandScheduler::GetInstance().CancelAll(); }
 

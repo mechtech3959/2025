@@ -1,9 +1,5 @@
 #include <frc/smartdashboard/SmartDashboard.h>
-#include <frc2/command/Commands.h>
-#include <frc2/command/InstantCommand.h>
 #include <pathplanner/lib/auto/AutoBuilder.h>
-#include <units/angular_velocity.h>
-#include <units/velocity.h>
 
 #include "RobotContainer.hpp"
 
@@ -11,6 +7,10 @@ RobotContainer::RobotContainer() {
   ConfigureButtonBindings();
 
   frc::SmartDashboard::PutData("Auto Chooser", &autoChooser);
+}
+
+frc2::Command *RobotContainer::GetAutonomousCommand() {
+  return autoChooser.GetSelected();
 }
 
 void RobotContainer::ConfigureButtonBindings() {
