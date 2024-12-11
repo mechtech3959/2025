@@ -5,6 +5,7 @@
 #include <ctre/phoenix6/swerve/SwerveDrivetrainConstants.hpp>
 #include <ctre/phoenix6/swerve/SwerveModuleConstants.hpp>
 #include <frc/kinematics/SwerveDriveKinematics.h>
+#include <units/acceleration.h>
 
 namespace constants {
 constexpr char canBus[] = "rio";
@@ -23,6 +24,8 @@ constexpr ctre::phoenix6::swerve::SwerveModuleConstantsFactory moduleCreator =
         .WithDriveMotorGains(ctre::phoenix6::configs::Slot0Configs{})
         .WithSteerMotorGains(ctre::phoenix6::configs::Slot0Configs{});
 
+// MK4 L2 swerve modules have a max free speed of 16.5 fps without FOC
+// FOC = 15.7 fps
 constexpr ctre::phoenix6::swerve::SwerveModuleConstants frontLeftModule =
     moduleCreator.CreateModuleConstants(7, 8, 12, 77.8_deg, 0_m, 0_m, false,
                                         false, false);
@@ -39,6 +42,9 @@ constexpr ctre::phoenix6::swerve::SwerveDrivetrainConstants
     drivetrainConstants =
         ctre::phoenix6::swerve::SwerveDrivetrainConstants{}.WithPigeon2Id(
             kPigeonID);
+//! set to max constraints of swerve modules!
+constexpr double maxDriveSpeedMPS = 5.01;
+constexpr double maxFOCDriveSpeedMPS = 4.78;
 }; // namespace swerve
 
 // namespace odometry {
