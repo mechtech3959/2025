@@ -34,7 +34,7 @@ constexpr ctre::phoenix6::swerve::SwerveDrivetrainConstants
     drivetrainConstants =
         ctre::phoenix6::swerve::SwerveDrivetrainConstants{}.WithPigeon2Id(
             kPigeonID);
-//!set to max constraints of swerve modules!
+//! set to max constraints of swerve modules!
 constexpr double maxDriveSpeedMPS = 5.01;
 constexpr double maxFOCDriveSpeedMPS = 4.78;
 }; // namespace swerve
