@@ -14,6 +14,7 @@
 class DriveSubsystem : public frc2::SubsystemBase {
 public:
   DriveSubsystem();
+  void Drive(ctre::phoenix6::swerve::requests::SwerveRequest &&request);
   void Drive(units::meters_per_second_t velocityX,
              units::meters_per_second_t velocityY,
              units::radians_per_second_t rotationalRate);

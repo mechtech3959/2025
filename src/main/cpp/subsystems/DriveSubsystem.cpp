@@ -33,6 +33,11 @@ DriveSubsystem::DriveSubsystem() {
       this);
 }
 
+void DriveSubsystem::Drive(
+    ctre::phoenix6::swerve::requests::SwerveRequest &&request) {
+  drivetrain.SetControl(request);
+}
+
 void DriveSubsystem::Drive(units::meters_per_second_t velocityX,
                            units::meters_per_second_t velocityY,
                            units::radians_per_second_t rotationalRate) {
