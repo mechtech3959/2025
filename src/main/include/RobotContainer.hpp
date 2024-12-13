@@ -8,7 +8,7 @@
 #include "Constants.hpp"
 #include "subsystems/DriveSubsystem.hpp"
 
-class RobotContainer {
+class RobotContainer final {
 public:
   RobotContainer();
   void ConfigureButtonBindings();
