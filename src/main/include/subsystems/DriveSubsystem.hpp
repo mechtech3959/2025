@@ -1,29 +1,24 @@
 #pragma once
 
 #include <ctre/phoenix6/swerve/SwerveDrivetrain.hpp>
-#include <frc/XboxController.h>
-#include <frc/geometry/Pose2d.h>
-#include <frc/kinematics/ChassisSpeeds.h>
 #include <frc2/command/InstantCommand.h>
 #include <frc2/command/SubsystemBase.h>
-#include <units/angular_velocity.h>
-#include <units/velocity.h>
 
 #include "Constants.hpp"
 
 class DriveSubsystem : public frc2::SubsystemBase {
 public:
   DriveSubsystem();
-  void Drive(ctre::phoenix6::swerve::requests::SwerveRequest &&request);
-  void Drive(units::meters_per_second_t velocityX,
-             units::meters_per_second_t velocityY,
-             units::radians_per_second_t rotationalRate);
+
+  void SetControl(ctre::phoenix6::swerve::requests::SwerveRequest &&request) {
+    drivetrain.SetControl(request);
+  };
+
+  bool isFieldCentric = false;
 
   frc2::InstantCommand invert{[this] { isFieldCentric = !isFieldCentric; }, {}};
 
 private:
-  bool isFieldCentric = false;
-
   ctre::phoenix6::swerve::SwerveDrivetrain drivetrain{
       constants::swerve::drivetrainConstants,
       constants::swerve::frontLeftModule, constants::swerve::frontRightModule,

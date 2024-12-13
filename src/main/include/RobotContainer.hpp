@@ -11,13 +11,15 @@
 class RobotContainer final {
 public:
   RobotContainer();
-  void ConfigureButtonBindings();
+
   void TeleopInit();
-  frc2::Command *GetAutonomousCommand();
+
+  frc2::Command *GetAutonomousCommand() { return autoChooser.GetSelected(); };
 
 private:
-  frc2::CommandXboxController driverController{constants::driverControllerPort};
   DriveSubsystem driveSubsystem;
+
+  frc2::CommandXboxController driverController{constants::driverControllerPort};
 
   frc::SendableChooser<frc2::Command *> autoChooser =
       pathplanner::AutoBuilder::buildAutoChooser();

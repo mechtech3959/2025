@@ -32,22 +32,3 @@ DriveSubsystem::DriveSubsystem() {
       },
       this);
 }
-
-void DriveSubsystem::Drive(
-    ctre::phoenix6::swerve::requests::SwerveRequest &&request) {
-  drivetrain.SetControl(request);
-}
-
-void DriveSubsystem::Drive(units::meters_per_second_t velocityX,
-                           units::meters_per_second_t velocityY,
-                           units::radians_per_second_t rotationalRate) {
-  isFieldCentric
-      ? drivetrain.SetControl(ctre::phoenix6::swerve::requests::FieldCentric{}
-                                  .WithVelocityX(velocityX)
-                                  .WithVelocityY(velocityY)
-                                  .WithRotationalRate(rotationalRate))
-      : drivetrain.SetControl(ctre::phoenix6::swerve::requests::RobotCentric{}
-                                  .WithVelocityX(velocityX)
-                                  .WithVelocityY(velocityY)
-                                  .WithRotationalRate(rotationalRate));
-}

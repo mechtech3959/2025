@@ -4,25 +4,32 @@
 #include "RobotContainer.hpp"
 
 RobotContainer::RobotContainer() {
-  ConfigureButtonBindings();
+  driverController.Start().OnTrue(&driveSubsystem.invert);
 
   frc::SmartDashboard::PutData("Auto Chooser", &autoChooser);
 }
 
-frc2::Command *RobotContainer::GetAutonomousCommand() {
-  return autoChooser.GetSelected();
-}
-
-void RobotContainer::ConfigureButtonBindings() {
-  driverController.Start().OnTrue(&driveSubsystem.invert);
-}
-
 void RobotContainer::TeleopInit() {
+  units::meters_per_second_t velocityX =
+      driverController.GetLeftX() * 1_m / 1_s;
+  units::meters_per_second_t velocityY =
+      driverController.GetLeftY() * 1_m / 1_s;
+  units::radians_per_second_t rotationalRate =
+      driverController.GetRightX() * 1_rad / 1_s;
+
   driveSubsystem.SetDefaultCommand(frc2::cmd::Run(
-      [this] {
-        driveSubsystem.Drive(driverController.GetLeftX() * 1_m / 1_s,
-                             driverController.GetLeftY() * 1_m / 1_s,
-                             driverController.GetRightX() * 1_rad / 1_s);
+      [this, velocityX, velocityY, rotationalRate] {
+        driveSubsystem.isFieldCentric
+            ? driveSubsystem.SetControl(
+                  ctre::phoenix6::swerve::requests::FieldCentric{}
+                      .WithVelocityX(velocityX)
+                      .WithVelocityY(velocityY)
+                      .WithRotationalRate(rotationalRate))
+            : driveSubsystem.SetControl(
+                  ctre::phoenix6::swerve::requests::RobotCentric{}
+                      .WithVelocityX(velocityX)
+                      .WithVelocityY(velocityY)
+                      .WithRotationalRate(rotationalRate));
       },
       {&driveSubsystem}));
 }
