@@ -13,12 +13,14 @@ public:
   void SetControl(ctre::phoenix6::swerve::requests::SwerveRequest &&request) {
     drivetrain.SetControl(request);
   };
+// prepares requests for drive control mode switch
 
   bool isFieldCentric = false;
 
   frc2::InstantCommand invert{[this] { isFieldCentric = !isFieldCentric; }, {}};
 
 private:
+  // creates drivetrain constructor
   ctre::phoenix6::swerve::SwerveDrivetrain drivetrain{
       constants::swerve::drivetrainConstants,
       constants::swerve::frontLeftModule, constants::swerve::frontRightModule,
