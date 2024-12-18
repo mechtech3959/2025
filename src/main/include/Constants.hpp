@@ -1,5 +1,8 @@
 #pragma once
 
+#include "ctre/phoenix6/core/CoreTalonFX.hpp"
+#include "units/current.h"
+#include "units/voltage.h"
 #include <ctre/phoenix6/Pigeon2.hpp>
 #include <ctre/phoenix6/configs/Configs.hpp>
 #include <ctre/phoenix6/swerve/SwerveDrivetrainConstants.hpp>
@@ -16,13 +19,29 @@ namespace swerve {
 constexpr double translationGain = 5.0;
 constexpr double rotationGain = 1.5;
 
+constexpr ctre::phoenix6::configs::CurrentLimitsConfigs driveCurrentLimit =
+    ctre::phoenix6::configs::CurrentLimitsConfigs{}.WithSupplyCurrentLimit(
+        units::current::ampere_t(40));
+constexpr ctre::phoenix6::configs::CurrentLimitsConfigs turnCurrentLimit =
+    ctre::phoenix6::configs::CurrentLimitsConfigs{}.WithSupplyCurrentLimit(
+        units::current::ampere_t(20));
+
+constexpr ctre::phoenix6::configs::TalonFXConfiguration driveMotorConfig =
+    ctre::phoenix6::configs::TalonFXConfiguration{}.WithCurrentLimits(
+        driveCurrentLimit);
+constexpr ctre::phoenix6::configs::TalonFXConfiguration turnMotorConfig =
+    ctre::phoenix6::configs::TalonFXConfiguration{}.WithCurrentLimits(
+        turnCurrentLimit);
+
 constexpr ctre::phoenix6::swerve::SwerveModuleConstantsFactory moduleCreator =
     ctre::phoenix6::swerve::SwerveModuleConstantsFactory{}
         .WithDriveMotorGearRatio(6.75)
         .WithSteerMotorGearRatio(12.8)
         .WithWheelRadius(1.97_in)
         .WithDriveMotorGains(ctre::phoenix6::configs::Slot0Configs{})
-        .WithSteerMotorGains(ctre::phoenix6::configs::Slot0Configs{});
+        .WithSteerMotorGains(ctre::phoenix6::configs::Slot0Configs{})
+        .WithDriveMotorInitialConfigs(driveMotorConfig)
+        .WithSteerMotorInitialConfigs(turnMotorConfig);
 
 // MK4 L2 swerve modules have a max free speed of 16.5 fps without FOC
 // FOC = 15.7 fps
