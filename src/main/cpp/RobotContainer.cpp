@@ -34,10 +34,10 @@ void RobotContainer::TeleopInit() {
       {&driveSubsystem}));
 }
 
-frc2::CommandPtr RobotContainer::startCommands() {
+frc2::CommandPtr RobotContainer::StartCommands() {
   return (frc2::cmd::Run([this] {
-    frc::Pose2d pose = driveSubsystem.getPose();
-    std::vector<frc::Translation2d> modPoses = driveSubsystem.swerveModPose();
+    frc::Pose2d pose = driveSubsystem.GetPose();
+    std::vector<frc::Translation2d> modPoses = driveSubsystem.SwerveModPose();
 
     frc::SmartDashboard::PutNumber("Pose X", pose.X().value());
     frc::SmartDashboard::PutNumber("Pose Y", pose.Y().value());

@@ -18,7 +18,7 @@ public:
 
   // function to dynamically change current limits
   void
-  setCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs driveLimit,
+  SetCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs driveLimit,
                    ctre::phoenix6::configs::CurrentLimitsConfigs turnLimit) {
     for (const std::unique_ptr<ctre::phoenix6::swerve::SwerveModule> &module :
          drivetrain.GetModules()) {
@@ -27,10 +27,12 @@ public:
     }
   };
 
-  frc::Pose2d getPose() { return (drivetrain.GetState().Pose); };
-  std::vector<frc::Translation2d> swerveModPose() {
+  frc::Pose2d GetPose() { return (drivetrain.GetState().Pose); };
+
+  std::vector<frc::Translation2d> SwerveModulePose() {
     return (drivetrain.GetModuleLocations());
   };
+
   bool isFieldCentric = false;
 
   frc2::InstantCommand invert{[this] { isFieldCentric = !isFieldCentric; }, {}};

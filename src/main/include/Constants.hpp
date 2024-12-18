@@ -12,7 +12,7 @@
 namespace constants {
 constexpr char canBus[] = "rio";
 constexpr int driverControllerPort = 0;
-constexpr int kPigeonID = 9;
+constexpr int pigeonID = 9;
 
 namespace swerve {
 constexpr double translationGain = 5.0;
@@ -64,7 +64,7 @@ constexpr ctre::phoenix6::swerve::SwerveModuleConstants rearRightModule =
 constexpr ctre::phoenix6::swerve::SwerveDrivetrainConstants
     drivetrainConstants =
         ctre::phoenix6::swerve::SwerveDrivetrainConstants{}.WithPigeon2Id(
-            kPigeonID);
+            pigeonID);
 //! set to max constraints of swerve modules!
 constexpr double maxDriveSpeedMPS = 5.01;
 constexpr double maxFOCDriveSpeedMPS = 4.78;
