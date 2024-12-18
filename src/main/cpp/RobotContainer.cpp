@@ -37,7 +37,8 @@ void RobotContainer::TeleopInit() {
 frc2::CommandPtr RobotContainer::StartCommands() {
   return (frc2::cmd::Run([this] {
     frc::Pose2d pose = driveSubsystem.GetPose();
-    std::vector<frc::Translation2d> modPoses = driveSubsystem.SwerveModPose();
+    std::vector<frc::Translation2d> modPoses =
+        driveSubsystem.SwerveModulePose();
 
     frc::SmartDashboard::PutNumber("Pose X", pose.X().value());
     frc::SmartDashboard::PutNumber("Pose Y", pose.Y().value());
