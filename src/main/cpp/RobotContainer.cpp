@@ -37,17 +37,22 @@ void RobotContainer::TeleopInit() {
       },
       {&driveSubsystem}));
 }
+
 frc2::CommandPtr RobotContainer::startCommands() {
-  return (frc2::cmd::Run([this] {
+  return frc2::cmd::Run([this] {
     frc::Pose2d pose = driveSubsystem.getPose();
     std::vector<frc::Translation2d> modPoses = driveSubsystem.swerveModPose();
 
     frc::SmartDashboard::PutNumber("Pose X", pose.X().value());
     frc::SmartDashboard::PutNumber("Pose Y", pose.Y().value());
+<<<<<<< HEAD
     // TODO: Check module order FL FR BL BR
     frc::SmartDashboard::PutNumberArray("Pose FL", modPoses[0].ToVector());
     frc::SmartDashboard::PutNumberArray("Pose FR", modPoses[1].ToVector());
     frc::SmartDashboard::PutNumberArray("Pose BL", modPoses[2].ToVector());
     frc::SmartDashboard::PutNumberArray("Pose BR", modPoses[3].ToVector());
   }));
+=======
+  });
+>>>>>>> origin/main
 }
