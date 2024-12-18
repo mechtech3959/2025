@@ -18,7 +18,6 @@ public:
   void TeleopInit();
 
   frc2::Command *GetAutonomousCommand() { return autoChooser.GetSelected(); };
-  frc2::CommandPtr startCommands();
 
   frc2::CommandPtr startCommands();
 
