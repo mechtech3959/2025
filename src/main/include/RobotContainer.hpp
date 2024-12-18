@@ -16,6 +16,8 @@ public:
 
   frc2::Command *GetAutonomousCommand() { return autoChooser.GetSelected(); };
 
+  frc2::CommandPtr startCommands();
+
 private:
   DriveSubsystem driveSubsystem;
 

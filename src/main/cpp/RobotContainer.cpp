@@ -36,11 +36,12 @@ void RobotContainer::TeleopInit() {
       },
       {&driveSubsystem}));
 }
+
 frc2::CommandPtr RobotContainer::startCommands() {
-  return (frc2::cmd::Run([this] {
+  return frc2::cmd::Run([this] {
     frc::Pose2d pose = driveSubsystem.getPose();
 
     frc::SmartDashboard::PutNumber("Pose X", pose.X().value());
     frc::SmartDashboard::PutNumber("Pose Y", pose.Y().value());
-  }));
+  });
 }

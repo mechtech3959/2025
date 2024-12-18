@@ -1,14 +1,14 @@
 #pragma once
 
-#include "ctre/phoenix6/core/CoreTalonFX.hpp"
-#include "units/current.h"
-#include "units/voltage.h"
 #include <ctre/phoenix6/Pigeon2.hpp>
 #include <ctre/phoenix6/configs/Configs.hpp>
+#include <ctre/phoenix6/core/CoreTalonFX.hpp>
 #include <ctre/phoenix6/swerve/SwerveDrivetrainConstants.hpp>
 #include <ctre/phoenix6/swerve/SwerveModuleConstants.hpp>
 #include <frc/kinematics/SwerveDriveKinematics.h>
 #include <units/acceleration.h>
+#include <units/current.h>
+#include <units/voltage.h>
 
 namespace constants {
 constexpr char canBus[] = "rio";
