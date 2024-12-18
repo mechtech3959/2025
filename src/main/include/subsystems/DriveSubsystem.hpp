@@ -13,7 +13,7 @@ public:
   void SetControl(ctre::phoenix6::swerve::requests::SwerveRequest &&request) {
     drivetrain.SetControl(request);
   };
-// prepares requests for drive control mode switch
+  // prepares requests for drive control mode switch
 
   bool isFieldCentric = false;
 

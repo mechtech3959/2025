@@ -6,11 +6,13 @@
 #include "subsystems/DriveSubsystem.hpp"
 
 DriveSubsystem::DriveSubsystem() {
-// starts position logging of robot
+  // starts position logging of robot
   drivetrain.GetOdometryThread().Start();
-// retrieves configs like height, weight, length, and width from path planner graphical interface
+  // retrieves configs like height, weight, length, and width from path planner
+  // graphical interface
   pathplanner::RobotConfig config = pathplanner::RobotConfig::fromGUISettings();
-// gathers all information about the drivetrain positioning, velocity, and force constraints to move it
+  // gathers all information about the drivetrain positioning, velocity, and
+  // force constraints to move it
   pathplanner::AutoBuilder::configure(
       [this]() { return drivetrain.GetState().Pose; },
       [this](frc::Pose2d pose) { return drivetrain.ResetPose(pose); },
@@ -27,8 +29,7 @@ DriveSubsystem::DriveSubsystem() {
           pathplanner::PIDConstants(0, 0, 0),
           pathplanner::PIDConstants(0, 0, 0)),
       config,
-      []()
-{
+      []() {
         return frc::DriverStation::GetAlliance().value() ==
                frc::DriverStation::Alliance::kRed;
       },
