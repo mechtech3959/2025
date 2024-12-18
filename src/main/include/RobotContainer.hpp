@@ -6,6 +6,9 @@
 #include <pathplanner/lib/auto/AutoBuilder.h>
 
 #include "Constants.hpp"
+#include "frc/smartdashboard/SmartDashboard.h"
+#include "frc2/command/CommandPtr.h"
+#include "frc2/command/Commands.h"
 #include "subsystems/DriveSubsystem.hpp"
 
 class RobotContainer final {
@@ -15,6 +18,7 @@ public:
   void TeleopInit();
 
   frc2::Command *GetAutonomousCommand() { return autoChooser.GetSelected(); };
+  frc2::CommandPtr startCommands();
 
   frc2::CommandPtr startCommands();
 
