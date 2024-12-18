@@ -14,7 +14,7 @@ public:
   void SetControl(ctre::phoenix6::swerve::requests::SwerveRequest &&request) {
     drivetrain.SetControl(request);
   };
-  // function to dynamically change current limits
+  // function to dynamically change current limits TODO: fix this
   void
   setCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs driveLimit,
                    ctre::phoenix6::configs::CurrentLimitsConfigs turnLimit) {
