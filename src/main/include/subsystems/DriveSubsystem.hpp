@@ -1,11 +1,13 @@
 #pragma once
 
+#include <ctre/phoenix6/configs/Configs.hpp>
 #include <ctre/phoenix6/swerve/SwerveDrivetrain.hpp>
+#include <ctre/phoenix6/swerve/SwerveModule.hpp>
 #include <frc2/command/InstantCommand.h>
 #include <frc2/command/SubsystemBase.h>
+#include <memory>
 
 #include "Constants.hpp"
-#include "ctre/phoenix6/configs/Configs.hpp"
 
 class DriveSubsystem : public frc2::SubsystemBase {
 public:
@@ -14,18 +16,17 @@ public:
   void SetControl(ctre::phoenix6::swerve::requests::SwerveRequest &&request) {
     drivetrain.SetControl(request);
   };
+
   // function to dynamically change current limits
   void
   setCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs driveLimit,
                    ctre::phoenix6::configs::CurrentLimitsConfigs turnLimit) {
-    for (int i = 0; i < 4; ++i) {
-      drivetrain.GetModule(i).GetDriveMotor().GetConfigurator().Apply(
-          driveLimit);
-      drivetrain.GetModule(i).GetSteerMotor().GetConfigurator().Apply(
-          turnLimit);
+    for (const std::unique_ptr<ctre::phoenix6::swerve::SwerveModule> &module :
+         drivetrain.GetModules()) {
+      module->GetDriveMotor().GetConfigurator().Apply(driveLimit);
+      module->GetSteerMotor().GetConfigurator().Apply(turnLimit);
     }
   };
-  // prepares requests for drive control mode switch
 
   bool isFieldCentric = false;
 
