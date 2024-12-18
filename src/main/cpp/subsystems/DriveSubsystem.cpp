@@ -1,4 +1,3 @@
-#include <ctre/phoenix6/swerve/SwerveRequest.hpp>
 #include <frc/DriverStation.h>
 #include <pathplanner/lib/auto/AutoBuilder.h>
 #include <pathplanner/lib/controllers/PPHolonomicDriveController.h>

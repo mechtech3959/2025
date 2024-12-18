@@ -1,10 +1,7 @@
+#include <frc/geometry/Pose2d.h>
 #include <frc/smartdashboard/SmartDashboard.h>
-#include <pathplanner/lib/auto/AutoBuilder.h>
 
 #include "RobotContainer.hpp"
-#include "frc/geometry/Pose2d.h"
-#include "frc2/command/CommandPtr.h"
-#include "frc2/command/Commands.h"
 
 RobotContainer::RobotContainer() {
   driverController.Start().OnTrue(&driveSubsystem.invert);

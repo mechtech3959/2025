@@ -2,11 +2,9 @@
 
 #include <ctre/phoenix6/configs/Configs.hpp>
 #include <ctre/phoenix6/swerve/SwerveDrivetrain.hpp>
-#include <ctre/phoenix6/swerve/SwerveModule.hpp>
 #include <frc/geometry/Translation2d.h>
 #include <frc2/command/InstantCommand.h>
 #include <frc2/command/SubsystemBase.h>
-#include <memory>
 
 #include "Constants.hpp"
 

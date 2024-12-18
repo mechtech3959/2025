@@ -2,7 +2,6 @@
 
 #include <ctre/phoenix6/Pigeon2.hpp>
 #include <ctre/phoenix6/configs/Configs.hpp>
-#include <ctre/phoenix6/core/CoreTalonFX.hpp>
 #include <ctre/phoenix6/swerve/SwerveDrivetrainConstants.hpp>
 #include <ctre/phoenix6/swerve/SwerveModuleConstants.hpp>
 #include <frc/kinematics/SwerveDriveKinematics.h>
