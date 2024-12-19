@@ -24,9 +24,9 @@ DriveSubsystem::DriveSubsystem() {
                 .WithWheelForceFeedforwardsY(feeds.robotRelativeForcesY));
       },
       std::make_shared<pathplanner::PPHolonomicDriveController>(
-          // TODO: set PID values correctly
-          pathplanner::PIDConstants(0, 0, 0),
-          pathplanner::PIDConstants(0, 0, 0)),
+          // TODO: set PID values correctly || Set to CTRE Example PID Values
+          pathplanner::PIDConstants(10, 0.0, 0.0),
+          pathplanner::PIDConstants(7, 0.0, 0.0)),
       config,
       []() {
         return frc::DriverStation::GetAlliance().value() ==

@@ -47,5 +47,7 @@ frc2::CommandPtr RobotContainer::StartCommands() {
     frc::SmartDashboard::PutNumberArray("Pose FR", modPoses[1].ToVector());
     frc::SmartDashboard::PutNumberArray("Pose BL", modPoses[2].ToVector());
     frc::SmartDashboard::PutNumberArray("Pose BR", modPoses[3].ToVector());
+
+    frc::SmartDashboard::PutData("Robot field translation ", &field);
   }));
 }
