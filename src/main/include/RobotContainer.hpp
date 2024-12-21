@@ -17,6 +17,8 @@ public:
 
   void TeleopInit();
 
+  void RobotPeriodic();
+
   frc2::Command *GetAutonomousCommand() { return autoChooser.GetSelected(); };
 
   frc2::CommandPtr StartCommands();

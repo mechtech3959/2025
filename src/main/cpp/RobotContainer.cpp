@@ -33,6 +33,9 @@ void RobotContainer::TeleopInit() {
       },
       {&driveSubsystem}));
 }
+void RobotContainer::RobotPeriodic() {
+  field.SetRobotPose(driveSubsystem.GetPose());
+}
 
 frc2::CommandPtr RobotContainer::StartCommands() {
   return (frc2::cmd::Run([this] {
