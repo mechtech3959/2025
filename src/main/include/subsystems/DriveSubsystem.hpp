@@ -11,7 +11,7 @@
 class DriveSubsystem : public frc2::SubsystemBase {
 public:
   DriveSubsystem();
-
+  // sets the drivetrain control mode
   void SetControl(ctre::phoenix6::swerve::requests::SwerveRequest &&request) {
     drivetrain.SetControl(request);
   };
@@ -26,13 +26,14 @@ public:
       module->GetSteerMotor().GetConfigurator().Apply(turnLimit);
     }
   };
-
+  // robot position
   frc::Pose2d GetPose() { return (drivetrain.GetState().Pose); };
-
+  // individual swerve module positions
   std::vector<frc::Translation2d> SwerveModulePose() {
     return (drivetrain.GetModuleLocations());
   };
 
+  // function to swap drive modes
   bool isFieldCentric = false;
 
   frc2::InstantCommand invert{[this] { isFieldCentric = !isFieldCentric; }, {}};

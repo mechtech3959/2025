@@ -10,6 +10,7 @@
 #include <units/voltage.h>
 
 namespace constants {
+// can bus types  "rio" TODO: check name of CANivore "can"
 constexpr char canBus[] = "rio";
 constexpr int driverControllerPort = 0;
 constexpr int pigeonID = 9;
@@ -18,6 +19,7 @@ namespace swerve {
 constexpr double translationGain = 5.0;
 constexpr double rotationGain = 1.5;
 
+// puts a limit on the current draw to avoid brownout
 constexpr ctre::phoenix6::configs::CurrentLimitsConfigs driveCurrentLimit =
     ctre::phoenix6::configs::CurrentLimitsConfigs{}.WithSupplyCurrentLimit(
         units::current::ampere_t(40));
@@ -32,6 +34,7 @@ constexpr ctre::phoenix6::configs::TalonFXConfiguration turnMotorConfig =
     ctre::phoenix6::configs::TalonFXConfiguration{}.WithCurrentLimits(
         turnCurrentLimit);
 
+// configures constants for the drivetrain
 constexpr ctre::phoenix6::swerve::SwerveModuleConstantsFactory moduleCreator =
     ctre::phoenix6::swerve::SwerveModuleConstantsFactory{}
         .WithDriveMotorGearRatio(6.75)

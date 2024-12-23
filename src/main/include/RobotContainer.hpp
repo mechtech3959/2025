@@ -13,7 +13,6 @@
 
 class RobotContainer final {
 public:
-  RobotContainer();
 
   void TeleopInit();
 
