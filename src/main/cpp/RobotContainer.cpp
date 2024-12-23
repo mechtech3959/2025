@@ -42,6 +42,8 @@ frc2::CommandPtr RobotContainer::StartCommands() {
     std::vector<frc::Translation2d> modPoses =
         driveSubsystem.SwerveModulePose();
     // Robot Pose
+    frc::SmartDashboard::PutBoolean("Is Odometry valid?",
+                                    driveSubsystem.isOdomValid());
     frc::SmartDashboard::PutNumber("Pose X", pose.X().value());
     frc::SmartDashboard::PutNumber("Pose Y", pose.Y().value());
     // position of each individual module
