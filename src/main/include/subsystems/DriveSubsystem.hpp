@@ -26,9 +26,8 @@ public:
       module->GetSteerMotor().GetConfigurator().Apply(turnLimit);
     }
   };
-    bool isOdomValid(){
-      return(drivetrain.IsOdometryValid());
-    }
+  bool isOdomValid() { return (drivetrain.IsOdometryValid()); }
+
   // robot position
   frc::Pose2d GetPose() { return (drivetrain.GetState().Pose); };
   // individual swerve module positions
