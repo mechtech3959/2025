@@ -15,7 +15,6 @@ public:
   void SetControl(ctre::phoenix6::swerve::requests::SwerveRequest &&request) {
     drivetrain.SetControl(request);
   };
-
   // function to dynamically change current limits
   void
   SetCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs driveLimit,
@@ -39,6 +38,12 @@ public:
   bool isFieldCentric = false;
 
   frc2::InstantCommand invert{[this] { isFieldCentric = !isFieldCentric; }, {}};
+
+  void Simsinit() {
+    auto &simPigeon = drivetrain.GetPigeon2().GetSimState();
+    auto &simFLDM = drivetrain.GetModule(0).GetDriveMotor().GetSimState();
+    auto &simFLTM = drivetrain.GetModule(0).GetSteerMotor().GetSimState();
+  };
 
 private:
   // creates drivetrain constructor

@@ -1,7 +1,13 @@
 #pragma once
 
+#include "ctre/phoenix6/swerve/SwerveDrivetrain.hpp"
 #include <ctre/phoenix6/Pigeon2.hpp>
 #include <ctre/phoenix6/configs/Configs.hpp>
+#include <ctre/phoenix6/sim/CANcoderSimState.hpp>
+#include <ctre/phoenix6/sim/ChassisReference.hpp>
+#include <ctre/phoenix6/sim/Pigeon2SimState.hpp>
+#include <ctre/phoenix6/sim/TalonFXSimState.hpp>
+#include <ctre/phoenix6/swerve/SimSwerveDrivetrain.hpp>
 #include <ctre/phoenix6/swerve/SwerveDrivetrainConstants.hpp>
 #include <ctre/phoenix6/swerve/SwerveModuleConstants.hpp>
 #include <frc/kinematics/SwerveDriveKinematics.h>
@@ -72,10 +78,23 @@ constexpr ctre::phoenix6::swerve::SwerveDrivetrainConstants
 constexpr double maxDriveSpeedMPS = 5.01;
 constexpr double maxFOCDriveSpeedMPS = 4.78;
 }; // namespace swerve
+namespace sim {
+// TODO figure out the correct values/stupid suffixes
+    /*/
+units::scalar_t simdriveGearing = 6.75;
+units::kilogram_square_meter_t simdriveInertia;
+units::volt_t simdriveFrictionVoltage;
+bool simdriveMotorInverted = false;
+units::scalar_t simsteerGearing = 12.8;
+units::kilogram_square_meter_t simsteerInertia;
+units::volt_t simsteerFrictionVoltage;
+bool simsteerMotorInverted = false;
+bool simcancoderInverted = false;
+*/}; // namespace sim
 
-// namespace odometry {
-// ctre::phoenix6::hardware::Pigeon2 gyro{constants::kPigeonID};
+    // namespace odometry {
+    // ctre::phoenix6::hardware::Pigeon2 gyro{constants::kPigeonID};
 
-// frc::SwerveDriveKinematics<4> m_kinematics;
-// }; // namespace odometry
-}; // namespace constants
+    // frc::SwerveDriveKinematics<4> m_kinematics;
+    // }; // namespace odometry
+    }; // namespace constants
