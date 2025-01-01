@@ -83,19 +83,19 @@ constexpr double maxFOCDriveSpeedMPS = 4.78;
 namespace sim {
 // TODO figure out the correct values/stupid suffixes
 
-constexpr units::scalar_t simDriveGearing = 6.75;
+constexpr units::scalar_t driveGearing = 6.75;
 // test var
-constexpr units::kilogram_square_meter_t simdriveInertia =
+constexpr units::kilogram_square_meter_t driveInertia =
     units::kilogram_square_meter_t(2);
-constexpr units::volt_t simdriveFrictionVoltage = 12_V;
-constexpr bool simdriveMotorInverted = false;
-constexpr units::scalar_t simsteerGearing = 12.8;
+constexpr units::volt_t driveFrictionVoltage = 12_V;
+constexpr bool driveMotorInverted = false;
+constexpr units::scalar_t steerGearing = 12.8;
 // TEST var
-constexpr units::kilogram_square_meter_t simsteerInertia =
+constexpr units::kilogram_square_meter_t steerInertia =
     units::kilogram_square_meter_t(2);
-constexpr units::volt_t simsteerFrictionVoltage = 12_V;
-constexpr bool simsteerMotorInverted = false;
-constexpr bool simcancoderInverted = false;
+constexpr units::volt_t steerFrictionVoltage = 12_V;
+constexpr bool steerMotorInverted = false;
+constexpr bool cancoderInverted = false;
 }; // namespace sim
 
 // namespace odometry {
