@@ -43,6 +43,15 @@ public:
     auto &simPigeon = drivetrain.GetPigeon2().GetSimState();
     auto &simFLDM = drivetrain.GetModule(0).GetDriveMotor().GetSimState();
     auto &simFLTM = drivetrain.GetModule(0).GetSteerMotor().GetSimState();
+    // TODO: make this work?
+    /*/ ctre::phoenix6::swerve::SimSwerveDrivetrain::SimSwerveModule frontRMod(
+        constants::sim::driveGearing, constants::sim::driveInertia,
+        constants::sim::driveFrictionVoltage,
+        constants::sim::driveMotorInverted, constants::sim::driveMotorInverted,
+        constants::sim::steerGearing, constants::sim::steerInertia,
+        constants::sim::steerFrictionVoltage,
+        constants::sim::steerMotorInverted, constants::sim::cancoderInverted);
+*/
   };
 
 private:
