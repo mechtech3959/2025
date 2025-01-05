@@ -2,8 +2,10 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 
 #include "RobotContainer.hpp"
+#include "ctre/phoenix6/swerve/SwerveRequest.hpp"
 
 void RobotContainer::TeleopInit() {
+  /*
   // Swaps control modes
   driverController.Start().OnTrue(&driveSubsystem.invert);
   // controller values multiplied into velocity
@@ -27,6 +29,15 @@ void RobotContainer::TeleopInit() {
                       .WithVelocityX(velocityX)
                       .WithVelocityY(velocityY)
                       .WithRotationalRate(rotationalRate));
+      },
+      {&driveSubsystem}));
+      */
+  driveSubsystem.SetDefaultCommand(frc2::cmd::Run(
+      [this] {
+        driveSubsystem.drivetrain.SetControl(
+            ctre::phoenix6::swerve::requests::RobotCentric{}
+                .WithVelocityX(driverController.GetLeftX() * 1_m / 1_s)
+                .WithVelocityY(driverController.GetLeftY() * 1_m / 1_s));
       },
       {&driveSubsystem}));
 }

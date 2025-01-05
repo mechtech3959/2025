@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ctre/phoenix6/core/CoreCANcoder.hpp"
 #include <ctre/phoenix6/Pigeon2.hpp>
 #include <ctre/phoenix6/configs/Configs.hpp>
 #include <ctre/phoenix6/swerve/SwerveDrivetrainConstants.hpp>
@@ -34,14 +35,35 @@ constexpr ctre::phoenix6::configs::TalonFXConfiguration turnMotorConfig =
     ctre::phoenix6::configs::TalonFXConfiguration{}.WithCurrentLimits(
         turnCurrentLimit);
 
+constexpr ctre::phoenix6::configs::CANcoderConfiguration encoderConfig =
+    ctre::phoenix6::configs::CANcoderConfiguration{};
+
 // configures constants for the drivetrain
 constexpr ctre::phoenix6::swerve::SwerveModuleConstantsFactory moduleCreator =
-    ctre::phoenix6::swerve::SwerveModuleConstantsFactory{}
-        .WithDriveMotorGearRatio(6.75)
+    ctre::phoenix6::swerve::SwerveModuleConstantsFactory<
+        ctre::phoenix6::configs::TalonFXConfiguration,
+        ctre::phoenix6::configs::TalonFXConfiguration,
+        ctre::phoenix6::configs::CANcoderConfiguration>{}
+        .WithDriveMotorGearRatio(6.14)
         .WithSteerMotorGearRatio(12.8)
         .WithWheelRadius(1.97_in)
-        .WithDriveMotorGains(ctre::phoenix6::configs::Slot0Configs{})
-        .WithSteerMotorGains(ctre::phoenix6::configs::Slot0Configs{})
+        .WithDriveMotorGains(ctre::phoenix6::configs::Slot0Configs{}
+                                 .WithKP(0.1)
+                                 .WithKI(0)
+                                 .WithKD(0)
+                                 .WithKS(0)
+                                 .WithKV(0.124))
+        .WithSteerMotorGains(
+            ctre::phoenix6::configs::Slot0Configs{}
+                .WithKP(100)
+                .WithKI(0)
+                .WithKD(0.5)
+                .WithKS(0.1)
+                .WithKV(1.91)
+                .WithKA(0)
+                .WithStaticFeedforwardSign(
+                    ctre::phoenix6::signals::StaticFeedforwardSignValue::
+                        UseClosedLoopSign))
         .WithDriveMotorInitialConfigs(driveMotorConfig)
         .WithSteerMotorInitialConfigs(turnMotorConfig);
 

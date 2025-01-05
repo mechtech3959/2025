@@ -7,20 +7,22 @@
 #include <frc2/command/SubsystemBase.h>
 
 #include "Constants.hpp"
+#include "ctre/phoenix6/CANcoder.hpp"
+#include "ctre/phoenix6/TalonFX.hpp"
+#include "ctre/phoenix6/swerve/SwerveModule.hpp"
 
 class DriveSubsystem : public frc2::SubsystemBase {
 public:
   DriveSubsystem();
-  // sets the drivetrain control mode
-  void SetControl(ctre::phoenix6::swerve::requests::SwerveRequest &&request) {
-    drivetrain.SetControl(request);
-  };
 
   // function to dynamically change current limits
   void
   SetCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs driveLimit,
                    ctre::phoenix6::configs::CurrentLimitsConfigs turnLimit) {
-    for (const std::unique_ptr<ctre::phoenix6::swerve::SwerveModule> &module :
+    for (const std::unique_ptr<ctre::phoenix6::swerve::SwerveModule<
+             ctre::phoenix6::hardware::TalonFX,
+             ctre::phoenix6::hardware::TalonFX,
+             ctre::phoenix6::hardware::CANcoder>> &module :
          drivetrain.GetModules()) {
       module->GetDriveMotor().GetConfigurator().Apply(driveLimit);
       module->GetSteerMotor().GetConfigurator().Apply(turnLimit);
@@ -40,10 +42,13 @@ public:
 
   frc2::InstantCommand invert{[this] { isFieldCentric = !isFieldCentric; }, {}};
 
-private:
   // creates drivetrain constructor
-  ctre::phoenix6::swerve::SwerveDrivetrain drivetrain{
-      constants::swerve::drivetrainConstants,
-      constants::swerve::frontLeftModule, constants::swerve::frontRightModule,
-      constants::swerve::rearLeftModule, constants::swerve::rearRightModule};
+  ctre::phoenix6::swerve::SwerveDrivetrain<ctre::phoenix6::hardware::TalonFX,
+                                           ctre::phoenix6::hardware::TalonFX,
+                                           ctre::phoenix6::hardware::CANcoder>
+      drivetrain{constants::swerve::drivetrainConstants,
+                 constants::swerve::frontLeftModule,
+                 constants::swerve::frontRightModule,
+                 constants::swerve::rearLeftModule,
+                 constants::swerve::rearRightModule};
 };

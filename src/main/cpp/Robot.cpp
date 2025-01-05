@@ -10,7 +10,8 @@ void Robot::AutonomousInit() {
 }
 
 void Robot::TeleopInit() {
-  autonomousCommand->Cancel();
+  if (autonomousCommand)
+    autonomousCommand->Cancel();
 
   container.TeleopInit();
 }
