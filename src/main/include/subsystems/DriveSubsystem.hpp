@@ -11,19 +11,22 @@
 #include "ctre/phoenix6/TalonFX.hpp"
 #include "ctre/phoenix6/swerve/SwerveModule.hpp"
 
-class DriveSubsystem : public frc2::SubsystemBase {
+class DriveSubsystem : public frc2::SubsystemBase
+{
 public:
   DriveSubsystem();
 
   // function to dynamically change current limits
   void
   SetCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs driveLimit,
-                   ctre::phoenix6::configs::CurrentLimitsConfigs turnLimit) {
+                   ctre::phoenix6::configs::CurrentLimitsConfigs turnLimit)
+  {
     for (const std::unique_ptr<ctre::phoenix6::swerve::SwerveModule<
              ctre::phoenix6::hardware::TalonFX,
              ctre::phoenix6::hardware::TalonFX,
              ctre::phoenix6::hardware::CANcoder>> &module :
-         drivetrain.GetModules()) {
+         drivetrain.GetModules())
+    {
       module->GetDriveMotor().GetConfigurator().Apply(driveLimit);
       module->GetSteerMotor().GetConfigurator().Apply(turnLimit);
     }
@@ -33,14 +36,17 @@ public:
   // robot position
   frc::Pose2d GetPose() { return (drivetrain.GetState().Pose); };
   // individual swerve module positions
-  std::vector<frc::Translation2d> SwerveModulePose() {
+  std::vector<frc::Translation2d> SwerveModulePose()
+  {
     return (drivetrain.GetModuleLocations());
   };
 
   // function to swap drive modes
   bool isFieldCentric = false;
 
-  frc2::InstantCommand invert{[this] { isFieldCentric = !isFieldCentric; }, {}};
+  frc2::InstantCommand invert{[this]
+                              { isFieldCentric = !isFieldCentric; },
+                              {}};
 
   // creates drivetrain constructor
   ctre::phoenix6::swerve::SwerveDrivetrain<ctre::phoenix6::hardware::TalonFX,

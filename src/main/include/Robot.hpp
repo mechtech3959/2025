@@ -5,7 +5,8 @@
 
 #include "RobotContainer.hpp"
 
-class Robot final : public frc::TimedRobot {
+class Robot final : public frc::TimedRobot
+{
 public:
   void RobotPeriodic() override;
   void AutonomousInit() override;

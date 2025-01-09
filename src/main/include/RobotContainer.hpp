@@ -11,9 +11,12 @@
 #include "Constants.hpp"
 #include "subsystems/DriveSubsystem.hpp"
 
-class RobotContainer final {
+class RobotContainer final
+{
 public:
   void TeleopInit();
+
+  void TeleopPeriodic();
 
   void RobotPeriodic();
 

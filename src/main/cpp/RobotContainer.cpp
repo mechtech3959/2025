@@ -4,7 +4,8 @@
 #include "RobotContainer.hpp"
 #include "ctre/phoenix6/swerve/SwerveRequest.hpp"
 
-void RobotContainer::TeleopInit() {
+void RobotContainer::TeleopInit()
+{
   /*
   // Swaps control modes
   driverController.Start().OnTrue(&driveSubsystem.invert);
@@ -32,23 +33,33 @@ void RobotContainer::TeleopInit() {
       },
       {&driveSubsystem}));
       */
+}
+// Runs every 20 ms
+void RobotContainer::TeleopPeriodic()
+{
   driveSubsystem.SetDefaultCommand(frc2::cmd::Run(
-      [this] {
+      [this]
+      {
         driveSubsystem.drivetrain.SetControl(
             ctre::phoenix6::swerve::requests::RobotCentric{}
-                .WithVelocityX(driverController.GetLeftX() * 1_m / 1_s)
-                .WithVelocityY(driverController.GetLeftY() * 1_m / 1_s));
+                .WithVelocityX(-driverController.GetLeftX() * 1_m / 1_s)
+                .WithVelocityY(-driverController.GetLeftY() * 1_m / 1_s)
+                .WithRotationalRate(-driverController.GetRightX() * 1_m / 1_s)
+                .WithDriveRequestType(ctre::phoenix6::swerve::DriveRequestType::OpenLoopVoltage)
+                .WithDeadband(1_m / 1_s * 0.1));
       },
       {&driveSubsystem}));
 }
-// Runs every 20 ms
-void RobotContainer::RobotPeriodic() {
+void RobotContainer::RobotPeriodic()
+{
   // updates field robot pose as the pose of the drive position
   field.SetRobotPose(driveSubsystem.GetPose());
 }
 
-frc2::CommandPtr RobotContainer::StartCommands() {
-  return (frc2::cmd::Run([this] {
+frc2::CommandPtr RobotContainer::StartCommands()
+{
+  return (frc2::cmd::Run([this]
+                         {
     frc::Pose2d pose = driveSubsystem.GetPose();
     std::vector<frc::Translation2d> modPoses =
         driveSubsystem.SwerveModulePose();
@@ -64,6 +75,5 @@ frc2::CommandPtr RobotContainer::StartCommands() {
     frc::SmartDashboard::PutNumberArray("Pose BL", modPoses[2].ToVector());
     frc::SmartDashboard::PutNumberArray("Pose BR", modPoses[3].ToVector());
     // posts field on dashboard
-    frc::SmartDashboard::PutData("Robot field translation ", &field);
-  }));
+    frc::SmartDashboard::PutData("Robot field translation ", &field); }));
 }

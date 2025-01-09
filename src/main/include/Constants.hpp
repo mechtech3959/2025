@@ -21,6 +21,7 @@ namespace constants
     {
         constexpr double translationGain = 5.0;
         constexpr double rotationGain = 1.5;
+        static constexpr units::scalar_t coupleRatio = 3.5714285714285716;
 
         // puts a limit on the current draw to avoid brownout
         constexpr ctre::phoenix6::configs::CurrentLimitsConfigs driveCurrentLimit =
@@ -58,6 +59,7 @@ namespace constants
                 ctre::phoenix6::configs::CANcoderConfiguration>{}
                 .WithDriveMotorGearRatio(6.14)
                 .WithSteerMotorGearRatio(12.8)
+                .WithCouplingGearRatio(coupleRatio)
                 .WithWheelRadius(4_in)
                 .WithDriveMotorGains(ctre::phoenix6::configs::Slot0Configs{}
                                          .WithKP(0.1)
@@ -93,13 +95,13 @@ namespace constants
                                                 false, false, false);
         constexpr ctre::phoenix6::swerve::SwerveModuleConstants frontRightModule =
             moduleCreator.CreateModuleConstants(1, 3, 13, -47.9_deg, 0.6064_m, 0.3429_m,
-                                                false, false, false);
+                                                true, false, false);
         constexpr ctre::phoenix6::swerve::SwerveModuleConstants rearLeftModule =
             moduleCreator.CreateModuleConstants(5, 6, 14, -17.45_deg, -0.6064_m,
                                                 -0.3429_m, false, false, false);
         constexpr ctre::phoenix6::swerve::SwerveModuleConstants rearRightModule =
             moduleCreator.CreateModuleConstants(2, 4, 15, 72.06_deg, 0.6064_m,
-                                                -0.3429_m, false, false, false);
+                                                -0.3429_m, true, false, false);
         constexpr ctre::phoenix6::swerve::SwerveDrivetrainConstants
             drivetrainConstants =
                 ctre::phoenix6::swerve::SwerveDrivetrainConstants{}.WithPigeon2Id(
