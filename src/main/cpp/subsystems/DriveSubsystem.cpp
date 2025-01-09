@@ -4,8 +4,7 @@
 
 #include "subsystems/DriveSubsystem.hpp"
 
-DriveSubsystem::DriveSubsystem()
-{
+DriveSubsystem::DriveSubsystem() {
   // starts position logging of robot
   drivetrain.GetOdometryThread().Start();
   // retrieves configs like height, weight, length, and width from path planner
@@ -14,14 +13,10 @@ DriveSubsystem::DriveSubsystem()
   // gathers all information about the drivetrain positioning, velocity, and
   // force constraints to move it
   pathplanner::AutoBuilder::configure(
-      [this]()
-      { return drivetrain.GetState().Pose; },
-      [this](frc::Pose2d pose)
-      { return drivetrain.ResetPose(pose); },
-      [this]()
-      { return drivetrain.GetState().Speeds; },
-      [this](frc::ChassisSpeeds speeds, pathplanner::DriveFeedforwards feeds)
-      {
+      [this]() { return drivetrain.GetState().Pose; },
+      [this](frc::Pose2d pose) { return drivetrain.ResetPose(pose); },
+      [this]() { return drivetrain.GetState().Speeds; },
+      [this](frc::ChassisSpeeds speeds, pathplanner::DriveFeedforwards feeds) {
         drivetrain.SetControl(
             ctre::phoenix6::swerve::requests::ApplyRobotSpeeds{}
                 .WithSpeeds(speeds)
@@ -33,8 +28,7 @@ DriveSubsystem::DriveSubsystem()
           pathplanner::PIDConstants(10, 0.0, 0.0),
           pathplanner::PIDConstants(7, 0.0, 0.0)),
       config,
-      []()
-      {
+      []() {
         return frc::DriverStation::GetAlliance().value() ==
                frc::DriverStation::Alliance::kRed;
       },
