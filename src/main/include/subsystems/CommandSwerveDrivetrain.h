@@ -19,6 +19,7 @@ namespace subsystems {
  * Subsystem so it can easily be used in command-based projects.
  */
 class CommandSwerveDrivetrain : public frc2::SubsystemBase, public TunerSwerveDrivetrain {
+
     static constexpr units::second_t kSimLoopPeriod = 5_ms;
     std::unique_ptr<frc::Notifier> m_simNotifier;
     units::second_t m_lastSimTime;
@@ -29,6 +30,10 @@ class CommandSwerveDrivetrain : public frc2::SubsystemBase, public TunerSwerveDr
     static constexpr frc::Rotation2d kRedAlliancePerspectiveRotation{180_deg};
     /* Keep track if we've ever applied the operator perspective before or not */
     bool m_hasAppliedOperatorPerspective = false;
+
+
+    /** Swerve request to apply during robot-centric path following */
+    swerve::requests::ApplyRobotSpeeds m_pathApplyRobotSpeeds;
 
     /* Swerve requests to apply during SysId characterization */
     swerve::requests::SysIdSwerveTranslation m_translationCharacterization;
@@ -250,6 +255,7 @@ public:
 
 private:
     void StartSimThread();
+    void ConfigureAutoBuilder();
 };
 
 }
