@@ -6,6 +6,8 @@
 
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/button/CommandXboxController.h>
+#include <pathplanner/lib/path/PathPlannerPath.h>
+#include <pathplanner/lib/auto/AutoBuilder.h>
 #include "subsystems/CommandSwerveDrivetrain.h"
 #include "Telemetry.h"
 
@@ -29,10 +31,12 @@ private:
 
 public:
     subsystems::CommandSwerveDrivetrain drivetrain{TunerConstants::CreateDrivetrain()};
+      std::unique_ptr<frc2::Command> exampleAuto;
 
     RobotContainer();
 
     frc2::CommandPtr GetAutonomousCommand();
+    void GetStartingPose();
 
 private:
     void ConfigureBindings();
