@@ -112,8 +112,8 @@ constexpr ctre::phoenix6::swerve::SwerveDrivetrainConstants
         ctre::phoenix6::swerve::SwerveDrivetrainConstants{}.WithPigeon2Id(
             pigeonID);
 //! set to max constraints of swerve modules!
-constexpr units::meters_per_second maxDriveSpeedMPS = 5.01_mps;
-constexpr units::meters_per_second maxFOCDriveSpeedMPS = 4.78_mps;
+constexpr units::meters_per_second_t maxDriveSpeedMPS = 5.01_mps;
+constexpr units::meters_per_second_t maxFOCDriveSpeedMPS = 4.78_mps;
 }; // namespace swerve
 
 // namespace odometry {
