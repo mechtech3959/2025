@@ -39,12 +39,11 @@ void RobotContainer::TeleopPeriodic() {
       [this] {
         driveSubsystem.drivetrain.SetControl(
             ctre::phoenix6::swerve::requests::RobotCentric{}
-                .WithVelocityX(-driverController.GetLeftX() * 1_m / 1_s)
-                .WithVelocityY(-driverController.GetLeftY() * 1_m / 1_s)
-                .WithRotationalRate(-driverController.GetRightX() * 1_m / 1_s)
+                .WithVelocityX(-driverController.GetLeftX() * 1_mps)
+                .WithVelocityY(-driverController.GetLeftY() * 1_mps)
+                .WithRotationalRate(-driverController.GetRightX() * 1_rad_per_s)
                 .WithDriveRequestType(
-                    ctre::phoenix6::swerve::DriveRequestType::OpenLoopVoltage)
-                .WithDeadband(1_m / 1_s * 0.1));
+                    ctre::phoenix6::swerve::DriveRequestType::OpenLoopVoltage));
       },
       {&driveSubsystem}));
 }
