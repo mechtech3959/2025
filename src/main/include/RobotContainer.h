@@ -32,6 +32,8 @@ private:
 public:
     subsystems::CommandSwerveDrivetrain drivetrain{TunerConstants::CreateDrivetrain()};
       std::unique_ptr<frc2::Command> exampleAuto;
+      std::vector<std::string> paths;
+
 
     RobotContainer();
 
