@@ -57,9 +57,10 @@ void RobotContainer::GetStartingPose() {
   // drivetrain.ResetPose(pose);
 }
 frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
-        selectedPath -> fromPathFile("New Path");
-        const std::optional<frc::Pose2d> pose = selectedPath->getStartingHolonomicPose();
-      
-        drivetrain.ResetPose(pose.value());
+  selectedPath->fromPathFile("New Path");
+  const std::optional<frc::Pose2d> pose =
+      selectedPath->getStartingHolonomicPose();
+
+  drivetrain.ResetPose(pose.value());
   return pathplanner::AutoBuilder::followPath(selectedPath);
 }
