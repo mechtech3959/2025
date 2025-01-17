@@ -3,14 +3,14 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "RobotContainer.h"
-
 #include <frc2/command/Commands.h>
 
 RobotContainer::RobotContainer() { ConfigureBindings(); }
+void RobotContainer::postDashboard(){
 
+}
 void RobotContainer::ConfigureBindings() {
-  paths = pathplanner::AutoBuilder::getAllAutoNames();
-
+  paths =  pathplanner::AutoBuilder::buildAutoChooser("");
   // Note that X is defined as forward according to WPILib convention,
   // and Y is defined as to the left according to WPILib convention.
   drivetrain.SetDefaultCommand(

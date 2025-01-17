@@ -8,6 +8,9 @@
 #include <frc2/command/button/CommandXboxController.h>
 #include <pathplanner/lib/path/PathPlannerPath.h>
 #include <pathplanner/lib/auto/AutoBuilder.h>
+#include <frc/smartdashboard/Field2d.h>
+#include <frc/smartdashboard/SmartDashboard.h>
+#include <frc/smartdashboard/SendableChooser.h>
 #include "subsystems/CommandSwerveDrivetrain.h"
 #include "Telemetry.h"
 
@@ -32,14 +35,14 @@ private:
 public:
     subsystems::CommandSwerveDrivetrain drivetrain{TunerConstants::CreateDrivetrain()};
       std::unique_ptr<frc2::Command> exampleAuto;
-      std::vector<std::string> paths;
+      frc::SendableChooser<frc2::Command *> paths;
 
 
     RobotContainer();
 
     frc2::CommandPtr GetAutonomousCommand();
     void GetStartingPose();
-
+    void postDashboard();
 private:
     void ConfigureBindings();
 };
