@@ -31,9 +31,13 @@ private:
                   OpenLoopVoltage); // Use open-loop control for drive motors
   swerve::requests::SwerveDriveBrake brake{};
   swerve::requests::PointWheelsAt point{};
-
-  /* Note: This must be constructed before the drivetrain, otherwise we need to
-   *       define a destructor to un-register the telemetry from the drivetrain
+  swerve::requests::RobotCentric rDrive =
+      swerve::requests::RobotCentric{}
+          .WithDeadband(MaxSpeed * 0.1)
+          .WithRotationalDeadband(MaxAngularRate * 0.1)
+          .WithDriveRequestType(swerve::DriveRequestType::OpenLoopVoltage);
+  /* Note: This must be constructed before the drivetrain, otherwise we need
+   * to define a destructor to un-register the telemetry from the drivetrain
    */
   Telemetry logger{MaxSpeed};
 
