@@ -6,11 +6,10 @@
 #include <frc2/command/Commands.h>
 
 RobotContainer::RobotContainer() { ConfigureBindings(); }
-void RobotContainer::postDashboard(){
 
-}
 void RobotContainer::ConfigureBindings() {
-  paths =  pathplanner::AutoBuilder::buildAutoChooser("");
+  pathList = pathplanner::AutoBuilder::getAllAutoNames();
+   
   // Note that X is defined as forward according to WPILib convention,
   // and Y is defined as to the left according to WPILib convention.
   drivetrain.SetDefaultCommand(
@@ -59,8 +58,9 @@ void RobotContainer::GetStartingPose() {
   // drivetrain.ResetPose(pose);
 }
 frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
-  auto path = pathplanner::PathPlannerPath::fromPathFile("New Path");
+  std::shared_ptr<pathplanner::PathPlannerPath> selectedPath =
+      pathplanner::PathPlannerPath::fromPathFile(paths.GetSelected());
   // auto pose = pathplanner::PathPlannerPath::getStartingHolonomicPose();
 
-  return pathplanner::AutoBuilder::followPath(path);
+  return pathplanner::AutoBuilder::followPath(selectedPath);
 }
