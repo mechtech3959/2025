@@ -8,8 +8,7 @@
 RobotContainer::RobotContainer() { ConfigureBindings(); }
 
 void RobotContainer::ConfigureBindings() {
-  pathList = pathplanner::AutoBuilder::getAllAutoNames();
-   
+
   // Note that X is defined as forward according to WPILib convention,
   // and Y is defined as to the left according to WPILib convention.
   drivetrain.SetDefaultCommand(
@@ -58,9 +57,9 @@ void RobotContainer::GetStartingPose() {
   // drivetrain.ResetPose(pose);
 }
 frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
-  std::shared_ptr<pathplanner::PathPlannerPath> selectedPath =
-      pathplanner::PathPlannerPath::fromPathFile(paths.GetSelected());
-  // auto pose = pathplanner::PathPlannerPath::getStartingHolonomicPose();
-
+        selectedPath -> fromPathFile("New Path");
+        const std::optional<frc::Pose2d> pose = selectedPath->getStartingHolonomicPose();
+      
+        drivetrain.ResetPose(pose.value());
   return pathplanner::AutoBuilder::followPath(selectedPath);
 }

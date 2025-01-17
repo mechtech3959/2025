@@ -43,8 +43,9 @@ public:
   subsystems::CommandSwerveDrivetrain drivetrain{
       TunerConstants::CreateDrivetrain()};
   std::unique_ptr<frc2::Command> exampleAuto;
-  std::vector<std::string> pathList;
-  frc::SendableChooser<std::vector<std::string>> paths;
+  std::shared_ptr<pathplanner::PathPlannerPath> selectedPath;
+  // frc::SendableChooser<frc2::Command> paths =
+  //   pathplanner::AutoBuilder::buildAutoChooser();
 
   RobotContainer();
 
