@@ -39,7 +39,7 @@ void CommandSwerveDrivetrain::ConfigureAutoBuilder() {
       this // Subsystem for requirements
   );
 }
-void CommandSwerveDrivetrain::Init(){}
+void CommandSwerveDrivetrain::Init() {}
 void CommandSwerveDrivetrain::Periodic() {
   /*
    * Periodically try to apply the operator perspective.
