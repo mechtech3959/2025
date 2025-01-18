@@ -59,7 +59,7 @@ frc::Pose2d defau = {7_m,1_m,0_deg};
    frc::Pose2d pose = (selectedPath->getStartingHolonomicPose() != std::nullopt) ?  selectedPath->getStartingHolonomicPose().value() :  defau; 
     return drivetrain.ResetPose(pose);
  }
-pathplanner::PathPlannerPath RobotContainer::SetAutonomousPath() {
+std::shared_ptr<pathplanner::PathPlannerPath> RobotContainer::SetAutonomousPath() {
      return pathplanner::PathPlannerPath::fromPathFile("Example Path");
 }
 frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
