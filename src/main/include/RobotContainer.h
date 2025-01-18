@@ -55,8 +55,9 @@ public:
 
   frc2::CommandPtr GetAutonomousCommand();
   void GetStartingPose();
-  void postDashboard();
-
+ 
 private:
   void ConfigureBindings();
+  void ConfigureDashboard();
+
 };

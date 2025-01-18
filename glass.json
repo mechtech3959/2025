@@ -1,0 +1,13 @@
+{
+  "NetworkTables": {
+    "Persistent Values": {
+      "open": false
+    },
+    "Retained Values": {
+      "open": false
+    }
+  },
+  "NetworkTables Settings": {
+    "serverTeam": "3959"
+  }
+}

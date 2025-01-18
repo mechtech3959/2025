@@ -5,7 +5,7 @@
 #include "RobotContainer.h"
 #include <frc2/command/Commands.h>
 
-RobotContainer::RobotContainer() { ConfigureBindings(); }
+RobotContainer::RobotContainer() { ConfigureBindings();}
 
 void RobotContainer::ConfigureBindings() {
 
@@ -49,18 +49,19 @@ void RobotContainer::ConfigureBindings() {
   drivetrain.RegisterTelemetry(
       [this](auto const &state) { logger.Telemeterize(state); });
 }
-
+void RobotContainer::ConfigureDashboard() {}
 void RobotContainer::GetStartingPose() {
 
   // const frc::Pose2d pose =
   // pathplanner::PathPlannerPath::getStartingHolonomicPose();
   // drivetrain.ResetPose(pose);
-}
-frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
-  selectedPath->fromPathFile("New Path");
   const std::optional<frc::Pose2d> pose =
       selectedPath->getStartingHolonomicPose();
 
   drivetrain.ResetPose(pose.value());
+}
+frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
+  selectedPath->fromPathFile("New Path");
+
   return pathplanner::AutoBuilder::followPath(selectedPath);
 }
