@@ -51,17 +51,19 @@ void RobotContainer::ConfigureBindings() {
 }
 void RobotContainer::ConfigureDashboard() {}
 void RobotContainer::GetStartingPose() {
-
+frc::Pose2d defau = {7_m,1_m,0_deg};
   // const frc::Pose2d pose =
   // pathplanner::PathPlannerPath::getStartingHolonomicPose();
   // drivetrain.ResetPose(pose);
-  const std::optional<frc::Pose2d> pose =
-      selectedPath->getStartingHolonomicPose();
-
-  drivetrain.ResetPose(pose.value());
+   //const std::optional<frc::Pose2d> pose =
+   frc::Pose2d pose = (selectedPath->getStartingHolonomicPose() != std::nullopt) ?  selectedPath->getStartingHolonomicPose().value() :  defau; 
+    return drivetrain.ResetPose(pose);
+ }
+pathplanner::PathPlannerPath RobotContainer::SetAutonomousPath() {
+     return pathplanner::PathPlannerPath::fromPathFile("Example Path");
 }
 frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
-  selectedPath->fromPathFile("New Path");
-
+ // selectedPath->fromPathFile("Example Path");
+  //auto p = pathplanner::PathPlannerPath::fromPathFile("Example Path");
   return pathplanner::AutoBuilder::followPath(selectedPath);
 }

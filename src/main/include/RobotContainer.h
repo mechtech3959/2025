@@ -46,6 +46,7 @@ private:
 public:
   subsystems::CommandSwerveDrivetrain drivetrain{
       TunerConstants::CreateDrivetrain()};
+  pathplanner::PathPlannerPath SetAutonomousPath();
   std::unique_ptr<frc2::Command> exampleAuto;
   std::shared_ptr<pathplanner::PathPlannerPath> selectedPath;
   // frc::SendableChooser<frc2::Command> paths =

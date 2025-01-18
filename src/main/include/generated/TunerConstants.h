@@ -40,7 +40,7 @@ class TunerConstants {
   // The closed-loop output type to use for the drive motors;
   // This affects the PID/FF gains for the drive motors
   static constexpr swerve::ClosedLoopOutputType kDriveClosedLoopOutput =
-      swerve::ClosedLoopOutputType::Voltage;
+      swerve::ClosedLoopOutputType::TorqueCurrentFOC;
 
   // The type of motor used for the drive motor
   static constexpr swerve::DriveMotorArrangement kDriveMotorType =
