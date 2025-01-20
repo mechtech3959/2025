@@ -10,7 +10,7 @@ Robot::Robot() {}
 
 void Robot::RobotPeriodic() { frc2::CommandScheduler::GetInstance().Run(); }
 
-void Robot::DisabledInit() {}
+void Robot::DisabledInit() { m_container.SetAutonomousPath(); }
 
 void Robot::DisabledPeriodic() {}
 
