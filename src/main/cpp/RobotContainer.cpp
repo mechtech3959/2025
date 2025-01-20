@@ -60,8 +60,8 @@ void RobotContainer::GetStartingPose() {
   // pathplanner::PathPlannerPath::getStartingHolonomicPose();
   // drivetrain.ResetPose(pose);
   // const std::optional<frc::Pose2d> pose =
-  frc::Pose2d pose = selectedPath -> getStartingDifferentialPose();
-    return drivetrain.ResetPose(pose);
+  frc::Pose2d pose = selectedPath->getStartingDifferentialPose();
+  return drivetrain.ResetPose(pose);
 }
 std::shared_ptr<pathplanner::PathPlannerPath>
 RobotContainer::SetAutonomousPath() {
