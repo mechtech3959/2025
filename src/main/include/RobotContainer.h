@@ -52,6 +52,7 @@ public:
 
   frc::SendableChooser<frc2::Command *> paths =
       pathplanner::AutoBuilder::buildAutoChooser("defauto");
+      std::string autopose;
 
   RobotContainer();
 

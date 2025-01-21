@@ -18,11 +18,11 @@ void Robot::DisabledExit() {}
 
 void Robot::AutonomousInit() {
 
-//  m_autonomousCommand = m_container.GetAutonomousCommand();
+  m_autonomousCommand = m_container.GetAutonomousCommand();
 
- // if (m_autonomousCommand) {
- //   m_autonomousCommand.value()->Schedule();
- // }
+  if (m_autonomousCommand) {
+    m_autonomousCommand.value()->Schedule();
+  }
 }
 
 void Robot::AutonomousPeriodic() {}
@@ -30,9 +30,9 @@ void Robot::AutonomousPeriodic() {}
 void Robot::AutonomousExit() {}
 
 void Robot::TeleopInit() {
- // if (m_autonomousCommand) {
- //   m_autonomousCommand.value()->Cancel();
-//  }
+  if (m_autonomousCommand) {
+    m_autonomousCommand.value()->Cancel();
+  }
 }
 
 void Robot::TeleopPeriodic() {}

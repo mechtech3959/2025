@@ -8,7 +8,7 @@
 RobotContainer::RobotContainer() {
   ConfigureBindings();
   ConfigureDashboard();
-  // GetStartingPose();
+  GetStartingPose();
 }
 
 void RobotContainer::ConfigureBindings() {
