@@ -12,6 +12,7 @@
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/button/CommandXboxController.h>
 #include <pathplanner/lib/auto/AutoBuilder.h>
+#include <pathplanner/lib/commands/PathPlannerAuto.h>
 #include <pathplanner/lib/path/PathPlannerPath.h>
 
 class RobotContainer {
@@ -49,15 +50,15 @@ public:
   std::shared_ptr<pathplanner::PathPlannerPath> SetAutonomousPath();
   std::unique_ptr<frc2::Command> exampleAuto;
   std::shared_ptr<pathplanner::PathPlannerPath> selectedPath;
-  // frc::SendableChooser<frc2::Command> paths =
-  //   pathplanner::AutoBuilder::buildAutoChooser();
+
+  frc::SendableChooser<frc2::Command *> paths =
+      pathplanner::AutoBuilder::buildAutoChooser();
 
   RobotContainer();
 
-  frc2::CommandPtr GetAutonomousCommand();
+  frc2::Command* GetAutonomousCommand();
   void GetStartingPose();
 
-private:
   void ConfigureBindings();
   void ConfigureDashboard();
 };

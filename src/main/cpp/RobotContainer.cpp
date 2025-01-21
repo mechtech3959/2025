@@ -5,10 +5,13 @@
 #include "RobotContainer.h"
 #include <frc2/command/Commands.h>
 
+
 RobotContainer::RobotContainer() {
   ConfigureBindings();
-  SetAutonomousPath();
+  ConfigureDashboard();
+  //SetAutonomousPath();
   GetStartingPose();
+
 }
 
 void RobotContainer::ConfigureBindings() {
@@ -53,22 +56,29 @@ void RobotContainer::ConfigureBindings() {
   drivetrain.RegisterTelemetry(
       [this](auto const &state) { logger.Telemeterize(state); });
 }
-void RobotContainer::ConfigureDashboard() {}
+void RobotContainer::ConfigureDashboard() {
+  frc::SmartDashboard::PutData("autochooser", &paths);
+}
 void RobotContainer::GetStartingPose() {
   frc::Pose2d defau = {7_m, 1_m, 0_deg};
   // const frc::Pose2d pose =
   // pathplanner::PathPlannerPath::getStartingHolonomicPose();
   // drivetrain.ResetPose(pose);
   // const std::optional<frc::Pose2d> pose =
-  frc::Pose2d pose = selectedPath->getStartingDifferentialPose();
+  auto pathName =  paths.GetSelected()->GetName();
+  const frc::Pose2d pose =  pathplanner::PathPlannerAuto(pathName).getStartingPose();
+   //..auto p =  pathplanner::PathPlannerPath::fromPathFile("Example Path"); 
+ // std::vector<frc::Pose2d> pose = p->getPathPoses();
+ 
   return drivetrain.ResetPose(pose);
 }
 std::shared_ptr<pathplanner::PathPlannerPath>
 RobotContainer::SetAutonomousPath() {
-  return pathplanner::PathPlannerPath::fromPathFile("Example Path");
+  return selectedPath-> fromPathFile("Example Path");
 }
-frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
+frc2::Command* RobotContainer::GetAutonomousCommand() {
   // selectedPath->fromPathFile("Example Path");
-  // auto p = pathplanner::PathPlannerPath::fromPathFile("Example Path");
-  return pathplanner::AutoBuilder::followPath(selectedPath);
+   //auto p = pathplanner::PathPlannerPath::fromPathFile("Example Path");
+  //return pathplanner::AutoBuilder::followPath(p);
+  return paths.GetSelected();
 }

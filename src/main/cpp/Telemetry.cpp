@@ -47,4 +47,5 @@ void Telemetry::Telemeterize(
     frc::SmartDashboard::PutData("Module " + std::to_string(i),
                                  &m_moduleMechanisms[i]);
   }
-}
+  
+  }
