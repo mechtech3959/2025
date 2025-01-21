@@ -18,7 +18,6 @@ private:
 
   /* What to publish over networktables for telemetry */
   nt::NetworkTableInstance inst = nt::NetworkTableInstance::GetDefault();
-  
 
   /* Robot swerve drive state */
   std::shared_ptr<nt::NetworkTable> driveStateTable =

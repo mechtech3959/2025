@@ -56,7 +56,7 @@ public:
 
   RobotContainer();
 
-  frc2::Command* GetAutonomousCommand();
+  frc2::Command *GetAutonomousCommand();
   void GetStartingPose();
 
   void ConfigureBindings();
