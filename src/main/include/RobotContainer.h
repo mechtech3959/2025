@@ -49,14 +49,13 @@ public:
       TunerConstants::CreateDrivetrain()};
   std::shared_ptr<pathplanner::PathPlannerPath> SetAutonomousPath();
   std::unique_ptr<frc2::Command> exampleAuto;
-  std::shared_ptr<pathplanner::PathPlannerPath> selectedPath;
 
   frc::SendableChooser<frc2::Command *> paths =
-      pathplanner::AutoBuilder::buildAutoChooser();
+      pathplanner::AutoBuilder::buildAutoChooser("defauto");
 
   RobotContainer();
 
-  frc2::Command *GetAutonomousCommand();
+  frc2::Command* GetAutonomousCommand();
   void GetStartingPose();
 
   void ConfigureBindings();
