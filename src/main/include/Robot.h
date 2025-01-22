@@ -29,7 +29,7 @@ public:
   void TestExit() override;
 
 private:
-  std::optional<frc2::Command*> m_autonomousCommand;
+  std::optional<frc2::Command *> m_autonomousCommand;
 
   RobotContainer m_container;
 };

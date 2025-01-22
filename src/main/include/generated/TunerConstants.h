@@ -92,7 +92,7 @@ class TunerConstants {
 public:
   // CAN bus that the devices are located on;
   // All swerve devices must share the same CAN bus
-  static inline const CANBus kCANBus{kCANBusName,"/media/sda1/"};
+  static inline const CANBus kCANBus{kCANBusName, "/media/sda1/"};
 
   // Theoretical free speed (m/s) at 12 V applied output;
   // This needs to be tuned to your individual robot
