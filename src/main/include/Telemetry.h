@@ -92,6 +92,7 @@ private:
   };
 
 public:
+//ctre::phoenix6::SignalLogger::SetPath("/media/sda1/");
   /**
    * Construct a telemetry object with the specified max speed of the robot.
    *
