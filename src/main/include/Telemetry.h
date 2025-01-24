@@ -92,13 +92,13 @@ private:
   };
 
 public:
-//ctre::phoenix6::SignalLogger::SetPath("/media/sda1/");
-  /**
+   /**
    * Construct a telemetry object with the specified max speed of the robot.
    *
    * \param maxSpeed Maximum speed
    */
   Telemetry(units::meters_per_second_t maxSpeed) : MaxSpeed{maxSpeed} {
+    ctre::phoenix6::SignalLogger::SetPath("/media/sda1/");
     ctre::phoenix6::SignalLogger::Start();
   }
 
