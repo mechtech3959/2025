@@ -1,5 +1,6 @@
 #include "subsystems/LimeLightSubsystem.h"
-// class LimeLight : frc2::SubsystemBase{};
+
+using namespace subsystems;
 
 LimeLight::LimeLight(std::string name) {
   limelight = nt::NetworkTableInstance::GetDefault().GetTable(name);

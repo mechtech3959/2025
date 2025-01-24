@@ -2,7 +2,7 @@
 #include "networktables/NetworkTable.h"
 #include <frc/geometry/Pose2d.h>
 #include <frc2/command/SubsystemBase.h>
-
+namespace subsystems{
 class LimeLight : frc2::SubsystemBase {
 private:
   std::shared_ptr<nt::NetworkTable> limelight;
@@ -24,3 +24,4 @@ public:
   frc::Pose2d poseEst(std::string name);
   void centerApriltag();
 };
+}
