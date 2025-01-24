@@ -13,6 +13,7 @@ private:
       return minval;
     return in;
   };
+  double tx, ty, ta, tv;
 
 public:
   double drivecmd, turncmd, distance;
@@ -20,6 +21,6 @@ public:
 
   LimeLight(std::string name);
   void updateTracking(std::string name);
-  frc::Pose2d poseEst();
+  frc::Pose2d poseEst(std::string name);
   void centerApriltag();
 };
