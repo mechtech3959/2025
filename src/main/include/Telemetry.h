@@ -92,7 +92,7 @@ private:
   };
 
 public:
-   /**
+  /**
    * Construct a telemetry object with the specified max speed of the robot.
    *
    * \param maxSpeed Maximum speed
