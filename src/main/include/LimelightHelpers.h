@@ -1,5 +1,4 @@
-#ifndef LIMELIGHTHELPERS_H
-#define LIMELIGHTHELPERS_H
+#pragma once
 
 ///
 // https://github.com/LimelightVision/limelightlib-wpicpp
@@ -10,14 +9,7 @@
 #include "networktables/NetworkTableInstance.h"
 #include "networktables/NetworkTableValue.h"
 #include "wpi/json.h"
-#include <string>
-#include <unistd.h>
-#include <wpinet/PortForwarder.h>
-// #include <curl/curl.h>
-#include <arpa/inet.h>
 #include <chrono>
-#include <cstring>
-#include <fcntl.h>
 #include <frc/geometry/Pose2d.h>
 #include <frc/geometry/Pose3d.h>
 #include <frc/geometry/Rotation2d.h>
@@ -25,9 +17,17 @@
 #include <frc/geometry/Translation2d.h>
 #include <frc/geometry/Translation3d.h>
 #include <iostream>
-#include <netinet/in.h>
-#include <sys/socket.h>
+#include <optional>
+#include <string>
 #include <vector>
+#include <wpinet/PortForwarder.h>
+// #include <unistd.h>
+// #include <curl/curl.h>
+//  #include <sys/socket.h>
+//  #include <netinet/in.h>
+//  #include <arpa/inet.h>
+#include <cstring>
+#include <fcntl.h>
 
 namespace LimelightHelpers {
 inline std::string sanitizeName(const std::string &name) {
@@ -41,23 +41,21 @@ inline frc::Pose3d toPose3D(const std::vector<double> &inData) {
   if (inData.size() < 6) {
     return frc::Pose3d();
   }
-  return frc::Pose3d(
-      frc::Translation3d(units::length::meter_t(inData[0]),
-                         units::length::meter_t(inData[1]),
-                         units::length::meter_t(inData[2])),
-      frc::Rotation3d(units::angle::radian_t(inData[3] * (M_PI / 180.0)),
-                      units::angle::radian_t(inData[4] * (M_PI / 180.0)),
-                      units::angle::radian_t(inData[5] * (M_PI / 180.0))));
+  return frc::Pose3d(frc::Translation3d(units::length::meter_t(inData[0]),
+                                        units::length::meter_t(inData[1]),
+                                        units::length::meter_t(inData[2])),
+                     frc::Rotation3d(units::angle::degree_t(inData[3]),
+                                     units::angle::degree_t(inData[4]),
+                                     units::angle::degree_t(inData[5])));
 }
 
 inline frc::Pose2d toPose2D(const std::vector<double> &inData) {
   if (inData.size() < 6) {
     return frc::Pose2d();
   }
-  return frc::Pose2d(
-      frc::Translation2d(units::length::meter_t(inData[0]),
-                         units::length::meter_t(inData[1])),
-      frc::Rotation2d(units::angle::radian_t(inData[5] * (M_PI / 180.0))));
+  return frc::Pose2d(frc::Translation2d(units::length::meter_t(inData[0]),
+                                        units::length::meter_t(inData[1])),
+                     frc::Rotation2d(units::angle::degree_t(inData[5])));
 }
 
 inline std::shared_ptr<nt::NetworkTable>
@@ -433,12 +431,18 @@ public:
         avgTagArea(avgTagArea), rawFiducials(rawFiducials) {}
 };
 
-inline PoseEstimate getBotPoseEstimate(const std::string &limelightName,
-                                       const std::string &entryName) {
+inline std::optional<PoseEstimate>
+getBotPoseEstimate(const std::string &limelightName,
+                   const std::string &entryName) {
   nt::NetworkTableEntry poseEntry =
       getLimelightNTTableEntry(limelightName, entryName);
   std::vector<double> poseArray = poseEntry.GetDoubleArray(std::span<double>{});
   frc::Pose2d pose = toPose2D(poseArray);
+
+  if (poseArray.size() == 0) {
+    // Handle the case where no data is available
+    return std::nullopt; // or some default PoseEstimate
+  }
 
   double latency = extractArrayEntry(poseArray, 6);
   int tagCount = static_cast<int>(extractArrayEntry(poseArray, 7));
@@ -451,8 +455,8 @@ inline PoseEstimate getBotPoseEstimate(const std::string &limelightName,
       (poseEntry.GetLastChange() / 1000000.0) - (latency / 1000.0));
 
   std::vector<RawFiducial> rawFiducials;
-  int valsPerFiducial = 7;
-  int expectedTotalVals = 11 + valsPerFiducial * tagCount;
+  constexpr int valsPerFiducial = 7;
+  size_t expectedTotalVals = 11 + valsPerFiducial * tagCount;
 
   if (poseArray.size() == expectedTotalVals) {
     for (int i = 0; i < tagCount; i++) {
@@ -473,22 +477,22 @@ inline PoseEstimate getBotPoseEstimate(const std::string &limelightName,
                       tagArea, rawFiducials);
 }
 
-inline PoseEstimate
+inline std::optional<PoseEstimate>
 getBotPoseEstimate_wpiBlue(const std::string &limelightName = "") {
   return getBotPoseEstimate(limelightName, "botpose_wpiblue");
 }
 
-inline PoseEstimate
+inline std::optional<PoseEstimate>
 getBotPoseEstimate_wpiRed(const std::string &limelightName = "") {
   return getBotPoseEstimate(limelightName, "botpose_wpired");
 }
 
-inline PoseEstimate
+inline std::optional<PoseEstimate>
 getBotPoseEstimate_wpiBlue_MegaTag2(const std::string &limelightName = "") {
   return getBotPoseEstimate(limelightName, "botpose_orb_wpiblue");
 }
 
-inline PoseEstimate
+inline std::optional<PoseEstimate>
 getBotPoseEstimate_wpiRed_MegaTag2(const std::string &limelightName = "") {
   return getBotPoseEstimate(limelightName, "botpose_orb_wpired");
 }
@@ -643,60 +647,60 @@ inline const std::string _key_colorRGB{"cRGB"};
 inline const std::string _key_colorHSV{"cHSV"};
 } // namespace internal
 
-inline void PhoneHome() {
-  static int sockfd = -1;
-  static struct sockaddr_in servaddr, cliaddr;
+// inline void PhoneHome()
+// {
+//     static int sockfd = -1;
+//     static struct sockaddr_in servaddr, cliaddr;
 
-  if (sockfd == -1) {
-    sockfd = socket(AF_INET, SOCK_DGRAM, 0);
-    if (sockfd < 0) {
-      std::cerr << "Socket creation failed" << std::endl;
-      return;
-    }
+//     if (sockfd == -1) {
+//         sockfd = socket(AF_INET, SOCK_DGRAM, 0);
+//         if (sockfd < 0) {
+//             std::cerr << "Socket creation failed" << std::endl;
+//             return;
+//         }
 
-    memset(&servaddr, 0, sizeof(servaddr));
-    servaddr.sin_family = AF_INET;
-    servaddr.sin_addr.s_addr = inet_addr("255.255.255.255");
-    servaddr.sin_port = htons(5809);
+//         memset(&servaddr, 0, sizeof(servaddr));
+//         servaddr.sin_family = AF_INET;
+//         servaddr.sin_addr.s_addr = inet_addr("255.255.255.255");
+//         servaddr.sin_port = htons(5809);
 
-    // Set socket for broadcast
-    int broadcast = 1;
-    if (setsockopt(sockfd, SOL_SOCKET, SO_BROADCAST, &broadcast,
-                   sizeof(broadcast)) < 0) {
-      std::cerr << "Error in setting Broadcast option" << std::endl;
-      close(sockfd);
-      sockfd = -1;
-      return;
-    }
+//         // Set socket for broadcast
+//         int broadcast = 1;
+//         if (setsockopt(sockfd, SOL_SOCKET, SO_BROADCAST, &broadcast,
+//         sizeof(broadcast)) < 0) {
+//             std::cerr << "Error in setting Broadcast option" << std::endl;
+//             close(sockfd);
+//             sockfd = -1;
+//             return;
+//         }
 
-    // Set socket to non-blocking
-    if (fcntl(sockfd, F_SETFL, O_NONBLOCK) < 0) {
-      std::cerr << "Error setting socket to non-blocking" << std::endl;
-      close(sockfd);
-      sockfd = -1;
-      return;
-    }
+//         // Set socket to non-blocking
+//         if (fcntl(sockfd, F_SETFL, O_NONBLOCK) < 0) {
+//             std::cerr << "Error setting socket to non-blocking" << std::endl;
+//             close(sockfd);
+//             sockfd = -1;
+//             return;
+//         }
 
-    const char *msg = "LLPhoneHome";
-    sendto(sockfd, msg, strlen(msg), 0, (const struct sockaddr *)&servaddr,
-           sizeof(servaddr));
-  }
+//         const char *msg = "LLPhoneHome";
+//         sendto(sockfd, msg, strlen(msg), 0, (const struct sockaddr *)
+//         &servaddr, sizeof(servaddr));
+//     }
 
-  char receiveData[1024];
-  socklen_t len = sizeof(cliaddr);
+//     char receiveData[1024];
+//     socklen_t len = sizeof(cliaddr);
 
-  ssize_t n = recvfrom(sockfd, (char *)receiveData, 1024, 0,
-                       (struct sockaddr *)&cliaddr, &len);
-  if (n > 0) {
-    receiveData[n] = '\0'; // Null-terminate the received string
-    std::string received(receiveData, n);
-    std::cout << "Received response: " << received << std::endl;
-  } else if (n < 0 && errno != EWOULDBLOCK && errno != EAGAIN) {
-    std::cerr << "Error receiving data" << std::endl;
-    close(sockfd);
-    sockfd = -1;
-  }
-}
+//     ssize_t n = recvfrom(sockfd, (char *)receiveData, 1024, 0, (struct
+//     sockaddr *) &cliaddr, &len); if (n > 0) {
+//         receiveData[n] = '\0'; // Null-terminate the received string
+//         std::string received(receiveData, n);
+//         std::cout << "Received response: " << received << std::endl;
+//     } else if (n < 0 && errno != EWOULDBLOCK && errno != EAGAIN) {
+//         std::cerr << "Error receiving data" << std::endl;
+//         close(sockfd);
+//         sockfd = -1;
+//     }
+// }
 
 inline void SetupPortForwarding(const std::string &limelightName) {
   auto &portForwarder = wpi::PortForwarder::GetInstance();
@@ -717,7 +721,7 @@ T SafeJSONAccess(const wpi::json &jsonData, const KeyType &key,
                  const T &defaultValue) {
   try {
     return jsonData.at(key).template get<T>();
-  } catch (wpi::json::exception &e) {
+  } catch (wpi::json::exception &) {
     return defaultValue;
   } catch (...) {
     return defaultValue;
@@ -861,7 +865,7 @@ getLatestResults(const std::string &limelightName = "", bool profile = false) {
   wpi::json data;
   try {
     data = wpi::json::parse(jsonString);
-  } catch (const std::exception &e) {
+  } catch (const std::exception &) {
     return LimelightResultsClass();
   }
 
@@ -882,4 +886,3 @@ getLatestResults(const std::string &limelightName = "", bool profile = false) {
   }
 }
 } // namespace LimelightHelpers
-#endif // LIMELIGHTHELPERS_H
