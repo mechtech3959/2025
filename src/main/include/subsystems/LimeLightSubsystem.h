@@ -6,6 +6,13 @@
 class LimeLight : frc2::SubsystemBase {
 private:
   std::shared_ptr<nt::NetworkTable> limelight;
+  double clamp(double in, double minval, double maxval) {
+    if (in > maxval)
+      return maxval;
+    if (in < minval)
+      return minval;
+    return in;
+  };
 
 public:
   double drivecmd, turncmd, distance;
