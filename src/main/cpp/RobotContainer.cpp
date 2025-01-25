@@ -9,7 +9,12 @@ RobotContainer::RobotContainer() {
   ConfigureBindings();
   ConfigureDashboard();
   GetStartingPose();
+  limelight.updateTracking();
+  visionEstimate = limelight.poseEst();
 }
+void RobotContainer::RobotPeriodic() {
+  // drivetrain.AddVisionMeasurement(visionEstimate);
+};
 
 void RobotContainer::ConfigureBindings() {
   // Note that X is defined as forward according to WPILib convention,
@@ -26,6 +31,9 @@ void RobotContainer::ConfigureBindings() {
                                 MaxAngularRate); // Drive counterclockwise with
                                                  // negative X (left)
       }));
+  joystick.X().WhileTrue(drivetrain.ApplyRequest([this]() -> auto && {
+    return drive.WithRotationalRate(limelight.turncmd * MaxAngularRate);
+  }));
 
   joystick.A().WhileTrue(
       drivetrain.ApplyRequest([this]() -> auto && { return brake; }));

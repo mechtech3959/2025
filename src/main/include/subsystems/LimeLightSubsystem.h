@@ -2,7 +2,7 @@
 #include "networktables/NetworkTable.h"
 #include <frc/geometry/Pose2d.h>
 #include <frc2/command/SubsystemBase.h>
-namespace subsystems{
+namespace subsystems {
 class LimeLight : frc2::SubsystemBase {
 private:
   std::shared_ptr<nt::NetworkTable> limelight;
@@ -16,12 +16,13 @@ private:
   double tx, ty, ta, tv;
 
 public:
+  std::string name;
   double drivecmd, turncmd, distance;
   bool LLHasTarget;
 
-  LimeLight(std::string name);
-  void updateTracking(std::string name);
-  frc::Pose2d poseEst(std::string name);
+  LimeLight(std::string NTname);
+  void updateTracking();
+  frc::Pose2d poseEst();
   void centerApriltag();
 };
-}
+} // namespace subsystems

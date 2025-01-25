@@ -2,10 +2,11 @@
 
 using namespace subsystems;
 
-LimeLight::LimeLight(std::string name) {
+LimeLight::LimeLight(std::string NTname) {
+  name = NTname;
   limelight = nt::NetworkTableInstance::GetDefault().GetTable(name);
 };
-void LimeLight::updateTracking(std::string name) {
+void LimeLight::updateTracking() {
   tx = LimelightHelpers::getTX(name);
   ty = LimelightHelpers::getTY(name);
   ta = LimelightHelpers::getTA(name);
@@ -22,7 +23,7 @@ void LimeLight::updateTracking(std::string name) {
     drivecmd = clamp(ta, -0.5, 0.5);
   }
 };
-frc::Pose2d LimeLight::poseEst(std ::string name) {
+frc::Pose2d LimeLight::poseEst() {
   if (LLHasTarget && (tx < 0.1 || tx > -0.1)) {
     std::optional<LimelightHelpers::PoseEstimate> posEst =
         LimelightHelpers::getBotPoseEstimate_wpiBlue_MegaTag2(name);

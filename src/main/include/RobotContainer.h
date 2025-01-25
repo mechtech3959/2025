@@ -48,10 +48,12 @@ private:
 public:
   subsystems::CommandSwerveDrivetrain drivetrain{
       TunerConstants::CreateDrivetrain()};
+
   subsystems::LimeLight limelight{"lime"};
+  frc::Pose2d visionEstimate;
+
   std::shared_ptr<pathplanner::PathPlannerPath> SetAutonomousPath();
   std::unique_ptr<frc2::Command> exampleAuto;
-
   frc::SendableChooser<frc2::Command *> paths =
       pathplanner::AutoBuilder::buildAutoChooser("defauto");
   std::string autopose;
@@ -63,4 +65,5 @@ public:
 
   void ConfigureBindings();
   void ConfigureDashboard();
+  void RobotPeriodic();
 };
