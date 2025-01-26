@@ -62,24 +62,16 @@ void RobotContainer::ConfigureBindings() {
 }
 void RobotContainer::ConfigureDashboard() {
   frc::SmartDashboard::PutData("autochooser", &paths);
+  // frc::SmartDashboard::PutNumberArray("LL pose",
+  // [visionEstimate.X().value(),visionEstimate.Y().value()]);
 }
 void RobotContainer::GetStartingPose() {
-  // const frc::Pose2d pose =
-  // pathplanner::PathPlannerPath::getStartingHolonomicPose();
-  // drivetrain.ResetPose(pose);
-  // const std::optional<frc::Pose2d> pose =
   auto pathName = paths.GetSelected();
   const frc::Pose2d pose =
       pathplanner::PathPlannerAuto(pathName->GetName()).getStartingPose();
-  //..auto p =  pathplanner::PathPlannerPath::fromPathFile("Example Path");
-  // std::vector<frc::Pose2d> pose = p->getPathPoses();
-
   return drivetrain.ResetPose(pose);
 }
 
 frc2::Command *RobotContainer::GetAutonomousCommand() {
-  // selectedPath->fromPathFile("Example Path");
-  // auto p = pathplanner::PathPlannerPath::fromPathFile("Example Path");
-  // return pathplanner::AutoBuilder::followPath(p);
   return paths.GetSelected();
 }
