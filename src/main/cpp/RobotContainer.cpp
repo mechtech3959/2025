@@ -27,7 +27,7 @@ void RobotContainer::ConfigureBindings() {
                            MaxSpeed) // Drive left with negative X (left)
             .WithRotationalRate(-joystick.GetRightX() *
                                 MaxAngularRate); // Drive counterclockwise with
-                                                 // negative X (left)
+        // negative X (left)
       }));
   joystick.X().WhileTrue(drivetrain.ApplyRequest([this]() -> auto && {
     return drive.WithRotationalRate(limelight.turncmd * MaxAngularRate);
