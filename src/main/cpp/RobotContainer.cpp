@@ -12,9 +12,7 @@ RobotContainer::RobotContainer() {
   limelight.updateTracking();
   visionEstimate = limelight.poseEst();
 }
-void RobotContainer::RobotPeriodic() {
-  // drivetrain.AddVisionMeasurement(visionEstimate);
-};
+void RobotContainer::RobotPeriodic() {};
 
 void RobotContainer::ConfigureBindings() {
   // Note that X is defined as forward according to WPILib convention,
