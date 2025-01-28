@@ -40,7 +40,7 @@ class TunerConstants {
   // The closed-loop output type to use for the drive motors;
   // This affects the PID/FF gains for the drive motors
   static constexpr swerve::ClosedLoopOutputType kDriveClosedLoopOutput =
-      swerve::ClosedLoopOutputType::TorqueCurrentFOC;
+      swerve::ClosedLoopOutputType::Voltage;
 
   // The type of motor used for the drive motor
   static constexpr swerve::DriveMotorArrangement kDriveMotorType =
@@ -68,7 +68,7 @@ class TunerConstants {
               // Swerve azimuth does not require much torque output, so we can
               // set a relatively low stator current limit to help avoid
               // brownouts without impacting performance.
-              .WithStatorCurrentLimit(60_A)
+              .WithStatorCurrentLimit(20_A)
               .WithStatorCurrentLimitEnable(true));
   static constexpr configs::TalonFXConfiguration steerInitialConfigs =
       configs::TalonFXConfiguration{}.WithCurrentLimits(
@@ -76,7 +76,7 @@ class TunerConstants {
               // Swerve azimuth does not require much torque output, so we can
               // set a relatively low stator current limit to help avoid
               // brownouts without impacting performance.
-              .WithStatorCurrentLimit(60_A)
+              .WithStatorCurrentLimit(40_A)
               .WithStatorCurrentLimitEnable(true));
   static constexpr configs::CANcoderConfiguration encoderInitialConfigs{};
   // Configs for the Pigeon 2; leave this nullopt to skip applying Pigeon 2
@@ -139,7 +139,7 @@ private:
           .WithDriveMotorGains(driveGains)
           .WithSteerMotorClosedLoopOutput(kSteerClosedLoopOutput)
           .WithDriveMotorClosedLoopOutput(kDriveClosedLoopOutput)
-          .WithSlipCurrent(kSlipCurrent)
+       //   .WithSlipCurrent(kSlipCurrent)
           .WithSpeedAt12Volts(kSpeedAt12Volts)
           .WithDriveMotorType(kDriveMotorType)
           .WithSteerMotorType(kSteerMotorType)

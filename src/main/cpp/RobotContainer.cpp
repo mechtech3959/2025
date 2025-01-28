@@ -29,7 +29,7 @@ void RobotContainer::ConfigureBindings() {
         // negative X (left)
       }));
   joystick.X().WhileTrue(drivetrain.ApplyRequest([this]() -> auto && {
-    return drive.WithRotationalRate(limelight.turncmd * MaxAngularRate);
+    return drive.WithVelocityX(limelight.turncmd * MaxSpeed);
   }));
 
   joystick.A().WhileTrue(

@@ -49,7 +49,7 @@ public:
   subsystems::CommandSwerveDrivetrain drivetrain{
       TunerConstants::CreateDrivetrain()};
 
-  subsystems::LimeLight limelight{"lime"};
+  subsystems::LimeLight limelight{"limelight"};
   frc::Pose2d visionEstimate;
 
   std::shared_ptr<pathplanner::PathPlannerPath> SetAutonomousPath();
