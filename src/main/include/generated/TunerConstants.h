@@ -139,7 +139,7 @@ private:
           .WithDriveMotorGains(driveGains)
           .WithSteerMotorClosedLoopOutput(kSteerClosedLoopOutput)
           .WithDriveMotorClosedLoopOutput(kDriveClosedLoopOutput)
-       //   .WithSlipCurrent(kSlipCurrent)
+          //   .WithSlipCurrent(kSlipCurrent)
           .WithSpeedAt12Volts(kSpeedAt12Volts)
           .WithDriveMotorType(kDriveMotorType)
           .WithSteerMotorType(kSteerMotorType)
