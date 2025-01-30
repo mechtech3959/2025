@@ -9,11 +9,11 @@ RobotContainer::RobotContainer() {
   ConfigureBindings();
   ConfigureDashboard();
   GetStartingPose();
-  limelight.updateTracking();
-  visionEstimate = limelight.poseEst();
 }
 
 void RobotContainer::ConfigureBindings() {
+  limelight.updateTracking();
+  visionEstimate = limelight.poseEst();
   // Note that X is defined as forward according to WPILib convention,
   // and Y is defined as to the left according to WPILib convention.
   drivetrain.SetDefaultCommand(
