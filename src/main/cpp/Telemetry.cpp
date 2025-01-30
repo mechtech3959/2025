@@ -48,8 +48,8 @@ void Telemetry::Telemeterize(
                                  &m_moduleMechanisms[i]);
   }
 
-  //drivers station 
+  // drivers station
   frc::DataLogManager::Start();
-// Record both DS control and joystick data
-frc::DriverStation::StartDataLog(frc::DataLogManager::GetLog());
+  // Record both DS control and joystick data
+  frc::DriverStation::StartDataLog(frc::DataLogManager::GetLog());
 }

@@ -1,6 +1,9 @@
 #pragma once
 
 #include "ctre/phoenix6/SignalLogger.hpp"
+#include "frc/DataLogManager.h"
+#include "frc/DriverStation.h"
+#include "subsystems/CommandSwerveDrivetrain.h"
 #include <frc/smartdashboard/Mechanism2d.h>
 #include <frc/smartdashboard/MechanismLigament2d.h>
 #include <networktables/DoubleArrayTopic.h>
@@ -9,9 +12,6 @@
 #include <networktables/StringTopic.h>
 #include <networktables/StructArrayTopic.h>
 #include <networktables/StructTopic.h>
-#include "frc/DataLogManager.h"
-#include "frc/DriverStation.h"
-#include "subsystems/CommandSwerveDrivetrain.h"
 
 class Telemetry {
 private:
