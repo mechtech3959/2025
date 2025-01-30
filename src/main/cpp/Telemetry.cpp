@@ -47,4 +47,9 @@ void Telemetry::Telemeterize(
     frc::SmartDashboard::PutData("Module " + std::to_string(i),
                                  &m_moduleMechanisms[i]);
   }
+
+  //drivers station 
+  frc::DataLogManager::Start();
+// Record both DS control and joystick data
+frc::DriverStation::StartDataLog(frc::DataLogManager::GetLog());
 }

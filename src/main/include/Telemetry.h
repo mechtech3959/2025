@@ -9,7 +9,8 @@
 #include <networktables/StringTopic.h>
 #include <networktables/StructArrayTopic.h>
 #include <networktables/StructTopic.h>
-
+#include "frc/DataLogManager.h"
+#include "frc/DriverStation.h"
 #include "subsystems/CommandSwerveDrivetrain.h"
 
 class Telemetry {
