@@ -12,7 +12,7 @@ RobotContainer::RobotContainer() {
 }
 
 void RobotContainer::ConfigureBindings() {
-  limelight.updateTracking();
+  // limelight.updateTracking();
   visionEstimate = limelight.poseEst();
   // Note that X is defined as forward according to WPILib convention,
   // and Y is defined as to the left according to WPILib convention.
@@ -30,7 +30,8 @@ void RobotContainer::ConfigureBindings() {
       }));
   joystick.X().WhileTrue(drivetrain.ApplyRequest([this]() -> auto && {
     if (limelight.LLHasTarget) {
-      return drive.WithRotationalRate(limelight.turncmd * MaxAngularRate);
+      return drive.WithVelocityX(-limelight.turncmd * 1_mps);
+      // .WithRotationalRate(-limelight.turncmd * 0.3_tps);
     } else {
       return drive.WithRotationalRate(-joystick.GetRightX() * MaxAngularRate);
     }

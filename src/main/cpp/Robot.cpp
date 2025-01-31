@@ -35,7 +35,7 @@ void Robot::TeleopInit() {
   }
 }
 
-void Robot::TeleopPeriodic() {}
+void Robot::TeleopPeriodic() { m_container.limelight.updateTracking(); }
 
 void Robot::TeleopExit() {}
 

@@ -1,6 +1,7 @@
 #include "LimelightHelpers.h"
 #include "networktables/NetworkTable.h"
 #include <frc/geometry/Pose2d.h>
+#include <frc2/command/Subsystem.h>
 #include <frc2/command/SubsystemBase.h>
 namespace subsystems {
 class LimeLight : frc2::SubsystemBase {
@@ -16,10 +17,10 @@ private:
   double tx, ty, ta, tv;
 
 public:
+  void limelightPeriodic();
   std::string name;
   double drivecmd, turncmd, distance;
   bool LLHasTarget;
-
   LimeLight(std::string NTname);
   void updateTracking();
   frc::Pose2d poseEst();
