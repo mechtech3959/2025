@@ -19,7 +19,8 @@ void LimeLight::updateTracking() {
   } else {
     LLHasTarget = true;
     // limt output val to avoid aggressive movement
-    turncmd = clamp(tx, -0.5, 0.5);
+
+    turncmd = clamp(tx * 0.26, -0.5f, 0.5f);
 
     drivecmd = ta;
   }
