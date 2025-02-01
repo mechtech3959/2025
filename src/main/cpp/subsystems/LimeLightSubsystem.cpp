@@ -20,7 +20,8 @@ void LimeLight::updateTracking() {
     LLHasTarget = true;
     // limt output val to avoid aggressive movement
 
-    turncmd = clamp(tx * 0.26, -0.5f, 0.5f);
+    turncmd = tx * 0.025;
+    // turncmd = clamp(tx * 0.26, -0.5f, 0.5f);
 
     drivecmd = ta;
   }
@@ -34,5 +35,5 @@ frc::Pose2d LimeLight::poseEst() {
     return p;
   }
 };
-void LimeLight::limelightPeriodic() {};
+void LimeLight::limelightPeriodic(){};
 // LimeLight::Register();
