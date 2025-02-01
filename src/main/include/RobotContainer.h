@@ -15,6 +15,7 @@
 #include <pathplanner/lib/auto/AutoBuilder.h>
 #include <pathplanner/lib/commands/PathPlannerAuto.h>
 #include <pathplanner/lib/path/PathPlannerPath.h>
+#include <cmath>
 
 class RobotContainer {
 private:
@@ -23,9 +24,20 @@ private:
   units::radians_per_second_t MaxAngularRate = 1.5_tps;
   //  0.75_tps;  3/4 of a rotation per second max angular velocity
 
+  swerve::requests::FieldCentricFacingAngle aDrive =
+      swerve::requests::FieldCentricFacingAngle{}
+                      .WithDeadband(MaxSpeed * 0.1)
+          .WithForwardPerspective(
+              ctre::phoenix6::swerve::requests::ForwardPerspectiveValue::
+                  OperatorPerspective)
+           
+         .WithDriveRequestType(swerve::DriveRequestType::OpenLoopVoltage);
   /* Setting up bindings for necessary control of the swerve drive platform */
   swerve::requests::FieldCentric drive =
       swerve::requests::FieldCentric{}
+          .WithForwardPerspective(
+              ctre::phoenix6::swerve::requests::ForwardPerspectiveValue::
+                  OperatorPerspective)
           .WithDeadband(MaxSpeed * 0.1)
           .WithRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
           .WithDriveRequestType(

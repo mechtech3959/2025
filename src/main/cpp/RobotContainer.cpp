@@ -14,18 +14,23 @@ RobotContainer::RobotContainer() {
 void RobotContainer::ConfigureBindings() {
   // limelight.updateTracking();
   visionEstimate = limelight.poseEst();
+
   // Note that X is defined as forward according to WPILib convention,
   // and Y is defined as to the left according to WPILib convention.
   drivetrain.SetDefaultCommand(
       // Drivetrain will execute this command periodically
       drivetrain.ApplyRequest([this]() -> auto && {
-        return drive
+        double dx = joystick.GetRightX();
+        double dy = joystick.GetRightY();
+        frc::Rotation2d dd = 0_deg;
+        if (sqrt(dx * dx + dy * dy) > 0.9) {dd = frc::Rotation2d(dx, dy).Degrees();};
+        return aDrive
             .WithVelocityX(-joystick.GetLeftY() *
                            MaxSpeed) // Drive forward with negative Y (forward)
-            .WithVelocityY(-joystick.GetLeftX() *
-                           MaxSpeed) // Drive left with negative X (left)
-            .WithRotationalRate(-joystick.GetRightX() *
-                                MaxAngularRate); // Drive counterclockwise with
+            .WithVelocityY(-joystick.GetLeftX() * MaxSpeed)
+            .WithTargetDirection(dd); // Drive left with negative X (left)
+        // WithRotationalRate(-joystick.GetRightX() *
+        //                  MaxAngularRate); // Drive counterclockwise with
         // negative X (left)
       }));
   joystick.X().WhileTrue(drivetrain.ApplyRequest([this]() -> auto && {
