@@ -7,6 +7,7 @@
 #include "Telemetry.h"
 #include "subsystems/CommandSwerveDrivetrain.h"
 #include "subsystems/LimeLightSubsystem.h"
+#include <cmath>
 #include <frc/smartdashboard/Field2d.h>
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc/smartdashboard/SmartDashboard.h>
@@ -15,7 +16,6 @@
 #include <pathplanner/lib/auto/AutoBuilder.h>
 #include <pathplanner/lib/commands/PathPlannerAuto.h>
 #include <pathplanner/lib/path/PathPlannerPath.h>
-#include <cmath>
 
 class RobotContainer {
 private:
@@ -26,12 +26,12 @@ private:
 
   swerve::requests::FieldCentricFacingAngle aDrive =
       swerve::requests::FieldCentricFacingAngle{}
-                      .WithDeadband(MaxSpeed * 0.1)
+          .WithDeadband(MaxSpeed * 0.1)
           .WithForwardPerspective(
               ctre::phoenix6::swerve::requests::ForwardPerspectiveValue::
                   OperatorPerspective)
-           
-         .WithDriveRequestType(swerve::DriveRequestType::OpenLoopVoltage);
+
+          .WithDriveRequestType(swerve::DriveRequestType::OpenLoopVoltage);
   /* Setting up bindings for necessary control of the swerve drive platform */
   swerve::requests::FieldCentric drive =
       swerve::requests::FieldCentric{}
