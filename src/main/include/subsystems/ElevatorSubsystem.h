@@ -1,7 +1,16 @@
+#include <ctre/phoenix6/TalonFX.hpp>
+#include <ctre/phoenix6/configs/Configs.hpp>
 #include <frc2/command/Subsystem.h>
 #include <frc2/command/SubsystemBase.h>
 
+namespace subsystems {
+
 class Elevator : frc2::SubsystemBase {
+private:
+  ctre::phoenix6::hardware::TalonFX masterM{12};
+  ctre::phoenix6::hardware::TalonFX slaveM{13};
+
+public:
   enum Positions {
     Zero,
     Trough,
@@ -20,3 +29,4 @@ class Elevator : frc2::SubsystemBase {
   };
   void sendData();
 };
+} // namespace subsystems
