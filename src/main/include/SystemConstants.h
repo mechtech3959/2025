@@ -1,4 +1,5 @@
 #include <ctre/phoenix6/TalonFX.hpp>
+#include <ctre/phoenix6/CANcoder.hpp>
 #include <ctre/phoenix6/configs/Configs.hpp>
 
 namespace Constants {
@@ -28,6 +29,7 @@ ctre::phoenix6::configs::TalonFXConfiguration elevatorConfigs =
                                .WithStatorCurrentLimit(10_A)
                                .WithStatorCurrentLimitEnable(true));
 
+ctre::phoenix6::configs::CANcoderConfiguration encoderConfigs = ctre::phoenix6::configs::CANcoderConfiguration{};
 } // namespace Elevator
 
 } // namespace Constants
