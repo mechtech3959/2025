@@ -30,7 +30,7 @@ public:
 
   };
   void elevatorInit();
-  void setHeight(Positions ...);
+  void setHeight(Positions pos);
   void sendData();
 };
 } // namespace subsystems
