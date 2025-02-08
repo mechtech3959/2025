@@ -9,6 +9,7 @@ RobotContainer::RobotContainer() {
   ConfigureBindings();
   ConfigureDashboard();
   GetStartingPose();
+  frc::CameraServer::StartAutomaticCapture().SetFPS(30);
 }
 
 void RobotContainer::ConfigureBindings() {

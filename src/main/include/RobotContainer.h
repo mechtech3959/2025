@@ -16,6 +16,7 @@
 #include <pathplanner/lib/auto/AutoBuilder.h>
 #include <pathplanner/lib/commands/PathPlannerAuto.h>
 #include <pathplanner/lib/path/PathPlannerPath.h>
+#include <cameraserver/CameraServer.h>
 
 class RobotContainer {
 private:
