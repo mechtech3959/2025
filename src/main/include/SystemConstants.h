@@ -23,21 +23,23 @@ constexpr ctre::phoenix6::configs::MotionMagicConfigs magicMotionConfigs =
         .WithMotionMagicJerk(500_tr_per_s_cu)
         .WithMotionMagicCruiseVelocity(40_tps)
         .WithMotionMagicAcceleration(60_tr_per_s_sq);
- ctre::phoenix6::configs::TalonFXConfiguration elevatorConfigs =
+constexpr ctre::phoenix6::configs::FeedbackConfigs fbConfigs =
+    ctre::phoenix6::configs::FeedbackConfigs{}
+        .WithRotorToSensorRatio(4)
+        .WithSensorToMechanismRatio(1)
+        .WithFeedbackRemoteSensorID(14);
+constexpr ctre::phoenix6::configs::TalonFXConfiguration elevatorConfigs =
     ctre::phoenix6::configs::TalonFXConfiguration{}
         .WithSlot0(slot)
         .WithMotionMagic(magicMotionConfigs)
         .WithCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs{}
                                .WithStatorCurrentLimit(10_A)
                                .WithStatorCurrentLimitEnable(true))
-        .WithFeedback(fusedCancoder);
+        .WithFeedback(fbConfigs);
 
 constexpr ctre::phoenix6::configs::CANcoderConfiguration encoderConfigs =
     ctre::phoenix6::configs::CANcoderConfiguration{};
- ctre::phoenix6::configs::FeedbackConfigs fusedCancoder =
-    ctre::phoenix6::configs::FeedbackConfigs{}
-        .WithFusedCANcoder(14)
-        .WithRotorToSensorRatio(4);
+
 } // namespace Elevator
 namespace claw {
 constexpr ctre::phoenix6::configs::Slot1Configs intakeSlot =
