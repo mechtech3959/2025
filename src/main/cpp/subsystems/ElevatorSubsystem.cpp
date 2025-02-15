@@ -15,5 +15,5 @@ void Elevator::setHeight(Positions pos) {
     ctre::phoenix6::controls::DynamicMotionMagicTorqueCurrentFOC{
         0_tr, 2_tps, 4_tr_per_s_sq, 40_tr_per_s_cu};
   //TODO: figure out conversion calc / consts for rotary to inches
-  masterM.SetControl(heightR.WithPosition(8_tr));
+  masterM.SetControl(heightR.WithPosition(2_tr));
 }   
