@@ -20,8 +20,8 @@ public:
   const units::degree_t trough = 0_deg;
   units::degree_t lastKnownAngle;
   enum states { traveling, onTarget };
+  states state;
   Claw();
-  void clawInit();
   void setIntake();
   void setAxis(units::degree_t angle);
   void sendData();

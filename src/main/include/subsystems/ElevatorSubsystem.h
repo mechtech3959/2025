@@ -1,10 +1,10 @@
 #include <ctre/phoenix6/TalonFX.hpp>
 #include <ctre/phoenix6/configs/Configs.hpp>
-#include <networktables/NetworkTable.h>
-#include <networktables/NetworkTableInstance.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc2/command/Subsystem.h>
 #include <frc2/command/SubsystemBase.h>
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableInstance.h>
 
 #include "SystemConstants.h"
 namespace subsystems {
@@ -16,7 +16,7 @@ private:
   ctre::phoenix6::hardware::CANcoder encoder{14};
 
 public:
-  // inches, measurements are relative to the floor 
+  // inches, measurements are relative to the floor
   enum Positions {
     Zero = 0,
     Barge = 101,

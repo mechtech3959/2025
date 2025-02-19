@@ -8,20 +8,24 @@ Claw::Claw() {
 };
 
 void Claw::setAxis(units::degree_t angle) {
-axisMotor.SetControl(axisMotion.WithPosition(angle));
-lastKnownAngle  = angle;
+  axisMotor.SetControl(axisMotion.WithPosition(angle));
+  lastKnownAngle = angle;
+  (axisMotor.GetMotorOutputStatus().GetValue() == 2) ? state = onTarget
+                                                     : state = traveling;
 };
 void Claw::setIntake() {
   // sensor integration function to stop after EX:0.5 second detection
   //  set ramdom for a static feed
   intakeMotor.Set(0.3);
-
 };
-void Claw::sendData(){
-  frc::SmartDashboard::PutNumber("axisEncoder pos",axisEncoder.GetPosition().GetValueAsDouble());
-  frc::SmartDashboard::PutNumber("axisEncoder ABSpose",axisEncoder.GetAbsolutePosition().GetValueAsDouble());
-  frc::SmartDashboard::PutNumber("axisMotor",axisMotor.GetPosition().GetValueAsDouble());
+void Claw::sendData() {
+  frc::SmartDashboard::PutNumber("axisEncoder pos",
+                                 axisEncoder.GetPosition().GetValueAsDouble());
+  frc::SmartDashboard::PutNumber(
+      "axisEncoder ABSpos",
+      axisEncoder.GetAbsolutePosition().GetValueAsDouble());
+  frc::SmartDashboard::PutNumber("axisMotor",
+                                 axisMotor.GetPosition().GetValueAsDouble());
   frc::SmartDashboard::PutNumber("axisAngle", double(lastKnownAngle));
-  
-
+  frc::SmartDashboard::PutBoolean("AxisState", state);
 };
