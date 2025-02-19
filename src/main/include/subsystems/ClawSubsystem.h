@@ -20,9 +20,11 @@ public:
   const units::degree_t trough = 0_deg;
 
   enum states { traveling, onTarget };
+  Claw();
   void clawInit();
   void setIntake();
   void setAxis(units::deg position);
+  void sendData();
   bool hasCoral();
 };
 
