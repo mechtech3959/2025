@@ -11,19 +11,19 @@ private:
   ctre::phoenix6::hardware::TalonFX intakeMotor{15};
   ctre::phoenix6::hardware::TalonFX axisMotor{16};
   ctre::phoenix6::hardware::CANcoder axisEncoder{17};
-
+  ctre::phoenix6::controls::MotionMagicVoltage axisMotion{0_deg};
   // TODO: determine sensor
 public:
   const units::degree_t L123 = 0_deg;
   const units::degree_t L4 = 90_deg;
   const units::degree_t algea = 180_deg;
   const units::degree_t trough = 0_deg;
-
+  units::degree_t lastKnownAngle;
   enum states { traveling, onTarget };
   Claw();
   void clawInit();
   void setIntake();
-  void setAxis(units::deg position);
+  void setAxis(units::degree_t angle);
   void sendData();
   bool hasCoral();
 };
