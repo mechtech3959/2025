@@ -14,6 +14,12 @@ private:
 
   // TODO: determine sensor
 public:
+  const units::degree_t L123 = 0_deg;
+  const units::degree_t L4 = 90_deg;
+  const units::degree_t algea = 180_deg;
+  const units::degree_t trough = 0_deg;
+
+  enum states { traveling, onTarget };
   void clawInit();
   void setIntake();
   void setAxis(units::deg position);
