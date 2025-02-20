@@ -21,10 +21,12 @@ constexpr ctre::phoenix6::configs::Slot0Configs slot =
 constexpr ctre::phoenix6::configs::MotionMagicConfigs magicMotionConfigs =
     ctre::phoenix6::configs::MotionMagicConfigs{}
         .WithMotionMagicJerk(500_tr_per_s_cu)
-        .WithMotionMagicCruiseVelocity(40_tps)
-        .WithMotionMagicAcceleration(60_tr_per_s_sq);
+        .WithMotionMagicCruiseVelocity(20_tps)
+        .WithMotionMagicAcceleration(20_tr_per_s_sq);
 constexpr ctre::phoenix6::configs::FeedbackConfigs fbConfigs =
     ctre::phoenix6::configs::FeedbackConfigs{}
+        .WithFeedbackSensorSource(
+            ctre::phoenix6::signals::FeedbackSensorSourceValue::FusedCANcoder)
         .WithRotorToSensorRatio(4)
         .WithSensorToMechanismRatio(1)
         .WithFeedbackRemoteSensorID(14);
@@ -33,7 +35,7 @@ constexpr ctre::phoenix6::configs::TalonFXConfiguration elevatorConfigs =
         .WithSlot0(slot)
         .WithMotionMagic(magicMotionConfigs)
         .WithCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs{}
-                               .WithStatorCurrentLimit(10_A)
+                               .WithStatorCurrentLimit(20_A)
                                .WithStatorCurrentLimitEnable(true))
         .WithFeedback(fbConfigs);
 

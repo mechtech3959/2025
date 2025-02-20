@@ -1,10 +1,10 @@
 #include <ctre/phoenix6/TalonFX.hpp>
 #include <ctre/phoenix6/configs/Configs.hpp>
-#include <networktables/NetworkTable.h>
-#include <networktables/NetworkTableInstance.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc2/command/Subsystem.h>
 #include <frc2/command/SubsystemBase.h>
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableInstance.h>
 
 #include "SystemConstants.h"
 namespace subsystems {
@@ -14,27 +14,26 @@ private:
   ctre::phoenix6::hardware::TalonFX masterM{12};
   ctre::phoenix6::hardware::TalonFX slaveM{13};
   ctre::phoenix6::hardware::CANcoder encoder{14};
+  ctre::phoenix6::controls::MotionMagicExpoTorqueCurrentFOC elevatorMotion{
+      0_tr};
 
 public:
-  // inches, measurements are relative to the floor 
-  enum Positions {
-    Zero = 0,
-    Barge = 101,
-    Processor = 15, // top =27 bottom is 7 ,
-    L1 = 18,
-    L2 = 31, // 31.875,
-    L3 = 48, // 47.625
-    L4 = 72
+  // inches, measurements are relative to the floor
+  units::inch_t Zero = 0_in;
+  units::inch_t Barge = 62_in;     // 101
+  units::inch_t Processor = 15_in; // top =27 bottom is 7 ,
+  units::inch_t L1 = 18_in;
+  units::inch_t L2 = 31_in; // 31.875,
+  units::inch_t L3 = 48_in; // 47.625
+  units::inch_t L4 = 62_in; // 72
 
-  };
   enum State {
-    onTarget,
-    Traveling
+    Traveling,
+    onTarget
 
   };
   Elevator();
-  void elevatorInit();
-  void setHeight(Positions pos);
+  void setHeight(units::inch_t pos);
   void sendData();
 };
 } // namespace subsystems
