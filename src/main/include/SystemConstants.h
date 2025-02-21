@@ -5,6 +5,11 @@
 namespace Constants {
 
 namespace Elevator {
+// 1 rot on axel = 12.4 inchs 1/12 = 0.0806 rot per inch
+const units::inch_t maxHeight = 62_in;
+// measure
+const units::inch_t minHeight = 0_in;
+
 // make believe vals
 constexpr ctre::phoenix6::configs::Slot0Configs slot =
     ctre::phoenix6::configs::Slot0Configs{}
@@ -27,8 +32,8 @@ constexpr ctre::phoenix6::configs::FeedbackConfigs fbConfigs =
     ctre::phoenix6::configs::FeedbackConfigs{}
         .WithFeedbackSensorSource(
             ctre::phoenix6::signals::FeedbackSensorSourceValue::FusedCANcoder)
-        .WithRotorToSensorRatio(4)
-        .WithSensorToMechanismRatio(1)
+        .WithRotorToSensorRatio(8)
+        .WithSensorToMechanismRatio(0.08) // was 1 ? converted to rot per in
         .WithFeedbackRemoteSensorID(14);
 constexpr ctre::phoenix6::configs::TalonFXConfiguration elevatorConfigs =
     ctre::phoenix6::configs::TalonFXConfiguration{}
