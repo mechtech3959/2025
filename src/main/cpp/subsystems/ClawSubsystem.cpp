@@ -10,6 +10,7 @@ Claw::Claw() {
 void Claw::setAxis(units::degree_t angle) {
   axisMotor.SetControl(axisMotion.WithPosition(angle));
   lastKnownAngle = angle;
+  // status signal for motor output
   (axisMotor.GetMotorOutputStatus().GetValue() == 2) ? state = onTarget
                                                      : state = traveling;
 };
@@ -21,9 +22,16 @@ void Claw::setIntake() {
     intakeMotor.Set(0.1);
   };
 };
-void Claw::setOutake(){};
-void Claw::setStaticIntake(){};
-void Claw::setStaticOuttake(){};
+void Claw::setOutake(){
+  (hasCoral(coralSensor) == true)? intakeMotor.Set(0.1) : intakeMotor.Set(0);
+};
+void Claw::setStaticIntake(){
+  intakeMotor.Set(0.1);
+};
+//FOR ALGEA
+void Claw::setStaticOuttake(){
+  intakeMotor.Set(-0.5);
+};
 void Claw::sendData() {
   frc::SmartDashboard::PutNumber("axisEncoder pos",
                                  axisEncoder.GetPosition().GetValueAsDouble());
