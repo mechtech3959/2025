@@ -22,16 +22,12 @@ void Claw::setIntake() {
     intakeMotor.Set(0.1);
   };
 };
-void Claw::setOutake(){
-  (hasCoral(coralSensor) == true)? intakeMotor.Set(0.1) : intakeMotor.Set(0);
+void Claw::setOutake() {
+  (hasCoral(coralSensor) == true) ? intakeMotor.Set(0.1) : intakeMotor.Set(0);
 };
-void Claw::setStaticIntake(){
-  intakeMotor.Set(0.1);
-};
-//FOR ALGEA
-void Claw::setStaticOuttake(){
-  intakeMotor.Set(-0.5);
-};
+void Claw::setStaticIntake() { intakeMotor.Set(0.1); };
+// FOR ALGEA
+void Claw::setStaticOuttake() { intakeMotor.Set(-0.5); };
 void Claw::sendData() {
   frc::SmartDashboard::PutNumber("axisEncoder pos",
                                  axisEncoder.GetPosition().GetValueAsDouble());
