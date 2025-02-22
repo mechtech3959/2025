@@ -2,6 +2,7 @@
 #include <ctre/phoenix6/TalonFX.hpp>
 #include <ctre/phoenix6/configs/Configs.hpp>
 
+#include "StateLogging.h"
 namespace Constants {
 
 namespace Elevator {
