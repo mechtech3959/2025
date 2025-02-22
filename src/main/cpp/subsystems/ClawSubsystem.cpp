@@ -28,4 +28,10 @@ void Claw::sendData() {
                                  axisMotor.GetPosition().GetValueAsDouble());
   frc::SmartDashboard::PutNumber("axisAngle", double(lastKnownAngle));
   frc::SmartDashboard::PutBoolean("AxisState", state);
+  frc::SmartDashboard::PutBoolean("has coral?", coralSensor.Get());
 };
+bool Claw::hasCoral(frc::DigitalInput &input) {
+  return ((input.Get() == 1) ? false : true);
+};
+void Claw::clawPeriodic() { coralSensor.Get();
+  hasCoral(coralSensor); };

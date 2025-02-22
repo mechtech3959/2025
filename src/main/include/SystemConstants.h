@@ -2,6 +2,8 @@
 #include <ctre/phoenix6/TalonFX.hpp>
 #include <ctre/phoenix6/configs/Configs.hpp>
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <frc/AnalogInput.h>
+#include <frc/DigitalInput.h>
 
 namespace Constants {
 
