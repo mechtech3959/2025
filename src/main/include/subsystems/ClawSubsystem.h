@@ -25,6 +25,9 @@ public:
   Claw();
   void clawPeriodic();
   void setIntake();
+  void setOutake();
+  void setStaticIntake();
+  void setStaticOuttake();
   void setAxis(units::degree_t angle);
   void sendData();
   bool hasCoral(frc::DigitalInput &input);

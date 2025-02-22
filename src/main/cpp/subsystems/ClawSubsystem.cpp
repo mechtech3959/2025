@@ -21,6 +21,9 @@ void Claw::setIntake() {
     intakeMotor.Set(0.1);
   };
 };
+void Claw::setOutake(){};
+void Claw::setStaticIntake(){};
+void Claw::setStaticOuttake(){};
 void Claw::sendData() {
   frc::SmartDashboard::PutNumber("axisEncoder pos",
                                  axisEncoder.GetPosition().GetValueAsDouble());
