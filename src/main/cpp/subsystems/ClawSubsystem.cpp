@@ -14,9 +14,12 @@ void Claw::setAxis(units::degree_t angle) {
                                                      : state = traveling;
 };
 void Claw::setIntake() {
-  // sensor integration function to stop after EX:0.5 second detection
-  //  set ramdom for a static feed
-  intakeMotor.Set(0.3);
+  if (hasCoral(coralSensor) == true) {
+    frc::Wait(1_s);
+    intakeMotor.Set(0);
+  } else {
+    intakeMotor.Set(0.1);
+  };
 };
 void Claw::sendData() {
   frc::SmartDashboard::PutNumber("axisEncoder pos",
@@ -33,5 +36,4 @@ void Claw::sendData() {
 bool Claw::hasCoral(frc::DigitalInput &input) {
   return ((input.Get() == 1) ? false : true);
 };
-void Claw::clawPeriodic() { coralSensor.Get();
-  hasCoral(coralSensor); };
+void Claw::clawPeriodic() { hasCoral(coralSensor); };
