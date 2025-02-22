@@ -29,16 +29,23 @@ void Claw::setStaticIntake() { intakeMotor.Set(0.1); };
 // FOR ALGEA
 void Claw::setStaticOuttake() { intakeMotor.Set(-0.5); };
 void Claw::sendData() {
-  frc::SmartDashboard::PutNumber("axisEncoder pos",
-                                 axisEncoder.GetPosition().GetValueAsDouble());
-  frc::SmartDashboard::PutNumber(
-      "axisEncoder ABSpos",
-      axisEncoder.GetAbsolutePosition().GetValueAsDouble());
-  frc::SmartDashboard::PutNumber("axisMotor",
-                                 axisMotor.GetPosition().GetValueAsDouble());
-  frc::SmartDashboard::PutNumber("axisAngle", double(lastKnownAngle));
-  frc::SmartDashboard::PutBoolean("AxisState", state);
-  frc::SmartDashboard::PutBoolean("has coral?", coralSensor.Get());
+  /* frc::SmartDashboard::PutNumber("axisEncoder pos",
+                                  axisEncoder.GetPosition().GetValueAsDouble());
+   frc::SmartDashboard::PutNumber(
+       "axisEncoder ABSpos",
+       axisEncoder.GetAbsolutePosition().GetValueAsDouble());
+   frc::SmartDashboard::PutNumber("axisMotor",
+                                  axisMotor.GetPosition().GetValueAsDouble());
+   frc::SmartDashboard::PutNumber("axisAngle", double(lastKnownAngle));
+   frc::SmartDashboard::PutBoolean("AxisState", state);
+   frc::SmartDashboard::PutBoolean("has coral?", coralSensor.Get());*/
+  clawLog.motorPose = axisMotor.GetPosition().GetValue();
+  clawLog.encoderPose = axisEncoder.GetPosition().GetValue();
+  clawLog.encoderABSPose = axisEncoder.GetAbsolutePosition().GetValue();
+  // CHECK
+  clawLog.currentAngle = units::degree_t{
+      axisEncoder.GetAbsolutePosition().GetValueAsDouble() * 360};
+  clawLog.coralDetected = hasCoral(coralSensor);
 };
 bool Claw::hasCoral(frc::DigitalInput &input) {
   return ((input.Get() == 1) ? false : true);

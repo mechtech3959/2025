@@ -22,6 +22,7 @@ public:
   units::degree_t lastKnownAngle;
   enum states { traveling, onTarget };
   states state;
+  customLogging::ClawState clawLog;
   Claw();
   void clawPeriodic();
   void setIntake();
