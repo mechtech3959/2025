@@ -11,13 +11,27 @@ private:
   ctre::phoenix6::hardware::TalonFX intakeMotor{15};
   ctre::phoenix6::hardware::TalonFX axisMotor{16};
   ctre::phoenix6::hardware::CANcoder axisEncoder{17};
-
+  frc::DigitalInput coralSensor{1};
+  ctre::phoenix6::controls::MotionMagicVoltage axisMotion{0_deg};
   // TODO: determine sensor
 public:
-  void clawInit();
+  const units::degree_t L123 = 0_deg;
+  const units::degree_t L4 = 90_deg;
+  const units::degree_t algea = 180_deg;
+  const units::degree_t trough = 0_deg;
+  units::degree_t lastKnownAngle;
+  enum states { traveling, onTarget };
+  states state;
+  customLogging::ClawState clawLog;
+  Claw();
+  void clawPeriodic();
   void setIntake();
-  void setAxis(units::deg position);
-  bool hasCoral();
+  void setOutake();
+  void setStaticIntake();
+  void setStaticOuttake();
+  void setAxis(units::degree_t angle);
+  void sendData();
+  bool hasCoral(frc::DigitalInput &input);
 };
 
 } // namespace subsystems

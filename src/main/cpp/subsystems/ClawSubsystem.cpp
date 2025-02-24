@@ -2,16 +2,52 @@
 
 using namespace subsystems;
 
-void Claw::clawInit() {
-  axisMotor.GetConfigurator().Apply(Constants::claw::axisConfigs);
+Claw::Claw() {
+  axisMotor.GetConfigurator().Apply(Constants::claw::axisConfig);
   intakeMotor.GetConfigurator().Apply(Constants::claw::intakeConfigs);
 };
 
-void Claw::setAxis(units::degree pos) {
-  // TODO: encoder realitive movement
+void Claw::setAxis(units::degree_t angle) {
+  axisMotor.SetControl(axisMotion.WithPosition(angle));
+  lastKnownAngle = angle;
+  // status signal for motor output
+  (axisMotor.GetMotorOutputStatus().GetValue() == 2) ? state = onTarget
+                                                     : state = traveling;
 };
 void Claw::setIntake() {
-  // sensor integration function to stop after EX:0.5 second detection
-  //  set ramdom for a static feed
-  intakeMotor.Set(0.3);
+  if (hasCoral(coralSensor) == true) {
+    frc::Wait(1_s);
+    intakeMotor.Set(0);
+  } else {
+    intakeMotor.Set(0.1);
+  };
 };
+void Claw::setOutake() {
+  (hasCoral(coralSensor) == true) ? intakeMotor.Set(0.1) : intakeMotor.Set(0);
+};
+void Claw::setStaticIntake() { intakeMotor.Set(0.1); };
+// FOR ALGEA
+void Claw::setStaticOuttake() { intakeMotor.Set(-0.5); };
+void Claw::sendData() {
+  /* frc::SmartDashboard::PutNumber("axisEncoder pos",
+                                  axisEncoder.GetPosition().GetValueAsDouble());
+   frc::SmartDashboard::PutNumber(
+       "axisEncoder ABSpos",
+       axisEncoder.GetAbsolutePosition().GetValueAsDouble());
+   frc::SmartDashboard::PutNumber("axisMotor",
+                                  axisMotor.GetPosition().GetValueAsDouble());
+   frc::SmartDashboard::PutNumber("axisAngle", double(lastKnownAngle));
+   frc::SmartDashboard::PutBoolean("AxisState", state);
+   frc::SmartDashboard::PutBoolean("has coral?", coralSensor.Get());*/
+  clawLog.motorPose = axisMotor.GetPosition().GetValue();
+  clawLog.encoderPose = axisEncoder.GetPosition().GetValue();
+  clawLog.encoderABSPose = axisEncoder.GetAbsolutePosition().GetValue();
+  // CHECK
+  clawLog.currentAngle = units::degree_t{
+      axisEncoder.GetAbsolutePosition().GetValueAsDouble() * 360};
+  clawLog.coralDetected = hasCoral(coralSensor);
+};
+bool Claw::hasCoral(frc::DigitalInput &input) {
+  return ((input.Get() == 1) ? false : true);
+};
+void Claw::clawPeriodic() { hasCoral(coralSensor); };

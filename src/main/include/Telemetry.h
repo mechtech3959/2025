@@ -19,7 +19,28 @@ private:
 
   /* What to publish over networktables for telemetry */
   nt::NetworkTableInstance inst = nt::NetworkTableInstance::GetDefault();
-
+  // claw
+  std::shared_ptr<nt::NetworkTable> clawTable = inst.GetTable("ClawState");
+ /*/ nt::StructPublisher<units::angle::turn_t> AbsoluteEncoderPose =
+      clawTable->GetStructTopic<units::angle::turn_t>("ABSEncoderPose")
+          .Publish();
+          *
+  nt::StructPublisher<units::angle::turn_t> encoderTurnCount =
+      clawTable->GetStructTopic<units::angle::turn_t>("EncoderTurnCount")
+          .Publish();
+  nt::StructPublisher<units::angle::turn_t> axisPosition =
+      clawTable->GetStructTopic<units::angle::turn_t>("AxisPosition")
+          .Publish();
+  nt::StructPublisher<units::degree_t> currentAxisAngle =
+      clawTable->GetStructTopic<units::degree_t>("CurrentAxisAngle")
+          .Publish();
+  nt::StructPublisher<units::degree_t> lastAxisAngle =
+      clawTable->GetStructTopic<units::degree_t>("LastAxisAngle").Publish();
+  nt::StructPublisher<units::degree_t> targetAxisAngle =
+      clawTable->GetStructTopic<units::degree_t>("TargetAxisAngle").Publish();
+  nt::StructPublisher<bool> hasCoral =
+      clawTable->GetStructTopic<bool>("Coraldetected").Publish();*/
+  // figure out mech2d for sim representation
   /* Robot swerve drive state */
   std::shared_ptr<nt::NetworkTable> driveStateTable =
       inst.GetTable("DriveState");
