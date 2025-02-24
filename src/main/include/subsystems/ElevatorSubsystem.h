@@ -33,7 +33,7 @@ public:
 
   };
   Elevator();
-  void setHeight(units::inch_t pos);
+  void setHeight(units::turn_t pos);
   void sendData();
 };
 } // namespace subsystems

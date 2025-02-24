@@ -10,8 +10,8 @@ Elevator::Elevator() {
 }
 
 // hypothetical 1 rotation = 6inches? 8:1 ratio
-void Elevator::setHeight(units::inch_t pos) {
-  masterM.SetControl(elevatorMotion.WithPosition(1_tr));
+void Elevator::setHeight(units::turn_t pos) {
+  masterM.SetControl(elevatorMotion.WithPosition(pos));
 }
 void Elevator::sendData() {  // nt::NetworkTableInstance elevatorInst =
   // nt::NetworkTableInstance::GetDefault();
