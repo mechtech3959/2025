@@ -2,17 +2,18 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 
 using namespace ctre::phoenix6;
+/*
 void Telemetry::subsystemTelemeterize(
-    customLogging::ClawState const &clawState) {
+    ClawState const &cState) {
   // claw
-  clawAbsoluteEncoderPose.Set(clawState.encoderABSPose);
-  clawAxisPosition.Set(clawState.encoderPose);
-  clawCurrentAxisAngle.Set(clawState.currentAngle);
+  clawAbsoluteEncoderPose.Set(cState.encoderABSPose);
+  clawAxisPosition.Set(cState.encoderPose);
+  clawCurrentAxisAngle.Set(cState.currentAngle);
   // clawTargetAxisAngle.Set();
   // clawLastAxisAngle.Set();
   // clawEncoderTurnCount.Set();
-  clawHasCoral.Set(clawState.coralDetected);
-};
+  clawHasCoral.Set(cState.coralDetected);
+};*/
 void Telemetry::Telemeterize(
     subsystems::CommandSwerveDrivetrain::SwerveDriveState const &state) {
 

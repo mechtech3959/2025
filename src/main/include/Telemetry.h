@@ -125,5 +125,5 @@ public:
    * SignalLogger. */
   void Telemeterize(
       subsystems::CommandSwerveDrivetrain::SwerveDriveState const &state);
-    void subsystemTelemeterize(customLogging::ClawState const &clawState);
+    //void subsystemTelemeterize(ClawState const &cState);
 };

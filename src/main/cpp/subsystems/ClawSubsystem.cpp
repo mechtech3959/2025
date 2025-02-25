@@ -3,7 +3,7 @@
 using namespace subsystems;
 
 Claw::Claw():intakeMotor{19,rev::spark::SparkMax::MotorType::kBrushless},axisMotor{20},axisEncoder{21},coralSensor{1},axisMotion{0_deg} {
-  //axisMotor.GetConfigurator().Apply(Constants::claw::axisConfig);
+  axisMotor.GetConfigurator().Apply(axisConfig);
 
 };
 
@@ -39,14 +39,14 @@ void Claw::sendData() {
    frc::SmartDashboard::PutNumber("axisAngle", double(lastKnownAngle));
    frc::SmartDashboard::PutBoolean("AxisState", state);
    frc::SmartDashboard::PutBoolean("has coral?", coralSensor.Get());*/
-  clawLog.axisMotorPose = axisMotor.GetPosition().GetValueAsDouble();
+ /*/ clawLog.axisMotorPose = axisMotor.GetPosition().GetValueAsDouble();
   clawLog.encoderPose = axisEncoder.GetPosition().GetValueAsDouble();
   clawLog.encoderABSPose = axisEncoder.GetAbsolutePosition().GetValueAsDouble();
   // CHECK
   clawLog.currentAngle =
       axisEncoder.GetAbsolutePosition().GetValueAsDouble() * 360;
   clawLog.coralDetected = hasCoral(coralSensor);
-};
+*/};
 bool Claw::hasCoral(frc::DigitalInput &input) {
   return ((input.Get() == 1) ? false : true);
 };

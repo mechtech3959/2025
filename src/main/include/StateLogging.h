@@ -1,9 +1,9 @@
 #include <ctre/phoenix6/CANcoder.hpp>
 #include <ctre/phoenix6/TalonFX.hpp>
 
-class customLogging {
-public:
-struct ElevatorState {
+
+
+/*struct ElevatorState {
 
   units::angle::turn_t encoderPose;
   units::angle::turn_t encoderABSPose;
@@ -24,4 +24,4 @@ struct ClawState {
   double intakeMotorPose;
 };
 
-}; // namespace customLogging
+*/
