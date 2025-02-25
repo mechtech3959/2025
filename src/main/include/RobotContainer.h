@@ -48,7 +48,7 @@ private:
 
 public:
   subsystems::Claw subsystemClaw;
- // subsystems::Elevator subsystemElevator;
+  subsystems::Elevator subsystemElevator;
   subsystems::CommandSwerveDrivetrain drivetrain{
       TunerConstants::CreateDrivetrain()};
 
