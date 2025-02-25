@@ -10,7 +10,7 @@
 #include <rev/SparkMax.h>
 
 #include "StateLogging.h"
-namespace Constants{}
-namespace elevatorConstants{} // namespace elevatorConstants
-namespace clawConstants{} // namespace clawConstants
+namespace Constants {}
+namespace elevatorConstants {} // namespace elevatorConstants
+namespace clawConstants {}     // namespace clawConstants
 #endif
