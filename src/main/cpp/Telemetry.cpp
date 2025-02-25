@@ -3,16 +3,19 @@
 
 using namespace ctre::phoenix6;
 
+void Telemetry::subsystemTelemeterize(
+    ClawState const &cState) {
+  // claw
+  clawAbsoluteEncoderPose.Set(cState.encoderABSPose);
+  clawAxisPosition.Set(cState.encoderPose);
+  clawCurrentAxisAngle.Set(cState.currentAngle);
+  // clawTargetAxisAngle.Set();
+  // clawLastAxisAngle.Set();
+  // clawEncoderTurnCount.Set();
+  clawHasCoral.Set(cState.coralDetected);
+};
 void Telemetry::Telemeterize(
-    subsystems::CommandSwerveDrivetrain::SwerveDriveState const &state, customLogging::ClawState const &clawState) {
-  //claw 
-  clawAbsoluteEncoderPose.Set(clawState.encoderABSPose);
-  clawAxisPosition.Set(clawState.encoderPose);
-  clawCurrentAxisAngle.Set(clawState.currentAngle);
-  //clawTargetAxisAngle.Set();
-  //clawLastAxisAngle.Set();
-  //clawEncoderTurnCount.Set();
-  clawHasCoral.Set(clawState.coralDetected);
+    subsystems::CommandSwerveDrivetrain::SwerveDriveState const &state) {
 
   /* Telemeterize the swerve drive state */
   drivePose.Set(state.Pose);

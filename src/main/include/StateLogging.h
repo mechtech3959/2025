@@ -1,9 +1,10 @@
+#ifndef StateLogging_H
+#define StateLogging_H
 #include <ctre/phoenix6/CANcoder.hpp>
 #include <ctre/phoenix6/TalonFX.hpp>
 
-namespace customLogging {
-
 struct ElevatorState {
+
   units::angle::turn_t encoderPose;
   units::angle::turn_t encoderABSPose;
   units::angle::turn_t masterPose;
@@ -23,4 +24,4 @@ struct ClawState {
   double intakeMotorPose;
 };
 
-} // namespace customLogging
+#endif

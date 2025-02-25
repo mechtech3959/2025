@@ -3,8 +3,8 @@
 using namespace subsystems;
 
 Elevator::Elevator() {
-  masterM.GetConfigurator().Apply(Constants::Elevator::elevatorConfigs);
-  slaveM.GetConfigurator().Apply(Constants::Elevator::elevatorConfigs);
+ // masterM.GetConfigurator().Apply(elevatorConstants::elevatorConfigs);
+  //slaveM.GetConfigurator().Apply(elevatorConstants::elevatorConfigs);
   slaveM.SetControl(
       ctre::phoenix6::controls::Follower{masterM.GetDeviceID(), false});
 }
@@ -22,8 +22,8 @@ void Elevator::sendData() {  // nt::NetworkTableInstance elevatorInst =
   frc::SmartDashboard::PutString("Elevator/Master Control Mode",
                                  masterM.GetControlMode().ToString());
   frc::SmartDashboard::PutNumber("Elevator/Encoder Value",
-                                 encoder.GetPosition().GetValueAsDouble());
+                                 elevatorEncoder.GetPosition().GetValueAsDouble());
   frc::SmartDashboard::PutNumber(
       "Elevator/Encoder abs val",
-      encoder.GetAbsolutePosition().GetValueAsDouble());
+      elevatorEncoder.GetAbsolutePosition().GetValueAsDouble());
 }

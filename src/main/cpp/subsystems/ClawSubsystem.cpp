@@ -2,8 +2,8 @@
 
 using namespace subsystems;
 
-Claw::Claw() {
-  axisMotor.GetConfigurator().Apply(Constants::claw::axisConfig);
+Claw::Claw():intakeMotor{19,rev::spark::SparkMax::MotorType::kBrushless},axisMotor{20},axisEncoder{21},coralSensor{1},axisMotion{0_deg} {
+  axisMotor.GetConfigurator().Apply(axisConfig);
 
 };
 
@@ -28,8 +28,8 @@ void Claw::setOutake() {
 void Claw::setStaticIntake() { intakeMotor.Set(0.1); };
 // FOR ALGEA
 void Claw::setStaticOuttake() { intakeMotor.Set(-0.5); };
-void Claw::sendData() {
-  /* frc::SmartDashboard::PutNumber("axisEncoder pos",
+void Claw::sendData() {/*/
+   frc::SmartDashboard::PutNumber("axisEncoder pos",
                                   axisEncoder.GetPosition().GetValueAsDouble());
    frc::SmartDashboard::PutNumber(
        "axisEncoder ABSpos",

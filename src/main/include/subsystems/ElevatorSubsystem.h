@@ -1,3 +1,5 @@
+#pragma once 
+
 #include <ctre/phoenix6/TalonFX.hpp>
 #include <ctre/phoenix6/configs/Configs.hpp>
 #include <frc/smartdashboard/SmartDashboard.h>
@@ -9,11 +11,11 @@
 #include "SystemConstants.h"
 namespace subsystems {
 
-class Elevator : frc2::SubsystemBase {
+class Elevator : public frc2::SubsystemBase {
 private:
-  ctre::phoenix6::hardware::TalonFX masterM{12};
-  ctre::phoenix6::hardware::TalonFX slaveM{13};
-  ctre::phoenix6::hardware::CANcoder encoder{14};
+  ctre::phoenix6::hardware::TalonFX masterM{22};
+  ctre::phoenix6::hardware::TalonFX slaveM{23};
+  ctre::phoenix6::hardware::CANcoder elevatorEncoder{23};
   ctre::phoenix6::controls::MotionMagicExpoTorqueCurrentFOC elevatorMotion{
       0_tr};
 

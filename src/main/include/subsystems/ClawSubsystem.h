@@ -1,3 +1,5 @@
+#pragma once 
+
 #include "SystemConstants.h"
 #include <ctre/phoenix6/TalonFX.hpp>
 #include <ctre/phoenix6/configs/Configs.hpp>
@@ -6,14 +8,45 @@
 
 namespace subsystems {
 
-class Claw : frc2::SubsystemBase {
+class Claw : public frc2::SubsystemBase {
 private:
-  rev::spark::SparkMax intakeMotor{15, rev::spark::SparkMax::MotorType::kBrushless};
-  ctre::phoenix6::hardware::TalonFX axisMotor{16};
-  ctre::phoenix6::hardware::CANcoder axisEncoder{17};
-  frc::DigitalInput coralSensor{1};
-  ctre::phoenix6::controls::MotionMagicVoltage axisMotion{0_deg};
-  // TODO: determine sensor
+  rev::spark::SparkMax intakeMotor;
+  ctre::phoenix6::hardware::TalonFX axisMotor;
+  ctre::phoenix6::hardware::CANcoder axisEncoder;
+  frc::DigitalInput coralSensor;
+  ctre::phoenix6::controls::MotionMagicVoltage axisMotion;
+  ctre::phoenix6::configs::Slot0Configs axisSlot =
+    ctre::phoenix6::configs::Slot0Configs{}
+        .WithKS(0.3)
+        .WithKA(0)
+        .WithKD(0.50)
+        .WithKG(0)
+        .WithKI(0)
+        .WithKV(0.0)
+        .WithKP(10)
+        .WithGravityType(ctre::phoenix6::signals::GravityTypeValue::Arm_Cosine)
+        .WithStaticFeedforwardSign(
+            ctre::phoenix6::signals::StaticFeedforwardSignValue::
+                UseClosedLoopSign);
+
+ ctre::phoenix6::configs::FeedbackConfigs axisFeedback =
+    ctre::phoenix6::configs::FeedbackConfigs{}
+        .WithFeedbackRemoteSensorID(21)
+        .WithFeedbackSensorSource(
+            ctre::phoenix6::signals::FeedbackSensorSourceValue::FusedCANcoder)
+        .WithRotorToSensorRatio(16.0)
+        .WithSensorToMechanismRatio(1.0);
+ ctre::phoenix6::configs::TalonFXConfiguration axisConfig =
+    ctre::phoenix6::configs::TalonFXConfiguration{}
+        .WithSlot0(axisSlot)
+        .WithFeedback(axisFeedback)
+        .WithMotionMagic(ctre::phoenix6::configs::MotionMagicConfigs{}
+                             .WithMotionMagicCruiseVelocity(1_tps)
+                             .WithMotionMagicAcceleration(1_tr_per_s_sq)
+                             .WithMotionMagicJerk(1600_tr_per_s_cu))
+        .WithCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs{}
+                               .WithStatorCurrentLimit(10_A)
+                               .WithStatorCurrentLimitEnable(true));
 public:
   const units::degree_t L123 = 0_deg;
   const units::degree_t L4 = 90_deg;
@@ -22,7 +55,7 @@ public:
   units::degree_t lastKnownAngle;
   enum states { traveling, onTarget };
   states state;
-  customLogging::ClawState clawLog;
+  ClawState clawLog;
 
   Claw();
   void clawPeriodic();
