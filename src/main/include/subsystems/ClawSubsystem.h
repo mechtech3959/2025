@@ -6,9 +6,10 @@
 
 namespace subsystems {
 
-class Claw : frc2::SubsystemBase {
+class Claw : public frc2::SubsystemBase {
 private:
-  rev::spark::SparkMax intakeMotor{19, rev::spark::SparkMax::MotorType::kBrushless};
+  rev::spark::SparkMax intakeMotor{19,
+                                   rev::spark::SparkMax::MotorType::kBrushless};
   ctre::phoenix6::hardware::TalonFX axisMotor{20};
   ctre::phoenix6::hardware::CANcoder axisEncoder{21};
   frc::DigitalInput coralSensor{1};

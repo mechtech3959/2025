@@ -61,7 +61,7 @@ void RobotContainer::ConfigureBindings() {
 
   drivetrain.RegisterTelemetry(
       [this](auto const &state) { logger.Telemeterize(state); });
-  logger.subsystemTelemeterize(claw.clawLog);
+  //logger.subsystemTelemeterize(claw.clawLog);
 }
 void RobotContainer::ConfigureDashboard() {
   frc::SmartDashboard::PutData("autochooser", &paths);

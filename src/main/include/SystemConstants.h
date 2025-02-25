@@ -9,8 +9,8 @@
 #include "StateLogging.h"
 namespace Constants {}
 
-namespace Elevator {/*/
-// make believe vals
+namespace elevatorConstants {
+// make believe val
 constexpr ctre::phoenix6::configs::Slot0Configs slot =
     ctre::phoenix6::configs::Slot0Configs{}
         .WithGravityType(
@@ -33,20 +33,20 @@ constexpr ctre::phoenix6::configs::FeedbackConfigs fbConfigs =
         .WithRotorToSensorRatio(4)
         .WithSensorToMechanismRatio(1)
         .WithFeedbackRemoteSensorID(23);
-constexpr ctre::phoenix6::configs::TalonFXConfiguration elevatorConfigs =
+ ctre::phoenix6::configs::TalonFXConfiguration elevatorConfigs =
     ctre::phoenix6::configs::TalonFXConfiguration{}
-        //.WithSlot0(slot)
-       // .WithMotionMagic(magicMotionConfigs)
+        .WithSlot0(slot)
+        .WithMotionMagic(magicMotionConfigs)
         .WithCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs{}
                                .WithStatorCurrentLimit(10_A)
-                               .WithStatorCurrentLimitEnable(true));
-        //.WithFeedback(fbConfigs);
+                               .WithStatorCurrentLimitEnable(true))
+        .WithFeedback(fbConfigs);
 
 constexpr ctre::phoenix6::configs::CANcoderConfiguration encoderConfigs =
     ctre::phoenix6::configs::CANcoderConfiguration{};
-*/
-} // namespace Elevator
-namespace claw {/*/
+
+} // namespace elevatorConstants
+namespace clawConstants {
 constexpr ctre::phoenix6::configs::Slot0Configs axisSlot =
     ctre::phoenix6::configs::Slot0Configs{}
         .WithKS(0.3)
@@ -70,8 +70,8 @@ constexpr ctre::phoenix6::configs::FeedbackConfigs axisFeedback =
         .WithSensorToMechanismRatio(1.0);
 constexpr ctre::phoenix6::configs::TalonFXConfiguration axisConfig =
     ctre::phoenix6::configs::TalonFXConfiguration{}
-        //.WithSlot0(axisSlot)
-      //  .WithFeedback(axisFeedback)
+        .WithSlot0(axisSlot)
+        .WithFeedback(axisFeedback)
         .WithMotionMagic(ctre::phoenix6::configs::MotionMagicConfigs{}
                              .WithMotionMagicCruiseVelocity(1_tps)
                              .WithMotionMagicAcceleration(1_tr_per_s_sq)
@@ -80,5 +80,5 @@ constexpr ctre::phoenix6::configs::TalonFXConfiguration axisConfig =
                                .WithStatorCurrentLimit(10_A)
                                .WithStatorCurrentLimitEnable(true));
 
-*/} // namespace claw
- // namespace Constants
+} // namespace clawConstants
+  // namespace Constants

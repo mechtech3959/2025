@@ -9,11 +9,11 @@
 #include "SystemConstants.h"
 namespace subsystems {
 
-class Elevator : frc2::SubsystemBase {
+class Elevator : public frc2::SubsystemBase {
 private:
   ctre::phoenix6::hardware::TalonFX masterM{22};
   ctre::phoenix6::hardware::TalonFX slaveM{23};
-  ctre::phoenix6::hardware::CANcoder encoder{23};
+  ctre::phoenix6::hardware::CANcoder elevatorEncoder{23};
   ctre::phoenix6::controls::MotionMagicExpoTorqueCurrentFOC elevatorMotion{
       0_tr};
 

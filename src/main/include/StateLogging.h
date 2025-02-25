@@ -2,8 +2,9 @@
 #include <ctre/phoenix6/TalonFX.hpp>
 
 class customLogging {
-
+public:
 struct ElevatorState {
+
   units::angle::turn_t encoderPose;
   units::angle::turn_t encoderABSPose;
   units::angle::turn_t masterPose;
@@ -23,4 +24,4 @@ struct ClawState {
   double intakeMotorPose;
 };
 
-} // namespace customLogging
+}; // namespace customLogging
