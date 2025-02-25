@@ -2,7 +2,7 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 
 using namespace ctre::phoenix6;
-/*
+
 void Telemetry::subsystemTelemeterize(
     ClawState const &cState) {
   // claw
@@ -13,7 +13,7 @@ void Telemetry::subsystemTelemeterize(
   // clawLastAxisAngle.Set();
   // clawEncoderTurnCount.Set();
   clawHasCoral.Set(cState.coralDetected);
-};*/
+};
 void Telemetry::Telemeterize(
     subsystems::CommandSwerveDrivetrain::SwerveDriveState const &state) {
 
