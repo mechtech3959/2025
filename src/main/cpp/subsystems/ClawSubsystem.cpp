@@ -3,7 +3,7 @@
 using namespace subsystems;
 
 Claw::Claw() {
-  axisMotor.GetConfigurator().Apply(Constants::claw::axisConfig);
+  //axisMotor.GetConfigurator().Apply(Constants::claw::axisConfig);
 
 };
 

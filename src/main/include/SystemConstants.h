@@ -6,11 +6,10 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <rev/SparkMax.h>
 
-
 #include "StateLogging.h"
-namespace Constants {
+namespace Constants {}
 
-namespace Elevator {
+namespace Elevator {/*/
 // make believe vals
 constexpr ctre::phoenix6::configs::Slot0Configs slot =
     ctre::phoenix6::configs::Slot0Configs{}
@@ -33,21 +32,21 @@ constexpr ctre::phoenix6::configs::FeedbackConfigs fbConfigs =
     ctre::phoenix6::configs::FeedbackConfigs{}
         .WithRotorToSensorRatio(4)
         .WithSensorToMechanismRatio(1)
-        .WithFeedbackRemoteSensorID(14);
+        .WithFeedbackRemoteSensorID(23);
 constexpr ctre::phoenix6::configs::TalonFXConfiguration elevatorConfigs =
     ctre::phoenix6::configs::TalonFXConfiguration{}
-        .WithSlot0(slot)
-        .WithMotionMagic(magicMotionConfigs)
+        //.WithSlot0(slot)
+       // .WithMotionMagic(magicMotionConfigs)
         .WithCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs{}
                                .WithStatorCurrentLimit(10_A)
-                               .WithStatorCurrentLimitEnable(true))
-        .WithFeedback(fbConfigs);
+                               .WithStatorCurrentLimitEnable(true));
+        //.WithFeedback(fbConfigs);
 
 constexpr ctre::phoenix6::configs::CANcoderConfiguration encoderConfigs =
     ctre::phoenix6::configs::CANcoderConfiguration{};
-
+*/
 } // namespace Elevator
-namespace claw {
+namespace claw {/*/
 constexpr ctre::phoenix6::configs::Slot0Configs axisSlot =
     ctre::phoenix6::configs::Slot0Configs{}
         .WithKS(0.3)
@@ -64,15 +63,15 @@ constexpr ctre::phoenix6::configs::Slot0Configs axisSlot =
 
 constexpr ctre::phoenix6::configs::FeedbackConfigs axisFeedback =
     ctre::phoenix6::configs::FeedbackConfigs{}
-        .WithFeedbackRemoteSensorID(17)
+        .WithFeedbackRemoteSensorID(21)
         .WithFeedbackSensorSource(
             ctre::phoenix6::signals::FeedbackSensorSourceValue::FusedCANcoder)
         .WithRotorToSensorRatio(16.0)
         .WithSensorToMechanismRatio(1.0);
 constexpr ctre::phoenix6::configs::TalonFXConfiguration axisConfig =
     ctre::phoenix6::configs::TalonFXConfiguration{}
-        .WithSlot0(axisSlot)
-        .WithFeedback(axisFeedback)
+        //.WithSlot0(axisSlot)
+      //  .WithFeedback(axisFeedback)
         .WithMotionMagic(ctre::phoenix6::configs::MotionMagicConfigs{}
                              .WithMotionMagicCruiseVelocity(1_tps)
                              .WithMotionMagicAcceleration(1_tr_per_s_sq)
@@ -81,11 +80,5 @@ constexpr ctre::phoenix6::configs::TalonFXConfiguration axisConfig =
                                .WithStatorCurrentLimit(10_A)
                                .WithStatorCurrentLimitEnable(true));
 
-constexpr ctre::phoenix6::configs::TalonFXConfiguration intakeConfigs =
-    ctre::phoenix6::configs::TalonFXConfiguration{}.WithCurrentLimits(
-        ctre::phoenix6::configs::CurrentLimitsConfigs{}
-            .WithStatorCurrentLimit(5_A)
-            .WithStatorCurrentLimitEnable(true));
-
-} // namespace claw
-} // namespace Constants
+*/} // namespace claw
+ // namespace Constants

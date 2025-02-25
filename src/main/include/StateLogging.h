@@ -1,7 +1,7 @@
 #include <ctre/phoenix6/CANcoder.hpp>
 #include <ctre/phoenix6/TalonFX.hpp>
 
-namespace customLogging {
+class customLogging {
 
 struct ElevatorState {
   units::angle::turn_t encoderPose;

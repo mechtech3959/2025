@@ -8,9 +8,9 @@ namespace subsystems {
 
 class Claw : frc2::SubsystemBase {
 private:
-  rev::spark::SparkMax intakeMotor{15, rev::spark::SparkMax::MotorType::kBrushless};
-  ctre::phoenix6::hardware::TalonFX axisMotor{16};
-  ctre::phoenix6::hardware::CANcoder axisEncoder{17};
+  rev::spark::SparkMax intakeMotor{19, rev::spark::SparkMax::MotorType::kBrushless};
+  ctre::phoenix6::hardware::TalonFX axisMotor{20};
+  ctre::phoenix6::hardware::CANcoder axisEncoder{21};
   frc::DigitalInput coralSensor{1};
   ctre::phoenix6::controls::MotionMagicVoltage axisMotion{0_deg};
   // TODO: determine sensor

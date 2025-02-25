@@ -7,7 +7,8 @@
 #include "Telemetry.h"
 #include "subsystems/CommandSwerveDrivetrain.h"
 #include "subsystems/LimeLightSubsystem.h"
-
+#include "subsystems/ClawSubsystem.h"
+#include "subsystems/ElevatorSubsystem.h"
 #include <frc/smartdashboard/Field2d.h>
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc/smartdashboard/SmartDashboard.h>
@@ -46,6 +47,8 @@ private:
   frc2::CommandXboxController joystick{0};
 
 public:
+  subsystems::Claw subsystemClaw;
+  subsystems::Elevator subsystemElevator;
   subsystems::CommandSwerveDrivetrain drivetrain{
       TunerConstants::CreateDrivetrain()};
 

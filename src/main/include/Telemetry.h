@@ -124,5 +124,6 @@ public:
   /** Accept the swerve drive state and telemeterize it to SmartDashboard and
    * SignalLogger. */
   void Telemeterize(
-      subsystems::CommandSwerveDrivetrain::SwerveDriveState const &state,customLogging::ClawState const &clawState);
+      subsystems::CommandSwerveDrivetrain::SwerveDriveState const &state);
+    void subsystemTelemeterize(customLogging::ClawState const &clawState);
 };

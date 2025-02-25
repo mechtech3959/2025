@@ -3,8 +3,8 @@
 using namespace subsystems;
 
 Elevator::Elevator() {
-  masterM.GetConfigurator().Apply(Constants::Elevator::elevatorConfigs);
-  slaveM.GetConfigurator().Apply(Constants::Elevator::elevatorConfigs);
+ // masterM.GetConfigurator().Apply(Constants::Elevator::elevatorConfigs);
+  //slaveM.GetConfigurator().Apply(Constants::Elevator::elevatorConfigs);
   slaveM.SetControl(
       ctre::phoenix6::controls::Follower{masterM.GetDeviceID(), false});
 }
