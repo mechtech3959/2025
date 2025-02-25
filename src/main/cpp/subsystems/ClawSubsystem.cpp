@@ -4,7 +4,7 @@ using namespace subsystems;
 
 Claw::Claw() {
   axisMotor.GetConfigurator().Apply(Constants::claw::axisConfig);
-  intakeMotor.GetConfigurator().Apply(Constants::claw::intakeConfigs);
+
 };
 
 void Claw::setAxis(units::degree_t angle) {
