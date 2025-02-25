@@ -1,9 +1,11 @@
 #include <ctre/phoenix6/CANcoder.hpp>
 #include <ctre/phoenix6/TalonFX.hpp>
 #include <ctre/phoenix6/configs/Configs.hpp>
-#include <frc/smartdashboard/SmartDashboard.h>
 #include <frc/AnalogInput.h>
 #include <frc/DigitalInput.h>
+#include <frc/smartdashboard/SmartDashboard.h>
+#include <rev/SparkMax.h>
+
 
 #include "StateLogging.h"
 namespace Constants {
@@ -46,8 +48,6 @@ constexpr ctre::phoenix6::configs::CANcoderConfiguration encoderConfigs =
 
 } // namespace Elevator
 namespace claw {
-constexpr ctre::phoenix6::configs::Slot0Configs intakeSlot =
-    ctre::phoenix6::configs::Slot0Configs{};
 constexpr ctre::phoenix6::configs::Slot0Configs axisSlot =
     ctre::phoenix6::configs::Slot0Configs{}
         .WithKS(0.3)
