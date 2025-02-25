@@ -2,7 +2,7 @@
 
 using namespace subsystems;
 
-Claw::Claw() {
+Claw::Claw():intakeMotor{19,rev::spark::SparkMax::MotorType::kBrushless},axisMotor{20},axisEncoder{21},coralSensor{1},axisMotion{0_deg} {
   //axisMotor.GetConfigurator().Apply(Constants::claw::axisConfig);
 
 };
