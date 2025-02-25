@@ -3,6 +3,7 @@
 #include "ctre/phoenix6/SignalLogger.hpp"
 #include "frc/DataLogManager.h"
 #include "frc/DriverStation.h"
+#include "subsystems/ClawSubsystem.h"
 #include "subsystems/CommandSwerveDrivetrain.h"
 #include <frc/smartdashboard/Mechanism2d.h>
 #include <frc/smartdashboard/MechanismLigament2d.h>
@@ -21,25 +22,21 @@ private:
   nt::NetworkTableInstance inst = nt::NetworkTableInstance::GetDefault();
   // claw
   std::shared_ptr<nt::NetworkTable> clawTable = inst.GetTable("ClawState");
- /*/ nt::StructPublisher<units::angle::turn_t> AbsoluteEncoderPose =
-      clawTable->GetStructTopic<units::angle::turn_t>("ABSEncoderPose")
-          .Publish();
-          *
-  nt::StructPublisher<units::angle::turn_t> encoderTurnCount =
-      clawTable->GetStructTopic<units::angle::turn_t>("EncoderTurnCount")
-          .Publish();
-  nt::StructPublisher<units::angle::turn_t> axisPosition =
-      clawTable->GetStructTopic<units::angle::turn_t>("AxisPosition")
-          .Publish();
-  nt::StructPublisher<units::degree_t> currentAxisAngle =
-      clawTable->GetStructTopic<units::degree_t>("CurrentAxisAngle")
-          .Publish();
-  nt::StructPublisher<units::degree_t> lastAxisAngle =
-      clawTable->GetStructTopic<units::degree_t>("LastAxisAngle").Publish();
-  nt::StructPublisher<units::degree_t> targetAxisAngle =
-      clawTable->GetStructTopic<units::degree_t>("TargetAxisAngle").Publish();
-  nt::StructPublisher<bool> hasCoral =
-      clawTable->GetStructTopic<bool>("Coraldetected").Publish();*/
+  nt::StructPublisher<double> clawAbsoluteEncoderPose =
+      clawTable->GetStructTopic<double>("ABSEncoderPose").Publish();
+
+  nt::StructPublisher<double> clawEncoderTurnCount =
+      clawTable->GetStructTopic<double>("EncoderTurnCount").Publish();
+  nt::StructPublisher<double> clawAxisPosition =
+      clawTable->GetStructTopic<double>("AxisPosition").Publish();
+  nt::StructPublisher<double> clawCurrentAxisAngle =
+      clawTable->GetStructTopic<double>("CurrentAxisAngle").Publish();
+  nt::StructPublisher<double> clawLastAxisAngle =
+      clawTable->GetStructTopic<double>("LastAxisAngle").Publish();
+  nt::StructPublisher<double> clawTargetAxisAngle =
+      clawTable->GetStructTopic<double>("TargetAxisAngle").Publish();
+  nt::StructPublisher<bool> clawHasCoral =
+      clawTable->GetStructTopic<bool>("Coraldetected").Publish();
   // figure out mech2d for sim representation
   /* Robot swerve drive state */
   std::shared_ptr<nt::NetworkTable> driveStateTable =
@@ -127,5 +124,5 @@ public:
   /** Accept the swerve drive state and telemeterize it to SmartDashboard and
    * SignalLogger. */
   void Telemeterize(
-      subsystems::CommandSwerveDrivetrain::SwerveDriveState const &state);
+      subsystems::CommandSwerveDrivetrain::SwerveDriveState const &state,customLogging::ClawState const &clawState);
 };

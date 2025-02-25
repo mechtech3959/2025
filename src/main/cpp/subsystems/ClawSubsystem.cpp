@@ -39,12 +39,12 @@ void Claw::sendData() {
    frc::SmartDashboard::PutNumber("axisAngle", double(lastKnownAngle));
    frc::SmartDashboard::PutBoolean("AxisState", state);
    frc::SmartDashboard::PutBoolean("has coral?", coralSensor.Get());*/
-  clawLog.motorPose = axisMotor.GetPosition().GetValue();
-  clawLog.encoderPose = axisEncoder.GetPosition().GetValue();
-  clawLog.encoderABSPose = axisEncoder.GetAbsolutePosition().GetValue();
+  clawLog.axisMotorPose = axisMotor.GetPosition().GetValueAsDouble();
+  clawLog.encoderPose = axisEncoder.GetPosition().GetValueAsDouble();
+  clawLog.encoderABSPose = axisEncoder.GetAbsolutePosition().GetValueAsDouble();
   // CHECK
-  clawLog.currentAngle = units::degree_t{
-      axisEncoder.GetAbsolutePosition().GetValueAsDouble() * 360};
+  clawLog.currentAngle =
+      axisEncoder.GetAbsolutePosition().GetValueAsDouble() * 360;
   clawLog.coralDetected = hasCoral(coralSensor);
 };
 bool Claw::hasCoral(frc::DigitalInput &input) {

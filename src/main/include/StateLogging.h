@@ -12,13 +12,15 @@ struct ElevatorState {
   units::inch_t targetPose;
 };
 struct ClawState {
-  units::angle::turn_t encoderPose;
-  units::angle::turn_t encoderABSPose;
-  units::angle::turn_t motorPose;
-  units::degree_t currentAngle;
-  units::degree_t lastKnowAngle;
-  units::degree_t targetAngle;
+  double axisMotorPose;
   bool coralDetected;
+
+  double currentAngle;
+  double lastKnowAngle;
+  double targetAngle;
+  double encoderPose;
+  double encoderABSPose;
+  double intakeMotorPose;
 };
 
 } // namespace customLogging
