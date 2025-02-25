@@ -18,6 +18,39 @@ private:
   ctre::phoenix6::hardware::CANcoder elevatorEncoder{23};
   ctre::phoenix6::controls::MotionMagicExpoTorqueCurrentFOC elevatorMotion{
       0_tr};
+ ctre::phoenix6::configs::Slot0Configs slot =
+    ctre::phoenix6::configs::Slot0Configs{}
+        .WithGravityType(
+            ctre::phoenix6::signals::GravityTypeValue::Elevator_Static)
+        .WithKP(5)
+        .WithKI(2)
+        .WithKD(1)
+        .WithStaticFeedforwardSign(
+            ctre::phoenix6::signals::StaticFeedforwardSignValue::
+                UseClosedLoopSign);
+// set to example values
+//https://v6.docs.ctr-electronics.com/en/2024/docs/api-reference/device-specific/talonfx/motion-magic.html
+ ctre::phoenix6::configs::MotionMagicConfigs magicMotionConfigs =
+    ctre::phoenix6::configs::MotionMagicConfigs{}
+        .WithMotionMagicJerk(500_tr_per_s_cu)
+        .WithMotionMagicCruiseVelocity(40_tps)
+        .WithMotionMagicAcceleration(60_tr_per_s_sq);
+ ctre::phoenix6::configs::FeedbackConfigs fbConfigs =
+    ctre::phoenix6::configs::FeedbackConfigs{}
+        .WithRotorToSensorRatio(4)
+        .WithSensorToMechanismRatio(1)
+        .WithFeedbackRemoteSensorID(23);
+ ctre::phoenix6::configs::TalonFXConfiguration elevatorConfigs =
+    ctre::phoenix6::configs::TalonFXConfiguration{}
+        .WithSlot0(slot)
+        .WithMotionMagic(magicMotionConfigs)
+        .WithCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs{}
+                               .WithStatorCurrentLimit(10_A)
+                               .WithStatorCurrentLimitEnable(true))
+        .WithFeedback(fbConfigs);
+
+ ctre::phoenix6::configs::CANcoderConfiguration encoderConfigs =
+    ctre::phoenix6::configs::CANcoderConfiguration{};
 
 public:
   // inches, measurements are relative to the floor

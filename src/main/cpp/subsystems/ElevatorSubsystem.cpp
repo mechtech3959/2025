@@ -3,8 +3,8 @@
 using namespace subsystems;
 
 Elevator::Elevator() {
- // masterM.GetConfigurator().Apply(elevatorConstants::elevatorConfigs);
-  //slaveM.GetConfigurator().Apply(elevatorConstants::elevatorConfigs);
+  masterM.GetConfigurator().Apply(elevatorConfigs);
+  slaveM.GetConfigurator().Apply(elevatorConfigs);
   slaveM.SetControl(
       ctre::phoenix6::controls::Follower{masterM.GetDeviceID(), false});
 }
@@ -13,7 +13,7 @@ Elevator::Elevator() {
 void Elevator::setHeight(units::turn_t pos) {
   masterM.SetControl(elevatorMotion.WithPosition(pos));
 }
-void Elevator::sendData() {  // nt::NetworkTableInstance elevatorInst =
+void Elevator::sendData() { // nt::NetworkTableInstance elevatorInst =
   // nt::NetworkTableInstance::GetDefault();
   frc::SmartDashboard::PutNumber("Elevator/MasterPose",
                                  masterM.GetPosition().GetValueAsDouble());
@@ -21,8 +21,9 @@ void Elevator::sendData() {  // nt::NetworkTableInstance elevatorInst =
                                  slaveM.GetPosition().GetValueAsDouble());
   frc::SmartDashboard::PutString("Elevator/Master Control Mode",
                                  masterM.GetControlMode().ToString());
-  frc::SmartDashboard::PutNumber("Elevator/Encoder Value",
-                                 elevatorEncoder.GetPosition().GetValueAsDouble());
+  frc::SmartDashboard::PutNumber(
+      "Elevator/Encoder Value",
+      elevatorEncoder.GetPosition().GetValueAsDouble());
   frc::SmartDashboard::PutNumber(
       "Elevator/Encoder abs val",
       elevatorEncoder.GetAbsolutePosition().GetValueAsDouble());
