@@ -13,18 +13,12 @@ Elevator::Elevator() {
 void Elevator::setHeight(units::turn_t pos) {
   masterM.SetControl(elevatorMotion.WithPosition(pos));
 }
-void Elevator::sendData() { // nt::NetworkTableInstance elevatorInst =
-  // nt::NetworkTableInstance::GetDefault();
-  frc::SmartDashboard::PutNumber("Elevator/MasterPose",
-                                 masterM.GetPosition().GetValueAsDouble());
-  frc::SmartDashboard::PutNumber("Elevator/SlavePose",
-                                 slaveM.GetPosition().GetValueAsDouble());
+void Elevator::sendData() {
+  elevatorLog.masterPose = masterM.GetPosition().GetValueAsDouble();
+  elevatorLog.slavePose = slaveM.GetPosition().GetValueAsDouble();
+  elevatorLog.elevatorPose = elevatorEncoder.GetPosition().GetValueAsDouble();
+  elevatorLog.encoderABSPose =
+      elevatorEncoder.GetAbsolutePosition().GetValueAsDouble();
   frc::SmartDashboard::PutString("Elevator/Master Control Mode",
                                  masterM.GetControlMode().ToString());
-  frc::SmartDashboard::PutNumber(
-      "Elevator/Encoder Value",
-      elevatorEncoder.GetPosition().GetValueAsDouble());
-  frc::SmartDashboard::PutNumber(
-      "Elevator/Encoder abs val",
-      elevatorEncoder.GetAbsolutePosition().GetValueAsDouble());
 }

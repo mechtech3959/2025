@@ -3,8 +3,14 @@
 
 using namespace ctre::phoenix6;
 
-void Telemetry::subsystemTelemeterize(
-    ClawState const &clawState, ElevatorState const&elevatorState ) {
+void Telemetry::subsystemTelemeterize(ClawState const &clawState,
+                                      ElevatorState const &elevatorState) {
+  // elevator
+  elevatorMasterPose.Set(elevatorState.masterPose);
+  elevatorSlavePose.Set(elevatorState.slavePose);
+  elevatorPose.Set(elevatorState.elevatorPose);
+  elevatorABSEncoderPose.Set(elevatorState.encoderABSPose);
+  // elevatorTargetpose.Set()
   // claw
   clawAbsoluteEncoderPose.Set(clawState.encoderABSPose);
   clawAxisPosition.Set(clawState.encoderPose);
