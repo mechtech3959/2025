@@ -5,12 +5,12 @@
 
 struct ElevatorState {
 
-  units::angle::turn_t encoderPose;
-  units::angle::turn_t encoderABSPose;
-  units::angle::turn_t masterPose;
-  units::angle::turn_t slavePose;
-  units::inch_t elevatorPose;
-  units::inch_t targetPose;
+  double encoderPose;
+  double encoderABSPose;
+  double masterPose;
+  double slavePose;
+  double elevatorPose;
+  double targetPose;
 };
 struct ClawState {
   double axisMotorPose;

@@ -20,6 +20,19 @@ private:
 
   /* What to publish over networktables for telemetry */
   nt::NetworkTableInstance inst = nt::NetworkTableInstance::GetDefault();
+  // elevator
+  std::shared_ptr<nt::NetworkTable> elevatorTable =
+      inst.GetTable("ElevatorState");
+  nt::StructPublisher<double> elevatorPose =
+      elevatorTable->GetStructTopic<double>("EncoderPose").Publish();
+  nt::StructPublisher<double> elevatorMasterPose =
+      elevatorTable->GetStructTopic<double>("MasterPose").Publish();
+  nt::StructPublisher<double> elevatorSlavePose =
+      elevatorTable->GetStructTopic<double>("SlavePose").Publish();
+  nt::StructPublisher<double> elevatorABSEncoderPose =
+      elevatorTable->GetStructTopic<double>("ABSEncoderPose").Publish();
+  nt::StructPublisher<double> elevatorTargetpose =
+      elevatorTable->GetStructTopic<double>("TargetPose").Publish();
   // claw
   std::shared_ptr<nt::NetworkTable> clawTable = inst.GetTable("ClawState");
   nt::StructPublisher<double> clawAbsoluteEncoderPose =
