@@ -69,6 +69,7 @@ public:
     onTarget
 
   };
+  ElevatorState elevatorLog;
   Elevator();
   void setHeight(units::turn_t pos);
   void sendData();

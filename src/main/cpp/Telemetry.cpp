@@ -4,15 +4,15 @@
 using namespace ctre::phoenix6;
 
 void Telemetry::subsystemTelemeterize(
-    ClawState const &cState) {
+    ClawState const &clawState, ElevatorState const&elevatorState ) {
   // claw
-  clawAbsoluteEncoderPose.Set(cState.encoderABSPose);
-  clawAxisPosition.Set(cState.encoderPose);
-  clawCurrentAxisAngle.Set(cState.currentAngle);
+  clawAbsoluteEncoderPose.Set(clawState.encoderABSPose);
+  clawAxisPosition.Set(clawState.encoderPose);
+  clawCurrentAxisAngle.Set(clawState.currentAngle);
   // clawTargetAxisAngle.Set();
   // clawLastAxisAngle.Set();
   // clawEncoderTurnCount.Set();
-  clawHasCoral.Set(cState.coralDetected);
+  clawHasCoral.Set(clawState.coralDetected);
 };
 void Telemetry::Telemeterize(
     subsystems::CommandSwerveDrivetrain::SwerveDriveState const &state) {
