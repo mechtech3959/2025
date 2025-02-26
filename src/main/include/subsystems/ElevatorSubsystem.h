@@ -33,8 +33,8 @@ private:
   ctre::phoenix6::configs::MotionMagicConfigs magicMotionConfigs =
       ctre::phoenix6::configs::MotionMagicConfigs{}
           .WithMotionMagicJerk(500_tr_per_s_cu)
-          .WithMotionMagicCruiseVelocity(40_tps)
-          .WithMotionMagicAcceleration(60_tr_per_s_sq);
+          .WithMotionMagicCruiseVelocity(4_tps)
+          .WithMotionMagicAcceleration(8_tr_per_s_sq);
   ctre::phoenix6::configs::FeedbackConfigs fbConfigs =
       ctre::phoenix6::configs::FeedbackConfigs{}
           .WithRotorToSensorRatio(4)
