@@ -1,0 +1,54 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 5.998782051289448,
+        "y": 0.5985897435828599
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 5.1879314524709255,
+        "y": 1.3634321499965747
+      },
+      "isLocked": false,
+      "linkedName": "Algea Processor"
+    },
+    {
+      "anchor": {
+        "x": 5.22474358974359,
+        "y": 2.8794230769230773
+      },
+      "prevControl": {
+        "x": 4.4414781457340435,
+        "y": 0.9912515770057597
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Middle Algea 2"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 1.0,
+    "maxAcceleration": 1.0,
+    "maxAngularVelocity": 2.0,
+    "maxAngularAcceleration": 2.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 123.11134196037206
+  },
+  "reversed": false,
+  "folder": null,
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -88.63607246935265
+  },
+  "useDefaultConstraints": true
+}

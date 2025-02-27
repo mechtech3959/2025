@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.0,
-        "y": 7.0
+        "x": 5.22474358974359,
+        "y": 2.8794230769230773
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.0,
-        "y": 7.0
+        "x": 4.301718040792647,
+        "y": 1.1285302461694946
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Middle Algea 2"
     },
     {
       "anchor": {
-        "x": 4.342422945205479,
-        "y": 7.0
+        "x": 5.998782051289448,
+        "y": 0.5985897435828599
       },
       "prevControl": {
-        "x": 3.7714469178082193,
-        "y": 6.955008561643836
+        "x": 5.252532469342115,
+        "y": 1.3556324551995713
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Algea Processor"
     }
   ],
   "rotationTargets": [],
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": -88.63607246935265
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 123.11134196037206
   },
   "useDefaultConstraints": true
 }
