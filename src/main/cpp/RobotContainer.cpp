@@ -13,7 +13,7 @@ RobotContainer::RobotContainer() {
 
 void RobotContainer::ConfigureBindings() {
   // limelight.updateTracking();
-  visionEstimate = limelight.poseEst();
+  //visionEstimate = limelight.poseEst();
 
   // Note that X is defined as forward according to WPILib convention,
   // and Y is defined as to the left according to WPILib convention.
@@ -72,6 +72,7 @@ void RobotContainer::ConfigureBindings() {
 }
 void RobotContainer::ConfigureDashboard() {
   frc::SmartDashboard::PutData("autochooser", &paths);
+ // frc::SmartDashboard::PutData("d", drivetrain.InitSendable(wpi::SendableBuilder& builder));
   // frc::SmartDashboard::PutNumberArray("LL pose",
   // [visionEstimate.X().value(),visionEstimate.Y().value()]);
 }

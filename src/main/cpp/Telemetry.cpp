@@ -5,6 +5,11 @@ using namespace ctre::phoenix6;
 
 void Telemetry::Telemeterize(
     subsystems::CommandSwerveDrivetrain::SwerveDriveState const &state) {
+      
+  
+  //elaststate.StartListeners()
+  
+
   /* Telemeterize the swerve drive state */
   drivePose.Set(state.Pose);
   driveSpeeds.Set(state.Speeds);
@@ -47,7 +52,17 @@ void Telemetry::Telemeterize(
     frc::SmartDashboard::PutData("Module " + std::to_string(i),
                                  &m_moduleMechanisms[i]);
   }
-
+  /* std::vector<double> moduleAngAr = {
+       double(state.ModuleStates[0].angle.Degrees()),
+       double(state.ModuleStates[1].angle.Degrees()),
+       double(state.ModuleStates[2].angle.Degrees()),
+       double(state.ModuleStates[3].angle.Degrees())};
+   std::vector<double> moduleAspeedAr = {
+       double(state.ModuleStates[0].speed), double(state.ModuleStates[1].speed),
+       double(state.ModuleStates[2].speed),
+   double(state.ModuleStates[3].speed)}; std::vector<std::vector<double>> mod =
+   {moduleAngAr, moduleAspeedAr}; stateAngle.Set(mod);
+ */
   // drivers station
   frc::DataLogManager::Start();
   // Record both DS control and joystick data

@@ -12,6 +12,7 @@
 #include <networktables/StringTopic.h>
 #include <networktables/StructArrayTopic.h>
 #include <networktables/StructTopic.h>
+#include <frc/smartdashboard/SendableBuilderImpl.h>
 
 class Telemetry {
 private:
@@ -19,8 +20,19 @@ private:
 
   /* What to publish over networktables for telemetry */
   nt::NetworkTableInstance inst = nt::NetworkTableInstance::GetDefault();
-
+  frc::SendableBuilderImpl elaststate;
+  
   /* Robot swerve drive state */
+  /*std::shared_ptr<nt::NetworkTable> driveETable =
+      inst.GetTable("ElasticDriveState");
+    nt::StructArrayPublisher<> stateAngle =
+      driveETable->GetStructArrayTopic<>("ModuleStates")
+          .Publish();
+  nt::StructArrayPublisher<frc::MechanismLigament2d *> stateVelocity =
+      driveETable
+          ->GetStructArrayTopic<frc::MechanismLigament2d *>("ModuleTargets")
+          .Publish();*/
+
   std::shared_ptr<nt::NetworkTable> driveStateTable =
       inst.GetTable("DriveState");
   nt::StructPublisher<frc::Pose2d> drivePose =
@@ -98,11 +110,12 @@ public:
    *
    * \param maxSpeed Maximum speed
    */
+
   Telemetry(units::meters_per_second_t maxSpeed) : MaxSpeed{maxSpeed} {
     ctre::phoenix6::SignalLogger::SetPath("/media/sda1/");
     ctre::phoenix6::SignalLogger::Start();
   }
-
+  
   /** Accept the swerve drive state and telemeterize it to SmartDashboard and
    * SignalLogger. */
   void Telemeterize(

@@ -263,7 +263,7 @@ public:
   frc2::CommandPtr SysIdDynamic(frc2::sysid::Direction direction) {
     return m_sysIdRoutineToApply->Dynamic(direction);
   }
-
+void InitSendable(wpi::SendableBuilder& builder)override;
 private:
   void StartSimThread();
   void ConfigureAutoBuilder();
