@@ -41,6 +41,7 @@ void CommandSwerveDrivetrain::ConfigureAutoBuilder() {
 }
 void CommandSwerveDrivetrain::InitSendable(wpi::SendableBuilder &builder) {
   frc2::SubsystemBase::InitSendable(builder);
+  
   builder.AddDoubleProperty(
       "FrontLeftangle",
       [this] { return GetState().ModuleStates[0].angle.Radians().value(); },
@@ -54,25 +55,28 @@ void CommandSwerveDrivetrain::InitSendable(wpi::SendableBuilder &builder) {
       NULL);
   builder.AddDoubleProperty(
       "FrontRightspeed",
-      [this] { return GetState().ModuleStates[0].speed.value(); }, NULL);
+      [this] { return GetState().ModuleStates[1].speed.value(); }, NULL);
   builder.AddDoubleProperty(
       "BackLeftangle",
       [this] { return GetState().ModuleStates[2].angle.Radians().value(); },
       NULL);
   builder.AddDoubleProperty(
       "BackLeftspeed",
-      [this] { return GetState().ModuleStates[0].speed.value(); }, NULL);
+      [this] { return GetState().ModuleStates[2].speed.value(); }, NULL);
   builder.AddDoubleProperty(
       "BackRightangle",
       [this] { return GetState().ModuleStates[3].angle.Radians().value(); },
       NULL);
   builder.AddDoubleProperty(
       "BackRightspeed",
-      [this] { return GetState().ModuleStates[0].speed.value(); }, NULL);
+      [this] { return GetState().ModuleStates[3].speed.value(); }, NULL);
   builder.AddDoubleProperty(
       "angle", [this] { return GetState().RawHeading.Radians().value(); },
       NULL);
   builder.SetSmartDashboardType("elasticswerve");
+  
+  
+  builder.Update();
 }
 void CommandSwerveDrivetrain::Init() {}
 void CommandSwerveDrivetrain::Periodic() {

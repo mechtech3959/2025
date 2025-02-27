@@ -9,6 +9,7 @@ RobotContainer::RobotContainer() {
   ConfigureBindings();
   ConfigureDashboard();
   GetStartingPose();
+    
 }
 
 void RobotContainer::ConfigureBindings() {
@@ -71,6 +72,8 @@ void RobotContainer::ConfigureBindings() {
         .WithTargetDirection(dd); */
 }
 void RobotContainer::ConfigureDashboard() {
+ // frc::Shuffleboard::GetTab("S").Add(drivetrain).WithWidget();
+  frc::SmartDashboard::PutData(&drivetrain);
   frc::SmartDashboard::PutData("autochooser", &paths);
  // frc::SmartDashboard::PutData("d", drivetrain.InitSendable(wpi::SendableBuilder& builder));
   // frc::SmartDashboard::PutNumberArray("LL pose",
