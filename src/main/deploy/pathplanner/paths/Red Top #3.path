@@ -1,0 +1,54 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 15.772307692307693,
+        "y": 7.358525641025641
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 16.08614499706164,
+        "y": 6.882930945236352
+      },
+      "isLocked": false,
+      "linkedName": "Red Coaral Station 1"
+    },
+    {
+      "anchor": {
+        "x": 12.511025641025642,
+        "y": 5.356346153846154
+      },
+      "prevControl": {
+        "x": 12.141660751023686,
+        "y": 5.2345111222189695
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Red Top Score 2"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 1.0,
+    "maxAcceleration": 1.0,
+    "maxAngularVelocity": 2.0,
+    "maxAngularAcceleration": 2.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -61.78264414527077
+  },
+  "reversed": false,
+  "folder": null,
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -126.86989764584409
+  },
+  "useDefaultConstraints": true
+}

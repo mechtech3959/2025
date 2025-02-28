@@ -1,0 +1,54 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.7570512820509003,
+        "y": 7.327564102569883
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.6080353530573595,
+        "y": 6.6414850650723425
+      },
+      "isLocked": false,
+      "linkedName": "Coral Station 1"
+    },
+    {
+      "anchor": {
+        "x": 3.8108333333333326,
+        "y": 5.6866025641025635
+      },
+      "prevControl": {
+        "x": 2.9715564807970543,
+        "y": 6.3887041312052535
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Path One Score 3"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 1.0,
+    "maxAcceleration": 1.0,
+    "maxAngularVelocity": 2.0,
+    "maxAngularAcceleration": 2.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -60.422161318738695
+  },
+  "reversed": false,
+  "folder": null,
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -51.34019174590977
+  },
+  "useDefaultConstraints": true
+}

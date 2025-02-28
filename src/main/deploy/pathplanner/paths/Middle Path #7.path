@@ -3,45 +3,32 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 6.236,
-        "y": 1.29
+        "x": 3.7695512820512818,
+        "y": 2.786538461538462
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.978979452050742,
-        "y": 0.9895719178076705
+        "x": 4.110128205128205,
+        "y": 2.848461538461538
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Middle Algea 3"
     },
     {
       "anchor": {
-        "x": 1.863,
-        "y": 1.2903253424657533
+        "x": 5.998782051289448,
+        "y": 0.5985897435828599
       },
       "prevControl": {
-        "x": 2.464027397260276,
-        "y": 0.3286815068493151
+        "x": 5.462115384615385,
+        "y": 1.0010897435897426
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Algea Processor"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0,
-      "rotationDegrees": 0.0
-    },
-    {
-      "waypointRelativePos": 0,
-      "rotationDegrees": 0.0
-    },
-    {
-      "waypointRelativePos": 0,
-      "rotationDegrees": 0.0
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],
@@ -55,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": -88.63607246935265
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 58.24051991518707
   },
   "useDefaultConstraints": true
 }
