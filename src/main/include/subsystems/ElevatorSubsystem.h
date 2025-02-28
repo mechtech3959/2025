@@ -38,7 +38,7 @@ private:
   ctre::phoenix6::configs::FeedbackConfigs fbConfigs =
       ctre::phoenix6::configs::FeedbackConfigs{}
           .WithRotorToSensorRatio(4)
-          .WithSensorToMechanismRatio(1)
+          .WithSensorToMechanismRatio(12)
           .WithFeedbackRemoteSensorID(23);
   ctre::phoenix6::configs::TalonFXConfiguration elevatorConfigs =
       ctre::phoenix6::configs::TalonFXConfiguration{}
