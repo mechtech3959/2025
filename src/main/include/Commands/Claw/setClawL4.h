@@ -6,10 +6,10 @@
 
 #include "subsystems/ClawSubsystem.h"
 
-class setClawStandard : public frc2::CommandHelper<frc2::Command, setClawStandard> {
+class setClawL4 : public frc2::CommandHelper<frc2::Command, setClawL4> {
 
 public:
-  explicit setClawStandard(subsystems::Claw *subsystem);
+  explicit setClawL4(subsystems::Claw *subsystem);
 
   void Initialize() override;
 
