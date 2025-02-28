@@ -3,8 +3,8 @@
 using namespace subsystems;
 
 Claw::Claw()
-    : feedMotor{30, rev::spark::SparkMax::MotorType::kBrushless},
-      axisMotor{20}, axisEncoder{21}, coralSensor{1}, axisMotion{0_deg} {
+    : feedMotor{30, rev::spark::SparkMax::MotorType::kBrushless}, axisMotor{20},
+      axisEncoder{21}, coralSensor{1}, axisMotion{0_deg} {
   axisMotor.GetConfigurator().Apply(axisConfig);
 };
 
@@ -15,9 +15,7 @@ void Claw::setAxis(units::degree_t angle) {
   (axisMotor.GetMotorOutputStatus().GetValue() == 2) ? state = onTarget
                                                      : state = traveling;
 };
-void Claw::setFeedStop(){
-  feedMotor.Set(0);
-};
+void Claw::setFeedStop() { feedMotor.Set(0); };
 void Claw::setIntake() {
   if (hasCoral(coralSensor) == true) {
     frc::Wait(1_s);
