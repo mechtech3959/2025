@@ -23,7 +23,7 @@ class TunerConstants {
           .WithKI(0)
           .WithKD(0.5)
           .WithKS(0.1)
-          .WithKV(1.59)
+          .WithKV(2.66)
           .WithKA(0)
           .WithStaticFeedforwardSign(
               signals::StaticFeedforwardSignValue::UseClosedLoopSign);
@@ -50,8 +50,7 @@ class TunerConstants {
       swerve::SteerMotorArrangement::TalonFX_Integrated;
 
   // The remote sensor feedback type to use for the steer motors;
-  // When not Pro-licensed, FusedCANcoder/SyncCANcoder automatically fall back
-  // to RemoteCANcoder
+  // When not Pro-licensed, Fused*/Sync* automatically fall back to Remote*
   static constexpr swerve::SteerFeedbackType kSteerFeedbackType =
       swerve::SteerFeedbackType::FusedCANcoder;
 
@@ -62,41 +61,32 @@ class TunerConstants {
   // Initial configs for the drive and steer motors and the azimuth encoder;
   // these cannot be null. Some configs will be overwritten; check the
   // `With*InitialConfigs()` API documentation.
-  static constexpr configs::TalonFXConfiguration driveInitialConfigs =
-      configs::TalonFXConfiguration{}.WithCurrentLimits(
-          configs::CurrentLimitsConfigs{}
-              // Swerve azimuth does not require much torque output, so we can
-              // set a relatively low stator current limit to help avoid
-              // brownouts without impacting performance.
-              .WithStatorCurrentLimit(40_A)
-              .WithStatorCurrentLimitEnable(true));
+  static constexpr configs::TalonFXConfiguration driveInitialConfigs{};
   static constexpr configs::TalonFXConfiguration steerInitialConfigs =
       configs::TalonFXConfiguration{}.WithCurrentLimits(
           configs::CurrentLimitsConfigs{}
               // Swerve azimuth does not require much torque output, so we can
               // set a relatively low stator current limit to help avoid
               // brownouts without impacting performance.
-              .WithStatorCurrentLimit(20_A)
+              .WithStatorCurrentLimit(60_A)
               .WithStatorCurrentLimitEnable(true));
+
   static constexpr configs::CANcoderConfiguration encoderInitialConfigs{};
   // Configs for the Pigeon 2; leave this nullopt to skip applying Pigeon 2
   // configs
-  // yaw 180?
-  static constexpr configs::MountPoseConfigs mountPose =
-      configs::MountPoseConfigs{}.WithMountPoseYaw(180_deg);
   static constexpr std::optional<configs::Pigeon2Configuration> pigeonConfigs =
-      configs::Pigeon2Configuration{}.WithMountPose(mountPose);
+      std::nullopt;
 
-  static constexpr std::string_view kCANBusName = "rio";
+  static constexpr std::string_view kCANBusName = "Default Name";
 
 public:
   // CAN bus that the devices are located on;
   // All swerve devices must share the same CAN bus
-  static inline const CANBus kCANBus{kCANBusName, "/media/sda1/"};
+  static inline const CANBus kCANBus{kCANBusName, "./media/sda1/"};
 
   // Theoretical free speed (m/s) at 12 V applied output;
   // This needs to be tuned to your individual robot
-  static constexpr units::meters_per_second_t kSpeedAt12Volts = 9.23_mps;
+  static constexpr units::meters_per_second_t kSpeedAt12Volts = 4.73_mps;
 
 private:
   // Every 1 rotation of the azimuth results in kCoupleRatio drive motor turns;
@@ -104,13 +94,13 @@ private:
   static constexpr units::scalar_t kCoupleRatio = 3.5714285714285716;
 
   static constexpr units::scalar_t kDriveGearRatio = 6.746031746031747;
-  static constexpr units::scalar_t kSteerGearRatio = 12.8;
-  static constexpr units::inch_t kWheelRadius = 3.9_in;
+  static constexpr units::scalar_t kSteerGearRatio = 21.428571428571427;
+  static constexpr units::inch_t kWheelRadius = 2_in;
 
   static constexpr bool kInvertLeftSide = false;
   static constexpr bool kInvertRightSide = true;
 
-  static constexpr int kPigeonId = 9;
+  static constexpr int kPigeonId = 16;
 
   // These are only used for simulation
   static constexpr units::kilogram_square_meter_t kSteerInertia = 0.01_kg_sq_m;
@@ -139,7 +129,7 @@ private:
           .WithDriveMotorGains(driveGains)
           .WithSteerMotorClosedLoopOutput(kSteerClosedLoopOutput)
           .WithDriveMotorClosedLoopOutput(kDriveClosedLoopOutput)
-          //   .WithSlipCurrent(kSlipCurrent)
+          .WithSlipCurrent(kSlipCurrent)
           .WithSpeedAt12Volts(kSpeedAt12Volts)
           .WithDriveMotorType(kDriveMotorType)
           .WithSteerMotorType(kSteerMotorType)
@@ -153,48 +143,48 @@ private:
           .WithDriveFrictionVoltage(kDriveFrictionVoltage);
 
   // Front Left
-  static constexpr int kFrontLeftDriveMotorId = 7;
-  static constexpr int kFrontLeftSteerMotorId = 8;
-  static constexpr int kFrontLeftEncoderId = 12;
-  static constexpr units::turn_t kFrontLeftEncoderOffset = 0.2080078125_tr;
-  static constexpr bool kFrontLeftSteerMotorInverted = false;
+  static constexpr int kFrontLeftDriveMotorId = 2;
+  static constexpr int kFrontLeftSteerMotorId = 6;
+  static constexpr int kFrontLeftEncoderId = 13;
+  static constexpr units::turn_t kFrontLeftEncoderOffset = 0.0283203125_tr;
+  static constexpr bool kFrontLeftSteerMotorInverted = true;
   static constexpr bool kFrontLeftEncoderInverted = false;
 
-  static constexpr units::inch_t kFrontLeftXPos = 16_in;
-  static constexpr units::inch_t kFrontLeftYPos = 13.5_in;
+  static constexpr units::inch_t kFrontLeftXPos = 11.8125_in;
+  static constexpr units::inch_t kFrontLeftYPos = 11.8125_in;
 
   // Front Right
   static constexpr int kFrontRightDriveMotorId = 1;
-  static constexpr int kFrontRightSteerMotorId = 3;
-  static constexpr int kFrontRightEncoderId = 13;
-  static constexpr units::turn_t kFrontRightEncoderOffset = -0.138916015625_tr;
-  static constexpr bool kFrontRightSteerMotorInverted = false;
+  static constexpr int kFrontRightSteerMotorId = 5;
+  static constexpr int kFrontRightEncoderId = 12;
+  static constexpr units::turn_t kFrontRightEncoderOffset = 0.068115234375_tr;
+  static constexpr bool kFrontRightSteerMotorInverted = true;
   static constexpr bool kFrontRightEncoderInverted = false;
 
-  static constexpr units::inch_t kFrontRightXPos = 16_in;
-  static constexpr units::inch_t kFrontRightYPos = -13.5_in;
+  static constexpr units::inch_t kFrontRightXPos = 11.8125_in;
+  static constexpr units::inch_t kFrontRightYPos = -11.8125_in;
 
   // Back Left
-  static constexpr int kBackLeftDriveMotorId = 5;
-  static constexpr int kBackLeftSteerMotorId = 6;
-  static constexpr int kBackLeftEncoderId = 14;
-  static constexpr units::turn_t kBackLeftEncoderOffset = -0.048583984375_tr;
-  static constexpr bool kBackLeftSteerMotorInverted = false;
+  static constexpr int kBackLeftDriveMotorId = 3;
+  static constexpr int kBackLeftSteerMotorId = 7;
+  static constexpr int kBackLeftEncoderId = 10;
+  static constexpr units::turn_t kBackLeftEncoderOffset = -0.399658203125_tr;
+  static constexpr bool kBackLeftSteerMotorInverted = true;
   static constexpr bool kBackLeftEncoderInverted = false;
 
-  static constexpr units::inch_t kBackLeftXPos = -16_in;
-  static constexpr units::inch_t kBackLeftYPos = 13.5_in;
+  static constexpr units::inch_t kBackLeftXPos = -11.8125_in;
+  static constexpr units::inch_t kBackLeftYPos = 11.8125_in;
 
   // Back Right
-  static constexpr int kBackRightDriveMotorId = 2;
-  static constexpr int kBackRightSteerMotorId = 4;
-  static constexpr int kBackRightEncoderId = 15;
-  static constexpr units::turn_t kBackRightEncoderOffset = 0.2001953125_tr;
-  static constexpr bool kBackRightSteerMotorInverted = false;
+  static constexpr int kBackRightDriveMotorId = 4;
+  static constexpr int kBackRightSteerMotorId = 8;
+  static constexpr int kBackRightEncoderId = 11;
+  static constexpr units::turn_t kBackRightEncoderOffset = 0.0078125_tr;
+  static constexpr bool kBackRightSteerMotorInverted = true;
   static constexpr bool kBackRightEncoderInverted = false;
 
-  static constexpr units::inch_t kBackRightXPos = -16_in;
-  static constexpr units::inch_t kBackRightYPos = -13.5_in;
+  static constexpr units::inch_t kBackRightXPos = -11.8125_in;
+  static constexpr units::inch_t kBackRightYPos = -11.8125_in;
 
 public:
   static constexpr swerve::SwerveModuleConstants FrontLeft =
@@ -223,8 +213,7 @@ public:
 
   /**
    * Creates a CommandSwerveDrivetrain instance.
-   *
-   *  This should only be called once in your robot program.
+   * This should only be called once in your robot program.
    */
   static subsystems::CommandSwerveDrivetrain CreateDrivetrain();
 };
