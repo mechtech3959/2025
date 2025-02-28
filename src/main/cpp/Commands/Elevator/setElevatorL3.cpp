@@ -1,22 +1,14 @@
 #include "commands/Elevator/setElevatorL3.h"
 
-
-setElevatorL3::setElevatorL3(subsystems::Elevator* subsystem) : Elevator(subsystem) {
+setElevatorL3::setElevatorL3(subsystems::Elevator *subsystem)
+    : Elevator(subsystem) {
 
   AddRequirements(subsystem);
-
 }
-
 
 void setElevatorL3::Initialize() {
-//wtv the val is 
+  // wtv the val is
   Elevator->setHeight(48_tr);
-
 }
 
-
-bool setElevatorL3::IsFinished() {
-
-  return true;
-
-}
+bool setElevatorL3::IsFinished() { return true; }
