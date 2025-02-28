@@ -3,7 +3,7 @@
 using namespace subsystems;
 
 Claw::Claw()
-    : intakeMotor{19, rev::spark::SparkMax::MotorType::kBrushless},
+    : feedMotor{30, rev::spark::SparkMax::MotorType::kBrushless},
       axisMotor{20}, axisEncoder{21}, coralSensor{1}, axisMotion{0_deg} {
   axisMotor.GetConfigurator().Apply(axisConfig);
 };
@@ -15,20 +15,23 @@ void Claw::setAxis(units::degree_t angle) {
   (axisMotor.GetMotorOutputStatus().GetValue() == 2) ? state = onTarget
                                                      : state = traveling;
 };
+void Claw::setFeedStop(){
+  feedMotor.Set(0);
+};
 void Claw::setIntake() {
   if (hasCoral(coralSensor) == true) {
     frc::Wait(1_s);
-    intakeMotor.Set(0);
+    feedMotor.Set(0);
   } else {
-    intakeMotor.Set(0.1);
+    feedMotor.Set(0.1);
   };
 };
 void Claw::setOutake() {
-  (hasCoral(coralSensor) == true) ? intakeMotor.Set(0.1) : intakeMotor.Set(0);
+  (hasCoral(coralSensor) == true) ? feedMotor.Set(0.1) : feedMotor.Set(0);
 };
-void Claw::setStaticIntake() { intakeMotor.Set(0.1); };
+void Claw::setStaticIntake() { feedMotor.Set(0.1); };
 // FOR ALGEA
-void Claw::setStaticOuttake() { intakeMotor.Set(-0.5); };
+void Claw::setStaticOuttake() { feedMotor.Set(-0.5); };
 void Claw::sendData() {
   clawLog.axisMotorPose = axisMotor.GetPosition().GetValueAsDouble();
   clawLog.encoderPose = axisEncoder.GetPosition().GetValueAsDouble();

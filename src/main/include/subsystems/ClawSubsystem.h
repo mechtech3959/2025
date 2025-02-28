@@ -10,7 +10,7 @@ namespace subsystems {
 
 class Claw : public frc2::SubsystemBase {
 private:
-  rev::spark::SparkMax intakeMotor;
+  rev::spark::SparkMax feedMotor;
   ctre::phoenix6::hardware::TalonFX axisMotor;
   ctre::phoenix6::hardware::CANcoder axisEncoder;
   frc::DigitalInput coralSensor;
@@ -61,6 +61,7 @@ public:
 
   Claw();
   void clawPeriodic();
+  void setFeedStop();
   void setIntake();
   void setOutake();
   void setStaticIntake();
