@@ -8,7 +8,7 @@ setElevatorL2::setElevatorL2(subsystems::Elevator* subsystem) : Elevator(subsyst
 }
 
 
-void setElevatorL2::Execute() {
+void setElevatorL2::Initialize() {
 //wtv the val is 
   Elevator->setHeight(32_tr);
 

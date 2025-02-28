@@ -29,7 +29,8 @@ class setElevatorL1 : public frc2::CommandHelper<frc2::Command, setElevatorL1> {
 
   explicit setElevatorL1( subsystems::Elevator* subsystem);
 
-
+  void Initialize() override;
+  
   void Execute() override;
 
 

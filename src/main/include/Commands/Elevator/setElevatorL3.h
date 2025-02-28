@@ -1,13 +1,10 @@
 #pragma once
 
-
 #include <frc2/command/Command.h>
 
 #include <frc2/command/CommandHelper.h>
 
-
 #include "subsystems/ElevatorSubsystem.h"
-
 
 /**
 
@@ -25,20 +22,15 @@
 
 class setElevatorL3 : public frc2::CommandHelper<frc2::Command, setElevatorL3> {
 
- public:
+public:
+  explicit setElevatorL3(subsystems::Elevator *subsystem);
 
-  explicit setElevatorL3( subsystems::Elevator* subsystem);
-
+  void Initialize() override;
 
   void Execute() override;
 
-
   bool IsFinished() override;
 
-
- private:
-
-    subsystems::Elevator* Elevator;
-
-
+private:
+  subsystems::Elevator *Elevator;
 };
