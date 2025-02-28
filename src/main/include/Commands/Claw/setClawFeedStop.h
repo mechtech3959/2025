@@ -6,14 +6,15 @@
 
 #include "subsystems/ClawSubsystem.h"
 
-class setClawFeedStop : public frc2::CommandHelper<frc2::Command, setClawFeedStop> {
+class setClawFeedStop
+    : public frc2::CommandHelper<frc2::Command, setClawFeedStop> {
 
 public:
   explicit setClawFeedStop(subsystems::Claw *subsystem);
 
   void Initialize() override;
 
-  void Execute() override;
+  // void Execute() override;
 
   bool IsFinished() override;
 

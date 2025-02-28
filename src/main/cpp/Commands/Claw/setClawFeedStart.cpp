@@ -1,22 +1,11 @@
 #include "commands/Claw/setClawFeedStart.h"
 
-
-setClawFeedStart::setClawFeedStart(subsystems::Claw* subsystem) : Claw(subsystem) {
+setClawFeedStart::setClawFeedStart(subsystems::Claw *subsystem)
+    : Claw(subsystem) {
 
   AddRequirements(subsystem);
-
 }
 
+void setClawFeedStart::Initialize() { Claw->setIntake(); }
 
-void setClawFeedStart::Initialize() {
-
-  Claw->setIntake();
-
-}
-
-
-bool setClawFeedStart::IsFinished() {
-
-  return true;
-
-}
+bool setClawFeedStart::IsFinished() { return true; }
