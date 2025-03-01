@@ -1,4 +1,4 @@
-#include "commands/Elevator/setElevatorL2.h"
+#include "Commands/Elevator/setElevatorL2.h"
 
 setElevatorL2::setElevatorL2(subsystems::Elevator *subsystem)
     : Elevator(subsystem) {

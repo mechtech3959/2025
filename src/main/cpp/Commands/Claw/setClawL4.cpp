@@ -1,4 +1,4 @@
-#include "commands/Claw/setClawL4.h"
+#include "Commands/Claw/setClawL4.h"
 
 setClawL4::setClawL4(subsystems::Claw *subsystem) : Claw(subsystem) {
 

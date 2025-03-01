@@ -1,4 +1,4 @@
-#include "commands/Claw/setClawAlgea.h"
+#include "Commands/Claw/setClawAlgea.h"
 
 setClawAlgea::setClawAlgea(subsystems::Claw *subsystem) : Claw(subsystem) {
 

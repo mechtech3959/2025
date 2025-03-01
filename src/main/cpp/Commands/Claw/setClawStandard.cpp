@@ -1,4 +1,4 @@
-#include "commands/Claw/setClawStandard.h"
+#include "Commands/Claw/setClawStandard.h"
 
 setClawStandard::setClawStandard(subsystems::Claw *subsystem)
     : Claw(subsystem) {

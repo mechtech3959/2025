@@ -1,4 +1,4 @@
-#include "commands/Claw/setClawFeedStart.h"
+#include "Commands/Claw/setClawFeedStart.h"
 
 setClawFeedStart::setClawFeedStart(subsystems::Claw *subsystem)
     : Claw(subsystem) {
