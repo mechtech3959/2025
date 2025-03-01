@@ -4,9 +4,11 @@ using namespace subsystems;
 
 LimeLight::LimeLight(std::string NTname) {
   name = NTname;
-  limelight = nt::NetworkTableInstance::GetDefault().GetTable(name);
+  limelight = nt::NetworkTableInstance::GetDefault().GetTable(NTname);
 };
 void LimeLight::updateTracking() {
+  timestamp = LimelightHelpers::getBotPoseEstimate_wpiBlue_MegaTag2(name)
+                  ->timestampSeconds;
   tx = LimelightHelpers::getTX(name);
   ty = LimelightHelpers::getTY(name);
   ta = LimelightHelpers::getTA(name);
@@ -25,6 +27,7 @@ void LimeLight::updateTracking() {
     drivecmd = ta;
   }
 };
+
 frc::Pose2d LimeLight::poseEst() {
   if (LLHasTarget && (tx < 0.1 || tx > -0.1)) {
     std::optional<LimelightHelpers::PoseEstimate> posEst =
@@ -34,5 +37,5 @@ frc::Pose2d LimeLight::poseEst() {
     return p;
   }
 };
-void LimeLight::limelightPeriodic(){};
+void LimeLight::limelightPeriodic() {};
 // LimeLight::Register();

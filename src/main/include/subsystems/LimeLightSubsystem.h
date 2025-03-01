@@ -15,11 +15,12 @@ private:
     return in;
   };
   double tx, ty, ta, tv;
+  std::string name;
 
 public:
   void limelightPeriodic();
-  std::string name;
   double drivecmd, turncmd, distance;
+  units::time::second_t timestamp;
   bool LLHasTarget;
   LimeLight(std::string NTname);
   void updateTracking();

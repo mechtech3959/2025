@@ -8,7 +8,13 @@
 
 Robot::Robot() {}
 
-void Robot::RobotPeriodic() { frc2::CommandScheduler::GetInstance().Run(); }
+void Robot::RobotPeriodic() {
+  frc2::CommandScheduler::GetInstance().Run();
+  m_container.frontLimeLight.updateTracking();
+  m_container.frontLimeLight.poseEst();
+  m_container.backLimeLight.updateTracking();
+  m_container.backLimeLight.poseEst();
+}
 
 void Robot::DisabledInit() {}
 
@@ -35,7 +41,7 @@ void Robot::TeleopInit() {
   }
 }
 
-void Robot::TeleopPeriodic() { m_container.frontLimeLight.updateTracking(); }
+void Robot::TeleopPeriodic() {}
 
 void Robot::TeleopExit() {}
 
