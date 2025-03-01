@@ -22,9 +22,9 @@ private:
       ctre::phoenix6::configs::Slot0Configs{}
           .WithGravityType(
               ctre::phoenix6::signals::GravityTypeValue::Elevator_Static)
-          .WithKP(5)
+          .WithKP(0.5)
           .WithKI(2)
-          .WithKD(1)
+          .WithKD(1).WithKS(0.4).WithKG(0.3).WithKV(0.001)
           .WithStaticFeedforwardSign(
               ctre::phoenix6::signals::StaticFeedforwardSignValue::
                   UseClosedLoopSign);
@@ -39,7 +39,7 @@ private:
       ctre::phoenix6::configs::FeedbackConfigs{}
           .WithRotorToSensorRatio(4)
           .WithSensorToMechanismRatio(12)
-          .WithFeedbackRemoteSensorID(23);
+          .WithFeedbackRemoteSensorID(9);
   ctre::phoenix6::configs::TalonFXConfiguration elevatorConfigs =
       ctre::phoenix6::configs::TalonFXConfiguration{}
           .WithSlot0(slot)
