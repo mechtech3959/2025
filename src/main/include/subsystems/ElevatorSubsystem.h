@@ -13,9 +13,9 @@ namespace subsystems {
 
 class Elevator : public frc2::SubsystemBase {
 private:
-  ctre::phoenix6::hardware::TalonFX masterM{22};
-  ctre::phoenix6::hardware::TalonFX slaveM{23};
-  ctre::phoenix6::hardware::CANcoder elevatorEncoder{23};
+  ctre::phoenix6::hardware::TalonFX masterM{19};
+  ctre::phoenix6::hardware::TalonFX slaveM{20};
+  ctre::phoenix6::hardware::CANcoder elevatorEncoder{9};
   ctre::phoenix6::controls::MotionMagicExpoTorqueCurrentFOC elevatorMotion{
       0_tr};
   ctre::phoenix6::configs::Slot0Configs slot =
@@ -45,7 +45,7 @@ private:
           .WithSlot0(slot)
           .WithMotionMagic(magicMotionConfigs)
           .WithCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs{}
-                                 .WithStatorCurrentLimit(10_A)
+                                 .WithStatorCurrentLimit(20_A)
                                  .WithStatorCurrentLimitEnable(true))
           .WithFeedback(fbConfigs);
 
