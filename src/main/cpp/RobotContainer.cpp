@@ -14,8 +14,10 @@ RobotContainer::RobotContainer() {
 void RobotContainer::ConfigureBindings() {
   frontLimeLight.updateTracking();
   backLimeLight.updateTracking();
-  drivetrain.AddVisionMeasurement(frontLimeLight.poseEst(),frontLimeLight.timestamp);
-  drivetrain.AddVisionMeasurement(backLimeLight.poseEst(), backLimeLight.timestamp);
+  drivetrain.AddVisionMeasurement(frontLimeLight.poseEst(),
+                                  frontLimeLight.timestamp);
+  drivetrain.AddVisionMeasurement(backLimeLight.poseEst(),
+                                  backLimeLight.timestamp);
   // Note that X is defined as forward according to WPILib convention,
   // and Y is defined as to the left according to WPILib convention.
   drivetrain.SetDefaultCommand(

@@ -24,7 +24,10 @@ private:
               ctre::phoenix6::signals::GravityTypeValue::Elevator_Static)
           .WithKP(0.5)
           .WithKI(2)
-          .WithKD(1).WithKS(0.4).WithKG(0.3).WithKV(0.001)
+          .WithKD(1)
+          .WithKS(0.4)
+          .WithKG(0.3)
+          .WithKV(0.001)
           .WithStaticFeedforwardSign(
               ctre::phoenix6::signals::StaticFeedforwardSignValue::
                   UseClosedLoopSign);
