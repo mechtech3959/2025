@@ -19,10 +19,10 @@ private:
       ctre::phoenix6::configs::Slot0Configs{}
           .WithKS(0.3)
           .WithKA(0)
-          .WithKD(0.50)
+          //.WithKD(0.50)
           .WithKG(0)
           .WithKI(0)
-          .WithKV(0.0)
+          .WithKV(0.001)
           .WithKP(10)
           .WithGravityType(
               ctre::phoenix6::signals::GravityTypeValue::Arm_Cosine)
@@ -32,7 +32,7 @@ private:
 
   ctre::phoenix6::configs::FeedbackConfigs axisFeedback =
       ctre::phoenix6::configs::FeedbackConfigs{}
-          .WithFeedbackRemoteSensorID(21)
+          .WithFeedbackRemoteSensorID(15)
           .WithFeedbackSensorSource(
               ctre::phoenix6::signals::FeedbackSensorSourceValue::FusedCANcoder)
           .WithRotorToSensorRatio(16.0)
@@ -40,10 +40,10 @@ private:
   ctre::phoenix6::configs::TalonFXConfiguration axisConfig =
       ctre::phoenix6::configs::TalonFXConfiguration{}
           .WithSlot0(axisSlot)
-          .WithFeedback(axisFeedback)
+          .WithFeedback(axisFeedback).WithMotorOutput(ctre::phoenix6::configs::MotorOutputConfigs{}.WithInverted(0).WithNeutralMode(1))
           .WithMotionMagic(ctre::phoenix6::configs::MotionMagicConfigs{}
-                               .WithMotionMagicCruiseVelocity(1_tps)
-                               .WithMotionMagicAcceleration(1_tr_per_s_sq)
+                               .WithMotionMagicCruiseVelocity(50_tps)
+                               .WithMotionMagicAcceleration(50_tr_per_s_sq)
                                .WithMotionMagicJerk(1600_tr_per_s_cu))
           .WithCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs{}
                                  .WithStatorCurrentLimit(10_A)
