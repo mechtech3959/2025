@@ -40,7 +40,10 @@ private:
   ctre::phoenix6::configs::TalonFXConfiguration axisConfig =
       ctre::phoenix6::configs::TalonFXConfiguration{}
           .WithSlot0(axisSlot)
-          .WithFeedback(axisFeedback).WithMotorOutput(ctre::phoenix6::configs::MotorOutputConfigs{}.WithInverted(0).WithNeutralMode(1))
+          .WithFeedback(axisFeedback)
+          .WithMotorOutput(ctre::phoenix6::configs::MotorOutputConfigs{}
+                               .WithInverted(0)
+                               .WithNeutralMode(1))
           .WithMotionMagic(ctre::phoenix6::configs::MotionMagicConfigs{}
                                .WithMotionMagicCruiseVelocity(50_tps)
                                .WithMotionMagicAcceleration(50_tr_per_s_sq)
@@ -48,6 +51,11 @@ private:
           .WithCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs{}
                                  .WithStatorCurrentLimit(10_A)
                                  .WithStatorCurrentLimitEnable(true));
+  ctre::phoenix6::configs::CANcoderConfiguration encoderConfigs =
+      ctre::phoenix6::configs::CANcoderConfiguration{}.WithMagnetSensor(
+          ctre::phoenix6::configs::MagnetSensorConfigs{}
+              .WithSensorDirection(0)
+              .WithAbsoluteSensorDiscontinuityPoint(0.5_tr));
 
 public:
   const units::degree_t L123 = 0_deg;
