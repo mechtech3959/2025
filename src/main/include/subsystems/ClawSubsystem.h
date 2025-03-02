@@ -19,9 +19,9 @@ private:
       ctre::phoenix6::configs::Slot0Configs{}
           .WithKS(0.3)
           .WithKA(0)
-          //.WithKD(0.50)
           .WithKG(0)
           .WithKI(0)
+          .WithKD(0)
           .WithKV(0.001)
           .WithKP(10)
           .WithGravityType(

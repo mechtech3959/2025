@@ -5,6 +5,9 @@ using namespace subsystems;
 Claw::Claw()
     : feedMotor{30, rev::spark::SparkMax::MotorType::kBrushless}, axisMotor{14},
       axisEncoder{15}, coralSensor{1}, axisMotion{0_deg} {
+  axisMotor.SetPosition(0_deg);
+  axisEncoder.SetPosition(0_deg);
+  axisEncoder.GetConfigurator().Apply(encoderConfigs);
   axisMotor.GetConfigurator().Apply(axisConfig);
 };
 
