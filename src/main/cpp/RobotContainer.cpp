@@ -12,7 +12,7 @@ RobotContainer::RobotContainer() {
 }
 
 void RobotContainer::ConfigureBindings() {
-  frontLimeLight.updateTracking();
+ /* frontLimeLight.updateTracking();
   backLimeLight.updateTracking();
   drivetrain.AddVisionMeasurement(frontLimeLight.poseEst(),
                                   frontLimeLight.timestamp);
@@ -67,7 +67,10 @@ void RobotContainer::ConfigureBindings() {
       [this](auto const &state) { logger.Telemeterize(state); });
   logger.subsystemTelemeterize(subsystemClaw.clawLog,
                                subsystemElevator.elevatorLog);
+*/
+//joystick.A().ToggleOnTrue(subsystemElevator.RunOnce([this]{subsystemElevator}));
 }
+
 void RobotContainer::ConfigureDashboard() {
   frc::SmartDashboard::PutData("autochooser", &paths);
   // frc::SmartDashboard::PutNumberArray("LL pose",
