@@ -6,6 +6,6 @@ setClawStandard::setClawStandard(subsystems::Claw *subsystem)
   AddRequirements(subsystem);
 }
 
-void setClawStandard::Initialize() { Claw->setAxis(0_deg); }
+void setClawStandard::Initialize() { Claw->setAxis(30_deg); }
 
 bool setClawStandard::IsFinished() { return true; }
