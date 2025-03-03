@@ -17,6 +17,7 @@
 #include <pathplanner/lib/auto/AutoBuilder.h>
 #include <pathplanner/lib/commands/PathPlannerAuto.h>
 #include <pathplanner/lib/path/PathPlannerPath.h>
+#include "Commands/ScoreL3.h"
 class RobotContainer {
 private:
   units::meters_per_second_t MaxSpeed =
@@ -47,6 +48,7 @@ private:
   frc2::CommandXboxController joystick{0};
 
 public:
+  ScoreL3 L3;
   subsystems::Claw subsystemClaw;
   subsystems::Elevator subsystemElevator;
   subsystems::CommandSwerveDrivetrain drivetrain{

@@ -69,6 +69,8 @@ void RobotContainer::ConfigureBindings() {
                                subsystemElevator.elevatorLog);
 */
 //joystick.A().ToggleOnTrue(subsystemElevator.RunOnce([this]{subsystemElevator}));
+// this might work maybe lol
+frc2::cmd::RunOnce([this]{L3;});
 }
 
 void RobotContainer::ConfigureDashboard() {
