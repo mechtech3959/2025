@@ -13,6 +13,7 @@
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc2/command/CommandPtr.h>
+#include <frc2/command/Command.h>
 #include <frc2/command/button/CommandXboxController.h>
 #include <pathplanner/lib/auto/AutoBuilder.h>
 #include <pathplanner/lib/commands/PathPlannerAuto.h>
@@ -48,9 +49,9 @@ private:
   frc2::CommandXboxController joystick{0};
 
 public:
-  ScoreL3 L3;
   subsystems::Claw subsystemClaw;
   subsystems::Elevator subsystemElevator;
+    ScoreL3 L3{&subsystemClaw,&subsystemElevator};
   subsystems::CommandSwerveDrivetrain drivetrain{
       TunerConstants::CreateDrivetrain()};
 

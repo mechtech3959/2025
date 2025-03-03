@@ -68,9 +68,7 @@ void RobotContainer::ConfigureBindings() {
   logger.subsystemTelemeterize(subsystemClaw.clawLog,
                                subsystemElevator.elevatorLog);
 */
-//joystick.A().ToggleOnTrue(subsystemElevator.RunOnce([this]{subsystemElevator}));
-// this might work maybe lol
-frc2::cmd::RunOnce([this]{L3;});
+frc2::cmd::RunOnce([this]{ L3.Schedule();});
 }
 
 void RobotContainer::ConfigureDashboard() {

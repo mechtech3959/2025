@@ -14,5 +14,5 @@ class ScoreL3
     : public frc2::CommandHelper<frc2::ParallelCommandGroup, ScoreL3> {
 
 public:
-  explicit ScoreL3(setClawStandard *claw, setElevatorL3 *elevator);
+   ScoreL3(subsystems::Claw *claw, subsystems::Elevator *elevator);
 };
