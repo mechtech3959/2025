@@ -13,6 +13,10 @@ Elevator::Elevator() {
 void Elevator::setHeight(units::turn_t pos) {
   masterM.SetControl(elevatorMotion.WithPosition(pos));
 }
+bool Elevator::isAtTarget(){
+  //auto t = masterM.GetAppliedControl()->GetControlInfo();
+return true;
+}
 void Elevator::sendData() {
   elevatorLog.masterPose = masterM.GetPosition().GetValueAsDouble();
   elevatorLog.slavePose = slaveM.GetPosition().GetValueAsDouble();

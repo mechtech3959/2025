@@ -35,21 +35,25 @@ private:
   // https://v6.docs.ctr-electronics.com/en/2024/docs/api-reference/device-specific/talonfx/motion-magic.html
   ctre::phoenix6::configs::MotionMagicConfigs magicMotionConfigs =
       ctre::phoenix6::configs::MotionMagicConfigs{}
-          .WithMotionMagicJerk(500_tr_per_s_cu)
-          .WithMotionMagicCruiseVelocity(4_tps)
-          .WithMotionMagicAcceleration(8_tr_per_s_sq);
+          .WithMotionMagicJerk(2000_tr_per_s_cu)
+          .WithMotionMagicCruiseVelocity(40_tps)
+          .WithMotionMagicAcceleration(80_tr_per_s_sq);
   ctre::phoenix6::configs::FeedbackConfigs fbConfigs =
       ctre::phoenix6::configs::FeedbackConfigs{}
           .WithRotorToSensorRatio(4)
-          .WithSensorToMechanismRatio(12)
+          .WithSensorToMechanismRatio(1)
           .WithFeedbackRemoteSensorID(9);
   ctre::phoenix6::configs::TalonFXConfiguration elevatorConfigs =
       ctre::phoenix6::configs::TalonFXConfiguration{}
           .WithSlot0(slot)
-          .WithMotionMagic(magicMotionConfigs)
+          .WithMotionMagic(magicMotionConfigs).WithMotorOutput(ctre::phoenix6::configs::MotorOutputConfigs{}
+                               .WithInverted(0)
+                               .WithNeutralMode(1))
           .WithCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs{}
-                                 .WithStatorCurrentLimit(20_A)
-                                 .WithStatorCurrentLimitEnable(true))
+                                 .WithSupplyCurrentLimit(60_A)
+                                 .WithSupplyCurrentLowerLimit(30_A)
+                                 .WithSupplyCurrentLowerTime(1_s)
+                                 .WithSupplyCurrentLimitEnable(true))
           .WithFeedback(fbConfigs);
 
   ctre::phoenix6::configs::CANcoderConfiguration encoderConfigs =
@@ -74,6 +78,7 @@ public:
   ElevatorState elevatorLog;
   Elevator();
   void setHeight(units::turn_t pos);
+  bool isAtTarget();
   void sendData();
 };
 } // namespace subsystems
