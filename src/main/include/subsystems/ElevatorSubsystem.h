@@ -60,6 +60,7 @@ private:
       ctre::phoenix6::configs::CANcoderConfiguration{};
 
 public:
+units::angle::turn_t target = 0_tr;
   // inches, measurements are relative to the floor
 
   units::inch_t Zero = 0_in;

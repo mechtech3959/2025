@@ -12,10 +12,14 @@ Elevator::Elevator() {
 // hypothetical 1 rotation = 6inches? 8:1 ratio
 void Elevator::setHeight(units::turn_t pos) {
   masterM.SetControl(elevatorMotion.WithPosition(pos));
+  target = pos;
 }
-bool Elevator::isAtTarget(){
-  //auto t = masterM.GetAppliedControl()->GetControlInfo();
-return true;
+bool Elevator::isAtTarget() {
+  if (masterM.GetPosition().GetValue() == target) {
+    return true;
+  } else {
+    return false;
+  };
 }
 void Elevator::sendData() {
   elevatorLog.masterPose = masterM.GetPosition().GetValueAsDouble();
