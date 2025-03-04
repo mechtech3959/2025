@@ -68,7 +68,7 @@ void RobotContainer::ConfigureBindings() {
   logger.subsystemTelemeterize(subsystemClaw.clawLog,
                                subsystemElevator.elevatorLog);
 */
-frc2::cmd::RunOnce([this]{ L3.Schedule();});
+ L3.Initialize();
 }
 
 void RobotContainer::ConfigureDashboard() {
