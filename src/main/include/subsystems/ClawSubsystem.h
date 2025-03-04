@@ -41,6 +41,12 @@ private:
       ctre::phoenix6::configs::TalonFXConfiguration{}
           .WithSlot0(axisSlot)
           .WithFeedback(axisFeedback)
+          .WithSoftwareLimitSwitch(
+              ctre::phoenix6::configs::SoftwareLimitSwitchConfigs{}
+                  .WithForwardSoftLimitThreshold(180_deg)
+                  .WithForwardSoftLimitEnable(true)
+                  .WithReverseSoftLimitThreshold(0_deg)
+                  .WithReverseSoftLimitEnable(true))
           .WithMotorOutput(ctre::phoenix6::configs::MotorOutputConfigs{}
                                .WithInverted(0)
                                .WithNeutralMode(1))
@@ -49,8 +55,8 @@ private:
                                .WithMotionMagicAcceleration(50_tr_per_s_sq)
                                .WithMotionMagicJerk(1600_tr_per_s_cu))
           .WithCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs{}
-                                 .WithStatorCurrentLimit(10_A)
-                                 .WithStatorCurrentLimitEnable(true));
+                                 .WithSupplyCurrentLimit(10_A)
+                                 .WithSupplyCurrentLimitEnable(true));
   ctre::phoenix6::configs::CANcoderConfiguration encoderConfigs =
       ctre::phoenix6::configs::CANcoderConfiguration{}.WithMagnetSensor(
           ctre::phoenix6::configs::MagnetSensorConfigs{}
