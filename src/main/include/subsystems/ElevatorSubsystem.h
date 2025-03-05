@@ -63,13 +63,13 @@ public:
 units::angle::turn_t target = 0_tr;
   // inches, measurements are relative to the floor
 
-  units::inch_t Zero = 0_in;
-  units::inch_t Barge = 62_in;     // 101
-  units::inch_t Processor = 15_in; // top =27 bottom is 7 ,
-  units::inch_t L1 = 18_in;
-  units::inch_t L2 = 31_in; // 31.875,
-  units::inch_t L3 = 48_in; // 47.625
-  units::inch_t L4 = 62_in; // 72
+  units::inch_t Zero = 0_in; 
+  units::inch_t Barge = 62_in;     // 101 / 5.166666666666667 tr
+  units::inch_t Processor = 15_in; // top =27 bottom is 7 ,1.25tr
+  units::inch_t L1 = 18_in; // 1.5 tr
+  units::inch_t L2 = 32_in; // 31.875, / 2.666666666666667 tr
+  units::inch_t L3 = 48_in; // 47.625 / 4 tr
+  units::inch_t L4 = 62_in; // 72 / 5.166666666666667 tr
 
   enum State {
     Traveling,

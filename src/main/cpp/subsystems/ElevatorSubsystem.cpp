@@ -15,6 +15,7 @@ void Elevator::setHeight(units::turn_t pos) {
   target = pos;
 }
 bool Elevator::isAtTarget() {
+  auto m = units::inch_t{elevatorEncoder.GetPosition().GetValueAsDouble()*12};
   if (masterM.GetPosition().GetValue() == target) {
     return true;
   } else {
