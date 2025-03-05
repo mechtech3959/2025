@@ -73,6 +73,12 @@ void RobotContainer::ConfigureBindings() {
   joystick.A().WhileTrue(subsystemClaw.SysIdDynamic(frc2::sysid::kReverse));
   joystick.Y().WhileTrue(subsystemClaw.SysIdQuasistatic(frc2::sysid::kForward));
   joystick.X().WhileTrue(subsystemClaw.SysIdQuasistatic(frc2::sysid::kReverse));
+/*
+  joystick.B().WhileTrue(subsystemElevator.SysIdDynamic(frc2::sysid::kForward));
+  joystick.A().WhileTrue(subsystemElevator.SysIdDynamic(frc2::sysid::kReverse));
+  joystick.Y().WhileTrue(subsystemElevator.SysIdQuasistatic(frc2::sysid::kForward));
+  joystick.X().WhileTrue(subsystemElevator.SysIdQuasistatic(frc2::sysid::kReverse));
+  */
 }
 
 void RobotContainer::ConfigureDashboard() {
