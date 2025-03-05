@@ -19,6 +19,7 @@
 #include <pathplanner/lib/commands/PathPlannerAuto.h>
 #include <pathplanner/lib/path/PathPlannerPath.h>
 #include "Commands/ScoreL3.h"
+#include "Commands/Claw/setClawIntake.h"
 class RobotContainer {
 private:
   units::meters_per_second_t MaxSpeed =
@@ -52,6 +53,7 @@ public:
   subsystems::Claw subsystemClaw;
   subsystems::Elevator subsystemElevator;
     ScoreL3 L3{&subsystemClaw,&subsystemElevator};
+    setClawIntake smartIntake{&subsystemClaw};
   subsystems::CommandSwerveDrivetrain drivetrain{
       TunerConstants::CreateDrivetrain()};
 
