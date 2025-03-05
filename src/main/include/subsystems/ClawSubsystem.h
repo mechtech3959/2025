@@ -71,6 +71,7 @@ public:
   enum states { traveling, onTarget };
   states state;
   ClawState clawLog;
+  bool endIntake = false;
 
   Claw();
   void clawPeriodic();

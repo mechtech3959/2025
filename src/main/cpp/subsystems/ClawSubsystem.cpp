@@ -23,12 +23,14 @@ void Claw::setIntake() {
   if (hasCoral() == 1) {
     frc::Wait(1_s);
     feedMotor.Set(0);
+    endIntake = true;
   } else {
     feedMotor.Set(0.5);
   };
 };
 void Claw::setOutake() {
-  (hasCoral() == 1) ? feedMotor.Set(-0.1) : feedMotor.Set(0);
+  (hasCoral() == 1) ? feedMotor.Set(0.1) : feedMotor.Set(0);
+  endIntake = false;
 };
 void Claw::setStaticIntake() { feedMotor.Set(0.1); };
 // FOR ALGEA
