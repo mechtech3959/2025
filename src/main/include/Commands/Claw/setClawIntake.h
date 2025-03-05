@@ -16,6 +16,8 @@ public:
 
   // void Execute() override;
 
+  void End() override;
+
   bool IsFinished() override;
 
 private:
