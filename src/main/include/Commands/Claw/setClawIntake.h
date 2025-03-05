@@ -16,7 +16,7 @@ public:
 
   // void Execute() override;
 
-  void End() override;
+  void End();
 
   bool IsFinished() override;
 
