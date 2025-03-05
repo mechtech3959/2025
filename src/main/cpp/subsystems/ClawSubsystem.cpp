@@ -4,7 +4,7 @@ using namespace subsystems;
 
 Claw::Claw()
     : feedMotor{30, rev::spark::SparkMax::MotorType::kBrushless}, axisMotor{14},
-      axisEncoder{15}, coralSensor{1}, axisMotion{0_deg} {
+      axisEncoder{15},axisMotion{0_deg} {
   axisMotor.SetPosition(0_deg);
   axisEncoder.SetPosition(0_deg);
   axisEncoder.GetConfigurator().Apply(encoderConfigs);
@@ -20,15 +20,15 @@ void Claw::setAxis(units::degree_t angle) {
 };
 void Claw::setFeedStop() { feedMotor.Set(0); };
 void Claw::setIntake() {
-  if (hasCoral(coralSensor) == true) {
+  if (hasCoral() == 1) {
     frc::Wait(1_s);
     feedMotor.Set(0);
   } else {
-    feedMotor.Set(0.1);
+    feedMotor.Set(0.5);
   };
 };
 void Claw::setOutake() {
-  (hasCoral(coralSensor) == true) ? feedMotor.Set(0.1) : feedMotor.Set(0);
+  (hasCoral() == 1) ? feedMotor.Set(-0.1) : feedMotor.Set(0);
 };
 void Claw::setStaticIntake() { feedMotor.Set(0.1); };
 // FOR ALGEA
@@ -40,9 +40,9 @@ void Claw::sendData() {
   // CHECK
   clawLog.currentAngle =
       axisEncoder.GetAbsolutePosition().GetValueAsDouble() * 360;
-  clawLog.coralDetected = hasCoral(coralSensor);
+  clawLog.coralDetected = hasCoral();
 };
-bool Claw::hasCoral(frc::DigitalInput &input) {
-  return ((input.Get() == 1) ? false : true);
+bool Claw::hasCoral() {
+  return(feedMotor.GetAnalog().GetVoltage() < 1 )? 1 :0;
 };
-void Claw::clawPeriodic() { hasCoral(coralSensor); };
+void Claw::clawPeriodic() { hasCoral(); };

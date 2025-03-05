@@ -13,7 +13,6 @@ private:
   rev::spark::SparkMax feedMotor;
   ctre::phoenix6::hardware::TalonFX axisMotor;
   ctre::phoenix6::hardware::CANcoder axisEncoder;
-  frc::DigitalInput coralSensor;
   ctre::phoenix6::controls::MotionMagicVoltage axisMotion;
   ctre::phoenix6::configs::Slot0Configs axisSlot =
       ctre::phoenix6::configs::Slot0Configs{}
@@ -82,7 +81,7 @@ public:
   void setStaticOuttake();
   void setAxis(units::degree_t angle);
   void sendData();
-  bool hasCoral(frc::DigitalInput &input);
+  bool hasCoral();
 };
 
 } // namespace subsystems
