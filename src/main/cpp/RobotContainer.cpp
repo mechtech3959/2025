@@ -81,10 +81,11 @@ void RobotContainer::ConfigureBindings() {
   joystick.Y().WhileTrue(subsystemElevator.SysIdQuasistatic(frc2::sysid::kForward));
   joystick.X().WhileTrue(subsystemElevator.SysIdQuasistatic(frc2::sysid::kReverse));
   */
+  joystick.X().OnTrue(&smartIntake);
+
 }
 
 void RobotContainer::ConfigureDashboard() {
-     joystick.X().WhileTrue(&smartIntake);
 
  // frc::SmartDashboard::PutData("autochooser", &paths);
   // frc::SmartDashboard::PutNumberArray("LL pose",

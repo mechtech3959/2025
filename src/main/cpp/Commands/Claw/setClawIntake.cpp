@@ -7,20 +7,17 @@ setClawIntake::setClawIntake(subsystems::Claw *subsystem) : Claw(subsystem) {
 
 void setClawIntake::Initialize() {
   Claw->setAxis(0_deg);
+  Claw->percentOut(-0.2);
  
 }
 void setClawIntake::Execute(){ 
    Claw->clawPeriodic();
 
- if (Claw->hasCoral() != true) {
-    Claw->percentOut(-0.2);
-  } else {
-    Claw->percentOut(0);
-    Claw->endIntake = true;
-  };
+
 }
-void setClawIntake::End() { Claw->setAxis(30_deg); }
+void setClawIntake::End() { 
+  Claw ->percentOut(0);
+  Claw->setAxis(30_deg); }
 bool setClawIntake::IsFinished() {
-  if (Claw->endIntake == true)
-    return true;
+return Claw->hasCoral();
 }
