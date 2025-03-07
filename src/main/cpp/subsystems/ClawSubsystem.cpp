@@ -3,8 +3,8 @@
 using namespace subsystems;
 
 Claw::Claw()
-    : feedMotor{30, rev::spark::SparkMax::MotorType::kBrushless}, axisMotor{14},
-      axisEncoder{15},axisMotion{0_deg} {
+    : feedMotor{30, rev::spark::SparkMax::MotorType::kBrushless}, axisMotor{14,"CanBus"},
+      axisEncoder{15,"CanBus"},axisMotion{0_deg} {
   axisMotor.SetPosition(0_deg);
   axisEncoder.SetPosition(0_deg);
   axisEncoder.GetConfigurator().Apply(encoderConfigs);
@@ -20,18 +20,21 @@ void Claw::setAxis(units::degree_t angle) {
 };
 void Claw::setFeedStop() { feedMotor.Set(0); };
 void Claw::setIntake() {
-  if (hasCoral() == 1) {
-    frc::Wait(1_s);
+  if (crl == true) {
+   // frc::Wait(0.3_s);
     feedMotor.Set(0);
     endIntake = true;
   } else {
-    feedMotor.Set(0.5);
+    feedMotor.Set(-0.2);
   };
 };
 void Claw::setOutake() {
   (hasCoral() == 1) ? feedMotor.Set(0.1) : feedMotor.Set(0);
   endIntake = false;
 };
+void Claw::percentOut(double s){
+  feedMotor.Set(s);
+}
 void Claw::setStaticIntake() { feedMotor.Set(0.1); };
 // FOR ALGEA
 void Claw::setStaticOuttake() { feedMotor.Set(-0.5); };
@@ -45,6 +48,16 @@ void Claw::sendData() {
   clawLog.coralDetected = hasCoral();
 };
 bool Claw::hasCoral() {
-  return(feedMotor.GetAnalog().GetVoltage() < 1 )? 1 :0;
+  bool val;
+   if(feedMotor.GetAnalog().GetVoltage() >= 2.9){val = true;}
+   else{val = false;};
+   crl = val;
+   return val;
 };
-void Claw::clawPeriodic() { hasCoral(); };
+void Claw::clawPeriodic() { 
+  hasCoral();
+  frc::SmartDashboard::PutBoolean("in", crl);
+  frc::SmartDashboard::PutNumber("sensorV",feedMotor.GetAnalog().GetVoltage());
+frc::SmartDashboard::PutNumber("c",feedMotor.GetBusVoltage());
+
+ };

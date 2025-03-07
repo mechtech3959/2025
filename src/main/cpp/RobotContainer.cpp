@@ -7,8 +7,8 @@
 
 RobotContainer::RobotContainer() {
   ConfigureBindings();
-  ConfigureDashboard();
-  GetStartingPose();
+ // ConfigureDashboard();
+//  GetStartingPose();
 }
 
 void RobotContainer::ConfigureBindings() {
@@ -68,12 +68,14 @@ void RobotContainer::ConfigureBindings() {
   // logger.subsystemTelemeterize(subsystemClaw.clawLog,
   //                            subsystemElevator.elevatorLog);
 
-  // joystick.X().OnTrue(&smartIntake);
+   //joystick.X().WhileTrue(&smartIntake);
+   
+  /*
   joystick.B().WhileTrue(subsystemClaw.SysIdDynamic(frc2::sysid::kForward));
   joystick.A().WhileTrue(subsystemClaw.SysIdDynamic(frc2::sysid::kReverse));
   joystick.Y().WhileTrue(subsystemClaw.SysIdQuasistatic(frc2::sysid::kForward));
   joystick.X().WhileTrue(subsystemClaw.SysIdQuasistatic(frc2::sysid::kReverse));
-/*
+
   joystick.B().WhileTrue(subsystemElevator.SysIdDynamic(frc2::sysid::kForward));
   joystick.A().WhileTrue(subsystemElevator.SysIdDynamic(frc2::sysid::kReverse));
   joystick.Y().WhileTrue(subsystemElevator.SysIdQuasistatic(frc2::sysid::kForward));
@@ -82,10 +84,13 @@ void RobotContainer::ConfigureBindings() {
 }
 
 void RobotContainer::ConfigureDashboard() {
-  frc::SmartDashboard::PutData("autochooser", &paths);
+     joystick.X().WhileTrue(&smartIntake);
+
+ // frc::SmartDashboard::PutData("autochooser", &paths);
   // frc::SmartDashboard::PutNumberArray("LL pose",
   // [visionEstimate.X().value(),visionEstimate.Y().value()]);
 }
+/*
 void RobotContainer::GetStartingPose() {
   auto pathName = paths.GetSelected();
   const frc::Pose2d pose =
@@ -96,3 +101,4 @@ void RobotContainer::GetStartingPose() {
 frc2::Command *RobotContainer::GetAutonomousCommand() {
   return paths.GetSelected();
 }
+*/

@@ -75,6 +75,7 @@ public:
   states state;
   ClawState clawLog;
   bool endIntake = false;
+  bool crl;
 frc2::sysid::SysIdRoutine m_sysIdRoutine_Claw{
       frc2::sysid::Config{
           std::nullopt, // Use default ramp rate (1 V/s)
@@ -107,6 +108,7 @@ frc2::CommandPtr SysIdDynamic(frc2::sysid::Direction direction)
   void setOutake();
   void setStaticIntake();
   void setStaticOuttake();
+  void percentOut(double s);
   void setAxis(units::degree_t angle);
   void sendData();
   bool hasCoral();

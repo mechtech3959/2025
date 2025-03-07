@@ -84,7 +84,7 @@ class TunerConstants {
   static constexpr std::optional<configs::Pigeon2Configuration> pigeonConfigs =
       std::nullopt;
 
-  static constexpr std::string_view kCANBusName = "Default Name";
+  static constexpr std::string_view kCANBusName = "CanBus";
 
 public:
   // CAN bus that the devices are located on;
