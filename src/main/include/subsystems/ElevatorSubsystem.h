@@ -29,8 +29,8 @@ private:
       ctre::phoenix6::configs::Slot0Configs{}
           .WithGravityType(
               ctre::phoenix6::signals::GravityTypeValue::Elevator_Static)
-               .WithKP(3)
-          .WithKI(2.2)
+               .WithKP(3.5)
+          .WithKI(1)
           .WithKD(0.1)
           .WithKS(0.4)
         .WithKG(0.3)
@@ -43,8 +43,8 @@ private:
   ctre::phoenix6::configs::MotionMagicConfigs magicMotionConfigs =
       ctre::phoenix6::configs::MotionMagicConfigs{}
           .WithMotionMagicJerk(2000_tr_per_s_cu)
-          .WithMotionMagicCruiseVelocity(7_tps)
-          .WithMotionMagicAcceleration(7_tr_per_s_sq).WithMotionMagicExpo_kA(ctre::unit::volts_per_turn_per_second_squared_t{0.3})         ;
+          .WithMotionMagicCruiseVelocity(10_tps)
+          .WithMotionMagicAcceleration(10_tr_per_s_sq).WithMotionMagicExpo_kA(ctre::unit::volts_per_turn_per_second_squared_t{0.3})         ;
         
   ctre::phoenix6::configs::FeedbackConfigs fbConfigs =
       ctre::phoenix6::configs::FeedbackConfigs{}

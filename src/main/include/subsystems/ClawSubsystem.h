@@ -53,8 +53,8 @@ private:
                                .WithInverted(1)
                                .WithNeutralMode(1))
           .WithMotionMagic(ctre::phoenix6::configs::MotionMagicConfigs{}
-                               .WithMotionMagicCruiseVelocity(50_tps)
-                               .WithMotionMagicAcceleration(50_tr_per_s_sq)
+                               .WithMotionMagicCruiseVelocity(80_tps)
+                               .WithMotionMagicAcceleration(80_tr_per_s_sq)
                                .WithMotionMagicJerk(1600_tr_per_s_cu))
           .WithCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs{}
                                  .WithSupplyCurrentLimit(15_A)

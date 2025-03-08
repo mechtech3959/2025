@@ -89,19 +89,39 @@ void RobotContainer::ConfigureBindings() {
 }
 
 void RobotContainer::ConfigureDashboard() {
- /*if(subsystemClaw.hasCoral()){
+  auto rt = joystick.GetRightTriggerAxis();
+  auto lt = joystick.GetLeftTriggerAxis();
+  if(rt > 0.1){
+    subsystemClaw.percentOut(-rt);
+  }else if(lt >0.2){
+    subsystemClaw.percentOut(lt);
+  }else{subsystemClaw.percentOut(0);}
+ if(joystick.Start().Get() == true){ if(subsystemClaw.hasCoral()){
   subsystemClaw.percentOut(0);
-  subsystemClaw.setAxis(30_deg);
+  subsystemClaw.setAxis(20_deg);
  }else{
+  subsystemClaw.setAxis(0_deg);
   subsystemClaw.percentOut(-0.2);
- }*/
-  if(joystick.A().Get() == true) subsystemClaw.setAxis(30_deg);
-    if(joystick.B().Get() == true) subsystemClaw.setAxis(0_deg);
- if(joystick.X().Get() ==true) subsystemElevator.setHeight(4_tr);
- 
- if(joystick.Y().Get() ==true) subsystemElevator.setHeight(0_tr);
+ }}
+  
+  if(joystick.POVUp().Get() == true) subsystemClaw.setAxis(90_deg);
+    if(joystick.POVLeft().Get() == true) subsystemClaw.setAxis(30_deg);
+        if(joystick.POVDown().Get() == true) subsystemClaw.setAxis(0_deg);
+        if(joystick.POVRight().Get() == true) subsystemClaw.setAxis(150_deg);
+
+  //   if(joystick.Y().Get() == true) subsystemClaw.setAxis(90_deg);
+ //   if(joystick.X().Get() == true) subsystemClaw.setAxis(120_deg);
+  if(joystick.A().Get() ==true) subsystemElevator.setHeight(0_tr);// 2.5 tr = l3 at 30 deg  
+ if(joystick.B().Get() ==true) subsystemElevator.setHeight(1_tr);// 2.5 tr = l3 at 30 deg  
+
+ if(joystick.X().Get() ==true) subsystemElevator.setHeight(2.3_tr);// 2.5 tr = l3 at 30 deg  
+ //4tr? l4 90 deg
+ if(joystick.Y().Get() ==true) subsystemElevator.setHeight(4.5_tr);
+ if(joystick.RightBumper().Get() == true) subsystemClaw.percentOut(-0.2);
+  if(joystick.LeftBumper().Get() == true) subsystemClaw.percentOut(0);
+
  // frc::SmartDashboard::PutData("autochooser", &paths);
-  // frc::SmartDashboard::PutNumberArray("LL pose",
+  // frc::SmartDashboard::PutNumberArray("LL pose"
   // [visionEstimate.X().value(),visionEstimate.Y().value()]);
 }
 /*
