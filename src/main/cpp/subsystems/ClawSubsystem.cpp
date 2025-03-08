@@ -54,8 +54,9 @@ bool Claw::hasCoral() {
    crl = val;
    return val;
 };
-void Claw::clawPeriodic() { 
+void Claw::Periodic() { 
   hasCoral();
+  sendData();
   frc::SmartDashboard::PutBoolean("in", crl);
   frc::SmartDashboard::PutNumber("sensorV",feedMotor.GetAnalog().GetVoltage());
 frc::SmartDashboard::PutNumber("c",feedMotor.GetBusVoltage());

@@ -20,18 +20,21 @@ private:
   ctre::phoenix6::hardware::CANcoder elevatorEncoder{9,"CanBus"};
   ctre::phoenix6::controls::MotionMagicExpoTorqueCurrentFOC elevatorMotion{
       0_tr};
-  ctre::phoenix6::controls::VoltageOut sysReq{0_V};
+      
+    //ctre::phoenix6::controls::DynamicMotionMagicVoltage ele{0_tr};
+    ctre::phoenix6::controls::MotionMagicVoltage ele{0_tr};
+      ctre::phoenix6::controls::VoltageOut sysReq{0_V};
 
   ctre::phoenix6::configs::Slot0Configs slot =
       ctre::phoenix6::configs::Slot0Configs{}
           .WithGravityType(
               ctre::phoenix6::signals::GravityTypeValue::Elevator_Static)
-          .WithKP(0.5)
-          .WithKI(2)
-          .WithKD(1)
+               .WithKP(3)
+          .WithKI(2.2)
+          .WithKD(0.1)
           .WithKS(0.4)
-          .WithKG(0.3)
-          .WithKV(0.001)
+        .WithKG(0.3)
+         .WithKV(0.001)
           .WithStaticFeedforwardSign(
               ctre::phoenix6::signals::StaticFeedforwardSignValue::
                   UseClosedLoopSign);
@@ -40,12 +43,13 @@ private:
   ctre::phoenix6::configs::MotionMagicConfigs magicMotionConfigs =
       ctre::phoenix6::configs::MotionMagicConfigs{}
           .WithMotionMagicJerk(2000_tr_per_s_cu)
-          .WithMotionMagicCruiseVelocity(40_tps)
-          .WithMotionMagicAcceleration(80_tr_per_s_sq);
+          .WithMotionMagicCruiseVelocity(7_tps)
+          .WithMotionMagicAcceleration(7_tr_per_s_sq).WithMotionMagicExpo_kA(ctre::unit::volts_per_turn_per_second_squared_t{0.3})         ;
+        
   ctre::phoenix6::configs::FeedbackConfigs fbConfigs =
       ctre::phoenix6::configs::FeedbackConfigs{}
-          .WithRotorToSensorRatio(4)
-          .WithSensorToMechanismRatio(1)
+          .WithRotorToSensorRatio(1)
+          .WithSensorToMechanismRatio(8)
           .WithFeedbackRemoteSensorID(9);
   ctre::phoenix6::configs::TalonFXConfiguration elevatorConfigs =
       ctre::phoenix6::configs::TalonFXConfiguration{}
@@ -55,12 +59,11 @@ private:
                                .WithInverted(0)
                                .WithNeutralMode(1))
           .WithCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs{}
-                                 .WithSupplyCurrentLimit(60_A)
+                                 .WithSupplyCurrentLimit(65_A)
                                  .WithSupplyCurrentLowerLimit(30_A)
                                  .WithSupplyCurrentLowerTime(1_s)
                                  .WithSupplyCurrentLimitEnable(true))
           .WithFeedback(fbConfigs);
-
   ctre::phoenix6::configs::CANcoderConfiguration encoderConfigs =
       ctre::phoenix6::configs::CANcoderConfiguration{};
 
@@ -115,5 +118,6 @@ public:
   void setHeight(units::turn_t pos);
   bool isAtTarget();
   void sendData();
+  void Periodic() override;
 };
 } // namespace subsystems

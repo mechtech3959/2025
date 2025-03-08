@@ -10,7 +10,9 @@ Robot::Robot() {}
 
 void Robot::RobotPeriodic() {
   frc2::CommandScheduler::GetInstance().Run();
-    m_container.subsystemClaw.clawPeriodic();
+   // m_container.subsystemClaw.clawPeriodic();
+    m_container.ConfigureBindings();
+    m_container.ConfigureDashboard();
       frc::SmartDashboard::PutBoolean("coral",m_container.subsystemClaw.hasCoral());
 
   /*/ m_container.frontLimeLight.updateTracking();

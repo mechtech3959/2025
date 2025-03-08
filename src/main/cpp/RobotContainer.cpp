@@ -6,7 +6,7 @@
 #include <frc2/command/Commands.h>
 
 RobotContainer::RobotContainer() {
-  ConfigureBindings();
+ // ConfigureBindings();
  // ConfigureDashboard();
 //  GetStartingPose();
 }
@@ -63,10 +63,10 @@ void RobotContainer::ConfigureBindings() {
    joystick.LeftBumper().OnTrue(
        drivetrain.RunOnce([this] { drivetrain.SeedFieldCentric(); }));
  */
-  // drivetrain.RegisterTelemetry(
-  //   [this](auto const &state) { logger.Telemeterize(state); });
-  // logger.subsystemTelemeterize(subsystemClaw.clawLog,
-  //                            subsystemElevator.elevatorLog);
+   drivetrain.RegisterTelemetry(
+    [this](auto const &state) { logger.Telemeterize(state); });
+   logger.subsystemTelemeterize(subsystemClaw.clawLog,
+                              subsystemElevator.elevatorLog);
 
    //joystick.X().WhileTrue(&smartIntake);
    
@@ -81,12 +81,25 @@ void RobotContainer::ConfigureBindings() {
   joystick.Y().WhileTrue(subsystemElevator.SysIdQuasistatic(frc2::sysid::kForward));
   joystick.X().WhileTrue(subsystemElevator.SysIdQuasistatic(frc2::sysid::kReverse));
   */
-  joystick.X().OnTrue(&smartIntake);
+ 
+ // frc2::cmd::Run(smartIntake);
+ //joystick.X().WhileTrue(&smartIntake);
+
 
 }
 
 void RobotContainer::ConfigureDashboard() {
-
+ /*if(subsystemClaw.hasCoral()){
+  subsystemClaw.percentOut(0);
+  subsystemClaw.setAxis(30_deg);
+ }else{
+  subsystemClaw.percentOut(-0.2);
+ }*/
+  if(joystick.A().Get() == true) subsystemClaw.setAxis(30_deg);
+    if(joystick.B().Get() == true) subsystemClaw.setAxis(0_deg);
+ if(joystick.X().Get() ==true) subsystemElevator.setHeight(4_tr);
+ 
+ if(joystick.Y().Get() ==true) subsystemElevator.setHeight(0_tr);
  // frc::SmartDashboard::PutData("autochooser", &paths);
   // frc::SmartDashboard::PutNumberArray("LL pose",
   // [visionEstimate.X().value(),visionEstimate.Y().value()]);

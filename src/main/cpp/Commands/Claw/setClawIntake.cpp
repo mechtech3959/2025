@@ -11,7 +11,7 @@ void setClawIntake::Initialize() {
  
 }
 void setClawIntake::Execute(){ 
-   Claw->clawPeriodic();
+   Claw->Periodic();
 
 
 }

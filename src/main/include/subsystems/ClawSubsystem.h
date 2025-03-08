@@ -22,10 +22,10 @@ private:
           .WithKS(0.3)
           .WithKA(0)
           .WithKG(0)
-          .WithKI(0)
-          .WithKD(0)
+          .WithKI(0.2)
+          .WithKD(0.1)
           .WithKV(0.001)
-          .WithKP(10)
+          .WithKP(8)
           .WithGravityType(
               ctre::phoenix6::signals::GravityTypeValue::Arm_Cosine)
           .WithStaticFeedforwardSign(
@@ -46,23 +46,23 @@ private:
           .WithSoftwareLimitSwitch(
               ctre::phoenix6::configs::SoftwareLimitSwitchConfigs{}
                   .WithForwardSoftLimitThreshold(180_deg)
-                  .WithForwardSoftLimitEnable(true)
+                  .WithForwardSoftLimitEnable(false)
                   .WithReverseSoftLimitThreshold(0_deg)
-                  .WithReverseSoftLimitEnable(true))
+                  .WithReverseSoftLimitEnable(false))
           .WithMotorOutput(ctre::phoenix6::configs::MotorOutputConfigs{}
-                               .WithInverted(0)
+                               .WithInverted(1)
                                .WithNeutralMode(1))
           .WithMotionMagic(ctre::phoenix6::configs::MotionMagicConfigs{}
                                .WithMotionMagicCruiseVelocity(50_tps)
                                .WithMotionMagicAcceleration(50_tr_per_s_sq)
                                .WithMotionMagicJerk(1600_tr_per_s_cu))
           .WithCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs{}
-                                 .WithSupplyCurrentLimit(10_A)
+                                 .WithSupplyCurrentLimit(15_A)
                                  .WithSupplyCurrentLimitEnable(true));
   ctre::phoenix6::configs::CANcoderConfiguration encoderConfigs =
       ctre::phoenix6::configs::CANcoderConfiguration{}.WithMagnetSensor(
           ctre::phoenix6::configs::MagnetSensorConfigs{}
-              .WithSensorDirection(0)
+              .WithSensorDirection(1)
               .WithAbsoluteSensorDiscontinuityPoint(0.5_tr));
 
 public:
@@ -102,7 +102,7 @@ frc2::CommandPtr SysIdDynamic(frc2::sysid::Direction direction)
    return m_sysIdRoutine_Claw.Dynamic(direction);
 }
   Claw();
-  void clawPeriodic();
+  void Periodic() override;
   void setFeedStop();
   void setIntake();
   void setOutake();
