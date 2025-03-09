@@ -13,10 +13,14 @@
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc2/command/CommandPtr.h>
+#include <frc2/command/Command.h>
 #include <frc2/command/button/CommandXboxController.h>
 #include <pathplanner/lib/auto/AutoBuilder.h>
 #include <pathplanner/lib/commands/PathPlannerAuto.h>
 #include <pathplanner/lib/path/PathPlannerPath.h>
+#include "Commands/ScoreL3.h"
+#include "Commands/Claw/setClawIntake.h"
+#include "Commands/Claw/setClawFeedStart.h"
 class RobotContainer {
 private:
   units::meters_per_second_t MaxSpeed =
@@ -43,23 +47,26 @@ private:
    * to define a destructor to un-register the telemetry from the drivetrain
    */
   Telemetry logger{MaxSpeed};
-
-  frc2::CommandXboxController joystick{0};
+    frc2::CommandXboxController driverJoystick{0};
+  frc2::CommandXboxController systemJoystick{1};
 
 public:
   subsystems::Claw subsystemClaw;
   subsystems::Elevator subsystemElevator;
+    ScoreL3 L3{&subsystemClaw,&subsystemElevator};
+    setClawIntake smartIntake{&subsystemClaw};
+    setClawFeedStart start{&subsystemClaw};
   subsystems::CommandSwerveDrivetrain drivetrain{
-      TunerConstants::CreateDrivetrain()};
+     TunerConstants::CreateDrivetrain()};
 
-  subsystems::LimeLight frontLimeLight{"limelight-front"};
-  subsystems::LimeLight backLimeLight{"limelight-back"};
+ // subsystems::LimeLight frontLimeLight{"limelight-front"};
+  //subsystems::LimeLight backLimeLight{"limelight-back"};
   frc::Pose2d visionEstimate;
 
   std::shared_ptr<pathplanner::PathPlannerPath> SetAutonomousPath();
   std::unique_ptr<frc2::Command> exampleAuto;
-  frc::SendableChooser<frc2::Command *> paths =
-      pathplanner::AutoBuilder::buildAutoChooser("defauto");
+ // frc::SendableChooser<frc2::Command *> paths =
+  //   pathplanner::AutoBuilder::buildAutoChooser("defauto");
   std::string autopose;
 
   RobotContainer();

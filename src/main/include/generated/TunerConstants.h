@@ -84,12 +84,12 @@ class TunerConstants {
   static constexpr std::optional<configs::Pigeon2Configuration> pigeonConfigs =
       std::nullopt;
 
-  static constexpr std::string_view kCANBusName = "Default Name";
+  static constexpr std::string_view kCANBusName = "CanBus";
 
 public:
   // CAN bus that the devices are located on;
   // All swerve devices must share the same CAN bus
-  static inline const CANBus kCANBus{kCANBusName, "./media/sda1/"};
+  static inline const CANBus kCANBus{kCANBusName, "/media/sda1/"};
 
   // Theoretical free speed (m/s) at 12 V applied output;
   // This needs to be tuned to your individual robot

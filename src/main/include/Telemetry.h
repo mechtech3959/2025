@@ -50,6 +50,8 @@ private:
       clawTable->GetStructTopic<double>("TargetAxisAngle").Publish();
   nt::StructPublisher<bool> clawHasCoral =
       clawTable->GetStructTopic<bool>("Coraldetected").Publish();
+  nt::StructPublisher<bool> clawAtAcceptableAngle =
+      clawTable->GetStructTopic<bool>("AcceptableAngle").Publish();
   // figure out mech2d for sim representation
   /* Robot swerve drive state */
   std::shared_ptr<nt::NetworkTable> driveStateTable =

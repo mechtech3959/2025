@@ -10,10 +10,15 @@ Robot::Robot() {}
 
 void Robot::RobotPeriodic() {
   frc2::CommandScheduler::GetInstance().Run();
-  m_container.frontLimeLight.updateTracking();
-  m_container.frontLimeLight.poseEst();
-  m_container.backLimeLight.updateTracking();
-  m_container.backLimeLight.poseEst();
+   // m_container.subsystemClaw.clawPeriodic();
+    //m_container.ConfigureBindings();
+    m_container.ConfigureDashboard();
+      frc::SmartDashboard::PutBoolean("coral",m_container.subsystemClaw.hasCoral());
+
+  /*/ m_container.frontLimeLight.updateTracking();
+   m_container.frontLimeLight.poseEst();
+   m_container.backLimeLight.updateTracking();
+   m_container.backLimeLight.poseEst();*/
 }
 
 void Robot::DisabledInit() {}
@@ -24,7 +29,7 @@ void Robot::DisabledExit() {}
 
 void Robot::AutonomousInit() {
 
-  m_autonomousCommand = m_container.GetAutonomousCommand();
+  //m_autonomousCommand = m_container.GetAutonomousCommand();
 
   if (m_autonomousCommand) {
     m_autonomousCommand.value()->Schedule();
@@ -41,7 +46,9 @@ void Robot::TeleopInit() {
   }
 }
 
-void Robot::TeleopPeriodic() {}
+void Robot::TeleopPeriodic() {
+  m_container.ConfigureDashboard();
+}
 
 void Robot::TeleopExit() {}
 
