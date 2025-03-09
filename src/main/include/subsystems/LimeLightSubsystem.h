@@ -26,5 +26,6 @@ public:
   void updateTracking();
   frc::Pose2d poseEst();
   void centerApriltag();
+  void Periodic() override;
 };
 } // namespace subsystems
