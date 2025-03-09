@@ -10,7 +10,9 @@ Claw::Claw()
   axisEncoder.GetConfigurator().Apply(encoderConfigs);
   axisMotor.GetConfigurator().Apply(axisConfig);
 };
-
+ units::angle::degree_t Claw::getAngle(){
+  return(axisEncoder.GetPosition().GetValue());
+ };
 void Claw::setAxis(units::degree_t angle) {
   axisMotor.SetControl(axisMotion.WithPosition(angle));
   lastKnownAngle = angle;
@@ -57,6 +59,8 @@ bool Claw::hasCoral() {
 void Claw::Periodic() { 
   hasCoral();
   sendData();
+  getAngle();
+  frc::SmartDashboard::PutNumber("axis Angle", double{ getAngle()});
   frc::SmartDashboard::PutBoolean("in", crl);
   frc::SmartDashboard::PutNumber("sensorV",feedMotor.GetAnalog().GetVoltage());
 frc::SmartDashboard::PutNumber("c",feedMotor.GetBusVoltage());

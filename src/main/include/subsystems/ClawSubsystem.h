@@ -22,10 +22,10 @@ private:
           .WithKS(0.3)
           .WithKA(0)
           .WithKG(0)
-          .WithKI(0.2)
-          .WithKD(0.1)
+          .WithKI(12)//.2 .5 1
+          .WithKD(0)//.1 .5
           .WithKV(0.001)
-          .WithKP(8)
+          .WithKP(15)
           .WithGravityType(
               ctre::phoenix6::signals::GravityTypeValue::Arm_Cosine)
           .WithStaticFeedforwardSign(
@@ -111,6 +111,7 @@ frc2::CommandPtr SysIdDynamic(frc2::sysid::Direction direction)
   void percentOut(double s);
   void setAxis(units::degree_t angle);
   void sendData();
+  units::angle::degree_t getAngle();
   bool hasCoral();
 };
 
