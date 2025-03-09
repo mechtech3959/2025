@@ -2,7 +2,9 @@
 
 using namespace subsystems;
 
-Elevator::Elevator() {
+Elevator::Elevator()
+    : masterM{19, "CanBus"}, slaveM{20, "CanBus"}, elevatorEncoder{9, "CanBus"},
+      elevatorMotion{0_tr} {
   masterM.GetConfigurator().Apply(elevatorConfigs);
   slaveM.GetConfigurator().Apply(elevatorConfigs);
   slaveM.SetControl(
@@ -12,7 +14,7 @@ Elevator::Elevator() {
 // hypothetical 1 rotation = 6inches? 8:1 ratio
 void Elevator::setHeight(units::turn_t pos) {
 
-  masterM.SetControl(ele.WithPosition(pos));
+  masterM.SetControl(elevatorMotion.WithPosition(pos));
   target = pos;
 }
 bool Elevator::isAtTarget() {

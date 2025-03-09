@@ -15,11 +15,10 @@ namespace subsystems {
 
 class Elevator : public frc2::SubsystemBase {
 private:
-  ctre::phoenix6::hardware::TalonFX masterM{19, "CanBus"};
-  ctre::phoenix6::hardware::TalonFX slaveM{20, "CanBus"};
-  ctre::phoenix6::hardware::CANcoder elevatorEncoder{9, "CanBus"};
-  ctre::phoenix6::controls::MotionMagicExpoTorqueCurrentFOC elevatorMotion{
-      0_tr};
+  ctre::phoenix6::hardware::TalonFX masterM;
+  ctre::phoenix6::hardware::TalonFX slaveM;
+  ctre::phoenix6::hardware::CANcoder elevatorEncoder;
+  ctre::phoenix6::controls::MotionMagicVoltage elevatorMotion;
 
   // ctre::phoenix6::controls::DynamicMotionMagicVoltage ele{0_tr};
   ctre::phoenix6::controls::MotionMagicVoltage ele{0_tr};
