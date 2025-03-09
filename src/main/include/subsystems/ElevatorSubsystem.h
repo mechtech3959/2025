@@ -15,26 +15,26 @@ namespace subsystems {
 
 class Elevator : public frc2::SubsystemBase {
 private:
-  ctre::phoenix6::hardware::TalonFX masterM{19,"CanBus"};
-  ctre::phoenix6::hardware::TalonFX slaveM{20,"CanBus"};
-  ctre::phoenix6::hardware::CANcoder elevatorEncoder{9,"CanBus"};
+  ctre::phoenix6::hardware::TalonFX masterM{19, "CanBus"};
+  ctre::phoenix6::hardware::TalonFX slaveM{20, "CanBus"};
+  ctre::phoenix6::hardware::CANcoder elevatorEncoder{9, "CanBus"};
   ctre::phoenix6::controls::MotionMagicExpoTorqueCurrentFOC elevatorMotion{
       0_tr};
-      
-    //ctre::phoenix6::controls::DynamicMotionMagicVoltage ele{0_tr};
-    ctre::phoenix6::controls::MotionMagicVoltage ele{0_tr};
-      ctre::phoenix6::controls::VoltageOut sysReq{0_V};
+
+  // ctre::phoenix6::controls::DynamicMotionMagicVoltage ele{0_tr};
+  ctre::phoenix6::controls::MotionMagicVoltage ele{0_tr};
+  ctre::phoenix6::controls::VoltageOut sysReq{0_V};
 
   ctre::phoenix6::configs::Slot0Configs slot =
       ctre::phoenix6::configs::Slot0Configs{}
           .WithGravityType(
               ctre::phoenix6::signals::GravityTypeValue::Elevator_Static)
-               .WithKP(3.5)
+          .WithKP(3.5)
           .WithKI(1)
           .WithKD(0.1)
           .WithKS(0.4)
-        .WithKG(0.3)
-         .WithKV(0.001)
+          .WithKG(0.3)
+          .WithKV(0.001)
           .WithStaticFeedforwardSign(
               ctre::phoenix6::signals::StaticFeedforwardSignValue::
                   UseClosedLoopSign);
@@ -44,8 +44,10 @@ private:
       ctre::phoenix6::configs::MotionMagicConfigs{}
           .WithMotionMagicJerk(2000_tr_per_s_cu)
           .WithMotionMagicCruiseVelocity(10_tps)
-          .WithMotionMagicAcceleration(10_tr_per_s_sq).WithMotionMagicExpo_kA(ctre::unit::volts_per_turn_per_second_squared_t{0.3})         ;
-        
+          .WithMotionMagicAcceleration(10_tr_per_s_sq)
+          .WithMotionMagicExpo_kA(
+              ctre::unit::volts_per_turn_per_second_squared_t{0.3});
+
   ctre::phoenix6::configs::FeedbackConfigs fbConfigs =
       ctre::phoenix6::configs::FeedbackConfigs{}
           .WithRotorToSensorRatio(1)

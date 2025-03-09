@@ -11,12 +11,12 @@ Elevator::Elevator() {
 
 // hypothetical 1 rotation = 6inches? 8:1 ratio
 void Elevator::setHeight(units::turn_t pos) {
-  
-  masterM.SetControl( ele.WithPosition(pos));
+
+  masterM.SetControl(ele.WithPosition(pos));
   target = pos;
 }
 bool Elevator::isAtTarget() {
-  auto m = units::inch_t{elevatorEncoder.GetPosition().GetValueAsDouble()*12};
+  auto m = units::inch_t{elevatorEncoder.GetPosition().GetValueAsDouble() * 12};
   if (masterM.GetPosition().GetValue() == target) {
     return true;
   } else {
@@ -32,6 +32,4 @@ void Elevator::sendData() {
   frc::SmartDashboard::PutString("Elevator/Master Control Mode",
                                  masterM.GetControlMode().ToString());
 }
-void Elevator::Periodic(){
-  sendData();
-}
+void Elevator::Periodic() { sendData(); }

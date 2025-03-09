@@ -71,11 +71,13 @@ public:
   const units::degree_t algea = 180_deg;
   const units::degree_t trough = 0_deg;
   units::degree_t lastKnownAngle;
+  units::degree_t targetAngle;
+
   enum states { traveling, onTarget };
   states state;
   ClawState clawLog;
   bool endIntake = false;
-  bool crl;
+  
 frc2::sysid::SysIdRoutine m_sysIdRoutine_Claw{
       frc2::sysid::Config{
           std::nullopt, // Use default ramp rate (1 V/s)
@@ -113,6 +115,7 @@ frc2::CommandPtr SysIdDynamic(frc2::sysid::Direction direction)
   void sendData();
   units::angle::degree_t getAngle();
   bool hasCoral();
+  bool acceptableAngle();
 };
 
 } // namespace subsystems

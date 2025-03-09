@@ -37,8 +37,8 @@ frc::Pose2d LimeLight::poseEst() {
     return p;
   }
 };
-void LimeLight::limelightPeriodic(){};
-void LimeLight::Periodic(){
+void LimeLight::limelightPeriodic() {};
+void LimeLight::Periodic() {
   updateTracking();
   poseEst();
 };

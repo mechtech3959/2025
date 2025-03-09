@@ -11,11 +11,15 @@ struct ElevatorState {
   double slavePose;
   double elevatorPose;
   double targetPose;
+  double currentAmperage;
+  double CurrentMvoltage;
+  double CurrentSvoltage;
+
 };
 struct ClawState {
   double axisMotorPose;
   bool coralDetected;
-
+  bool acceptableAngle;
   double currentAngle;
   double lastKnowAngle;
   double targetAngle;
