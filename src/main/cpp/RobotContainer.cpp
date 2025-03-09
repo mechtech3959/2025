@@ -113,7 +113,8 @@ void RobotContainer::ConfigureDashboard() {
  //   if(driverJoystick.X().Get() == true) subsystemClaw.setAxis(120_deg);
     if(systemJoystick.A().Get() ==true){ 
       subsystemClaw.setAxis(20_deg);
-      if(subsystemClaw.getAngle() == 20_deg)subsystemElevator.setHeight(0_tr);
+     // if(subsystemClaw.getAngle() == 20_deg)subsystemElevator.setHeight(0_tr);
+     subsystemElevator.coastOut();
       }// 2.5 tr = l3 at 30 deg  
  if(systemJoystick.B().Get() ==true) subsystemElevator.setHeight(1_tr);// 2.5 tr = l3 at 30 deg  
 
