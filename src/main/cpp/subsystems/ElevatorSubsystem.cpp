@@ -17,6 +17,10 @@ void Elevator::setHeight(units::turn_t pos) {
   masterM.SetControl(elevatorMotion.WithPosition(pos));
   target = pos;
 }
+void Elevator::coastOut(){
+  masterM.SetControl(ctre::phoenix6::controls::CoastOut{});
+  target = 0_tr;
+}
 bool Elevator::isAtTarget() {
   auto m = units::inch_t{elevatorEncoder.GetPosition().GetValueAsDouble() * 12};
   if (masterM.GetPosition().GetValue() == target) {

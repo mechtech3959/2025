@@ -117,6 +117,7 @@ public:
 
   Elevator();
   void setHeight(units::turn_t pos);
+  void coastOut();
   bool isAtTarget();
   void sendData();
   void Periodic() override;
