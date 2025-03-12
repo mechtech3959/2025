@@ -84,8 +84,8 @@ void Claw::Periodic() {
   hasCoral();
   sendData();
   getAngle();
-  frc::SmartDashboard::PutBoolean("accept?",acceptableAngle());
+  frc::SmartDashboard::PutBoolean("acceptable angle?",acceptableAngle());
   frc::SmartDashboard::PutNumber("axis Angle", double{getAngle()});
-  frc::SmartDashboard::PutNumber("sensorV", feedMotor.GetAnalog().GetVoltage());
-  frc::SmartDashboard::PutNumber("c", feedMotor.GetBusVoltage());
+  //frc::SmartDashboard::PutNumber("sensorV", feedMotor.GetAnalog().GetVoltage());
+ // frc::SmartDashboard::PutNumber("c", feedMotor.GetBusVoltage());
 };
