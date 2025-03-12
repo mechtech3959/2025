@@ -65,15 +65,16 @@ public:
 
   std::shared_ptr<pathplanner::PathPlannerPath> SetAutonomousPath();
   std::unique_ptr<frc2::Command> exampleAuto;
- // frc::SendableChooser<frc2::Command *> paths =
-   //  pathplanner::AutoBuilder::buildAutoChooser("Defauto");
+  frc::SendableChooser<frc2::Command *> paths =
+    pathplanner::AutoBuilder::buildAutoChooser("Def");
   std::string autopose;
-
+bool algea = false;
   RobotContainer();
 
-  //frc2::Command *GetAutonomousCommand();
-  //void GetStartingPose();
+  frc2::Command* GetAutonomousCommand();
+  void GetStartingPose();
 
+  void ConfigureTeli();
   void ConfigureBindings();
   void ConfigureDashboard();
   void RobotPeriodic();

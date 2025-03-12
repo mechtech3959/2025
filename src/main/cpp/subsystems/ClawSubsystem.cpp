@@ -21,8 +21,8 @@ units::angle::degree_t Claw::getAngle() {
 };
 void Claw::setAxis(units::degree_t angle) {
   if (angle == 0_deg){
-    axisMotor.SetControl(zeroAxis.WithPosition(0_tr));
-  }else{  axisMotor.SetControl(axisMotion.WithPosition(angle));};
+    axisMotor.SetControl(zeroAxis.WithPosition(0_tr).WithUseTimesync(true).WithEnableFOC(true));
+  }else{  axisMotor.SetControl(axisMotion.WithPosition(angle).WithUseTimesync(true).WithEnableFOC(true));};
   lastKnownAngle = angle;
   // status signal for motor output
   (axisMotor.GetMotorOutputStatus().GetValue() == 2) ? state = onTarget

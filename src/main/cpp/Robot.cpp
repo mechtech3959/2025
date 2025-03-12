@@ -49,7 +49,7 @@ void Robot::TeleopInit() {
 }
 
 void Robot::TeleopPeriodic() {
-  m_container.ConfigureDashboard();
+  m_container.ConfigureTeli();
 }
 
 void Robot::TeleopExit() {}

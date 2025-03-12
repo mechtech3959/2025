@@ -5,16 +5,19 @@ using namespace subsystems;
 Elevator::Elevator()
     : masterM{19, "CanBus"}, slaveM{20, "CanBus"}, elevatorEncoder{9, "CanBus"},
       elevatorMotion{0_tr} {
+  masterM.SetPosition(0_tr);
+  slaveM.SetPosition(0_tr);
+  elevatorEncoder.SetPosition(0_tr);
   masterM.GetConfigurator().Apply(elevatorConfigs);
   slaveM.GetConfigurator().Apply(elevatorConfigs);
   slaveM.SetControl(
-      ctre::phoenix6::controls::Follower{masterM.GetDeviceID(), false});
+      ctre::phoenix6::controls::StrictFollower{masterM.GetDeviceID()});
 }
 
 // hypothetical 1 rotation = 6inches? 8:1 ratio
 void Elevator::setHeight(units::turn_t pos) {
 
-  masterM.SetControl(elevatorMotion.WithPosition(pos));
+  masterM.SetControl(elevatorMotion.WithPosition(pos).WithUseTimesync(true).WithEnableFOC(true).WithOverrideBrakeDurNeutral(true));
   target = pos;
 }
 void Elevator::coastOut(){

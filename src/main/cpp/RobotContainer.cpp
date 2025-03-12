@@ -8,7 +8,7 @@
 RobotContainer::RobotContainer() {
   ConfigureBindings();
   // ConfigureDashboard();
-   // GetStartingPose();
+  // GetStartingPose();
 }
 
 void RobotContainer::ConfigureBindings() {
@@ -51,14 +51,14 @@ void RobotContainer::ConfigureBindings() {
 
   // Run SysId routines when holding back/start and X/Y.
   // Note that each routine should be run exactly once in a single log.
-  (driverJoystick.Back() && driverJoystick.Y())
-      .WhileTrue(drivetrain.SysIdDynamic(frc2::sysid::Direction::kForward));
-  (driverJoystick.Back() && driverJoystick.X())
-      .WhileTrue(drivetrain.SysIdDynamic(frc2::sysid::Direction::kReverse));
+ // (driverJoystick.Back() && driverJoystick.Y())
+ //     .WhileTrue(drivetrain.SysIdDynamic(frc2::sysid::Direction::kForward));
+ // (driverJoystick.Back() && driverJoystick.X())
+  //    .WhileTrue(drivetrain.SysIdDynamic(frc2::sysid::Direction::kReverse));
   (driverJoystick.Start() && driverJoystick.Y())
-      .WhileTrue(drivetrain.SysIdQuasistatic(frc2::sysid::Direction::kForward));
-  (driverJoystick.Start() && driverJoystick.X())
-      .WhileTrue(drivetrain.SysIdQuasistatic(frc2::sysid::Direction::kReverse));
+   .WhileTrue(drivetrain.SysIdQuasistatic(frc2::sysid::Direction::kForward));
+(driverJoystick.Start() && driverJoystick.X())
+   .WhileTrue(drivetrain.SysIdQuasistatic(frc2::sysid::Direction::kReverse));
 
   // reset the field-centric heading on left bumper press
   driverJoystick.LeftBumper().OnTrue(
@@ -66,8 +66,6 @@ void RobotContainer::ConfigureBindings() {
 
   drivetrain.RegisterTelemetry(
       [this](auto const &state) { logger.Telemeterize(state); });
-  logger.subsystemTelemeterize(subsystemClaw.clawLog,
-                               subsystemElevator.elevatorLog);
 
   // driverJoystick.X().WhileTrue(&smartIntake);
 
@@ -86,8 +84,28 @@ void RobotContainer::ConfigureBindings() {
   // frc2::cmd::Run(smartIntake);
   // driverJoystick.X().WhileTrue(&smartIntake);
 }
+void RobotContainer::ConfigureDashboard(){
+logger.subsystemTelemeterize(subsystemClaw.clawLog,
+                               subsystemElevator.elevatorLog);
+  frc::SmartDashboard::PutData("autochooser", &paths);
 
-void RobotContainer::ConfigureDashboard() {
+}
+void RobotContainer::ConfigureTeli() {
+  if (driverJoystick .Y ().Get() ) {
+    if (algea == false){
+      algea = true;}
+   else if (algea == true){
+      algea = false;}
+  }
+  frc::SmartDashboard::PutBoolean("alg", algea);
+  if (driverJoystick.RightTrigger().Get()) {
+    MaxSpeed = 0.5_mps;
+    MaxAngularRate = 0.3_tps;
+  } else {
+    MaxSpeed = 4.91_mps;
+    MaxAngularRate = 1.0_tps;
+  };
+   
   auto rt = systemJoystick.GetRightTriggerAxis();
   auto lt = systemJoystick.GetLeftTriggerAxis();
   if (rt > 0.1) {
@@ -121,37 +139,44 @@ void RobotContainer::ConfigureDashboard() {
   if (systemJoystick.A().Get() == true) {
     subsystemClaw.setAxis(20_deg);
     // if(subsystemClaw.getAngle() == 20_deg)subsystemElevator.setHeight(0_tr);
-    if(subsystemClaw.acceptableAngle() == true) subsystemElevator.setHeight(0_tr);
+    if (subsystemClaw.acceptableAngle() == true)
+      subsystemElevator.setHeight(0_tr);
   } // 2.5 tr = l3 at 30 deg
-  if (systemJoystick.B().Get() == true)
-    subsystemElevator.setHeight(1_tr); // 2.5 tr = l3 at 30 deg
+  if (systemJoystick.B().Get() == true) {
+    subsystemClaw.setAxis(20_deg);
+    if (subsystemClaw.acceptableAngle() == true)
+      subsystemElevator.setHeight(1_tr);
+  } // 2.5 tr = l3 at 30 deg
 
-  if (systemJoystick.X().Get() == true)
-    subsystemElevator.setHeight(2.3_tr); // 2.5 tr = l3 at 30 deg
+  if (systemJoystick.X().Get() == true) {
+    subsystemClaw.setAxis(20_deg);
+    if (subsystemClaw.acceptableAngle() == true)
+      subsystemElevator.setHeight(2.3_tr);
+  }
+  // 2.5 tr = l3 at 30 deg
   // 4tr? l4 90 deg
   if (systemJoystick.Y().Get() == true) {
     subsystemClaw.setAxis(20_deg);
 
-    subsystemElevator.setHeight(4.55_tr);
+    if (subsystemClaw.acceptableAngle() == true)
+      subsystemElevator.setHeight(4.3_tr);
   }
   if (systemJoystick.RightBumper().Get() == true)
     subsystemClaw.percentOut(-0.2);
   if (systemJoystick.LeftBumper().Get() == true)
     subsystemClaw.percentOut(0);
 
-   //frc::SmartDashboard::PutData("autochooser", &paths);
   // frc::SmartDashboard::PutNumberArray("LL pose"
   // [visionEstimate.X().value(),visionEstimate.Y().value()]);
 }
-/**
+
 void RobotContainer::GetStartingPose() {
   auto pathName = paths.GetSelected();
   const frc::Pose2d pose =
       pathplanner::PathPlannerAuto(pathName->GetName()).getStartingPose();
-   drivetrain.ResetPose(pose);
+  drivetrain.ResetPose(pose);
 }
 
 frc2::Command *RobotContainer::GetAutonomousCommand() {
   return paths.GetSelected();
 }
-*/
