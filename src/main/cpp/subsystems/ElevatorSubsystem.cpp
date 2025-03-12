@@ -33,6 +33,7 @@ bool Elevator::isAtTarget() {
   };
 }
 void Elevator::sendData() {
+  isAtTarget();
   elevatorLog.masterPose = masterM.GetPosition().GetValueAsDouble();
   elevatorLog.slavePose = slaveM.GetPosition().GetValueAsDouble();
   elevatorLog.elevatorPose = elevatorEncoder.GetPosition().GetValueAsDouble();
@@ -40,5 +41,9 @@ void Elevator::sendData() {
       elevatorEncoder.GetAbsolutePosition().GetValueAsDouble();
   frc::SmartDashboard::PutString("Elevator/Master Control Mode",
                                  masterM.GetControlMode().ToString());
+ frc::SmartDashboard::PutNumber("Elevator pose", masterM.GetPosition().GetValueAsDouble());
+  frc::SmartDashboard::PutNumber("Elevator Encoder pose", elevatorEncoder.GetPosition().GetValueAsDouble());
+  frc::SmartDashboard::PutBoolean("Elevator at Target?", isAtTarget());
+
 }
 void Elevator::Periodic() { sendData(); }
