@@ -61,8 +61,6 @@ private:
                                .WithNeutralMode(1))
           .WithCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs{}
                                  .WithSupplyCurrentLimit(60_A)
-                                 .WithStatorCurrentLimit(60_A)
-                                 .WithStatorCurrentLimitEnable(true)
                                  .WithSupplyCurrentLowerLimit(30_A)
                                  .WithSupplyCurrentLowerTime(1_s)
                                  .WithSupplyCurrentLimitEnable(false))
