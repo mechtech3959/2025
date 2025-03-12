@@ -67,7 +67,7 @@ class TunerConstants {
               // Swerve azimuth does not require much torque output, so we can
               // set a relatively low stator current limit to help avoid
               // brownouts without impacting performance.
-              .WithStatorCurrentLimit(40_A)
+              .WithStatorCurrentLimit(30_A)//40
               .WithStatorCurrentLimitEnable(true));
   static constexpr configs::TalonFXConfiguration steerInitialConfigs =
       configs::TalonFXConfiguration{}.WithCurrentLimits(
@@ -75,7 +75,7 @@ class TunerConstants {
               // Swerve azimuth does not require much torque output, so we can
               // set a relatively low stator current limit to help avoid
               // brownouts without impacting performance.
-              .WithStatorCurrentLimit(20_A)
+              .WithStatorCurrentLimit(10_A)//20
               .WithStatorCurrentLimitEnable(true));
 
   static constexpr configs::CANcoderConfiguration encoderInitialConfigs{};

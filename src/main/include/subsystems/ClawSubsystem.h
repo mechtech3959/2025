@@ -79,7 +79,7 @@ private:
                                .WithMotionMagicAcceleration(80_tr_per_s_sq)
                                .WithMotionMagicJerk(1600_tr_per_s_cu))
           .WithCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs{}
-                                 .WithSupplyCurrentLimit(15_A)
+                                 .WithSupplyCurrentLimit(10_A)//15
                                  .WithSupplyCurrentLimitEnable(true));
   ctre::phoenix6::configs::CANcoderConfiguration encoderConfigs =
       ctre::phoenix6::configs::CANcoderConfiguration{}.WithMagnetSensor(

@@ -60,8 +60,8 @@ private:
                                .WithInverted(0)
                                .WithNeutralMode(1))
           .WithCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs{}
-                                 .WithSupplyCurrentLimit(60_A)
-                                 .WithSupplyCurrentLowerLimit(30_A)
+                                 .WithSupplyCurrentLimit(40_A)//60
+                                 .WithSupplyCurrentLowerLimit(15_A)//30
                                  .WithSupplyCurrentLowerTime(1_s)
                                  .WithSupplyCurrentLimitEnable(false))
           .WithFeedback(fbConfigs);
