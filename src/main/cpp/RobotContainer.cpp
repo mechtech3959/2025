@@ -51,10 +51,10 @@ void RobotContainer::ConfigureBindings() {
 
   // Run SysId routines when holding back/start and X/Y.
   // Note that each routine should be run exactly once in a single log.
- // (driverJoystick.Back() && driverJoystick.Y())
- //     .WhileTrue(drivetrain.SysIdDynamic(frc2::sysid::Direction::kForward));
- // (driverJoystick.Back() && driverJoystick.X())
-  //    .WhileTrue(drivetrain.SysIdDynamic(frc2::sysid::Direction::kReverse));
+ (driverJoystick.Back() && driverJoystick.Y())
+     .WhileTrue(drivetrain.SysIdDynamic(frc2::sysid::Direction::kForward));
+  (driverJoystick.Back() && driverJoystick.X())
+   .WhileTrue(drivetrain.SysIdDynamic(frc2::sysid::Direction::kReverse));
   (driverJoystick.Start() && driverJoystick.Y())
    .WhileTrue(drivetrain.SysIdQuasistatic(frc2::sysid::Direction::kForward));
 (driverJoystick.Start() && driverJoystick.X())
@@ -85,18 +85,18 @@ void RobotContainer::ConfigureBindings() {
   // driverJoystick.X().WhileTrue(&smartIntake);
 }
 void RobotContainer::ConfigureDashboard(){
-logger.subsystemTelemeterize(subsystemClaw.clawLog,
-                               subsystemElevator.elevatorLog);
+ // logger.subsystemTelemeterize(subsystemClaw.clawLog,
+  //                       subsystemElevator.elevatorLog);
   frc::SmartDashboard::PutData("autochooser", &paths);
 
 }
 void RobotContainer::ConfigureTeli() {
-  if (driverJoystick .Y ().Get() ) {
-    if (algea == false){
-      algea = true;}
-   else if (algea == true){
-      algea = false;}
-  }
+  //if (con .Y ().Get() ) {
+//    if (algea == false){
+  //    algea = true;}
+  // else if (algea == true){
+   //   algea = false;}
+//  }
   frc::SmartDashboard::PutBoolean("alg", algea);
   if (driverJoystick.RightTrigger().Get()) {
     MaxSpeed = 0.5_mps;
