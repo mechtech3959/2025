@@ -8,7 +8,7 @@
 RobotContainer::RobotContainer() {
   ConfigureBindings();
   // ConfigureDashboard();
-  // GetStartingPose();
+  GetStartingPose();
 }
 
 void RobotContainer::ConfigureBindings() {
@@ -91,95 +91,98 @@ void RobotContainer::ConfigureDashboard() {
   frc::SmartDashboard::PutData("autochooser", &paths);
 }
 void RobotContainer::ConfigureTeli() {
-  if (systemJoystick.Back().Get()) {
-        if (algea == false) {
+  if (systemJoystick.GetBackButtonPressed()) {
+    if (algea == false) {
 
-          algea = true;
-        } else if (algea == true) {
-          algea = false;
-        }
-      }
-      frc::SmartDashboard::PutBoolean("alg", algea);
-      /*if (driverJoystick.RightTrigger().Get()) {
-        MaxSpeed = 0.5_mps;
-        MaxAngularRate = 0.3_tps;
-      } else {
-        MaxSpeed = 4.91_mps;
-        MaxAngularRate = 1.0_tps;
-      };*/
-
-      auto rt = systemJoystick.GetRightTriggerAxis();
-      auto lt = systemJoystick.GetLeftTriggerAxis();
-      if (rt > 0.1) {
-        subsystemClaw.percentOut(-rt);
-      } else if (lt > 0.2) {
-        subsystemClaw.percentOut(lt);
-      } else {
-        subsystemClaw.percentOut(0);
-      }
-      if (systemJoystick.Start().Get() == true) {
-        if (subsystemClaw.hasCoral()) {
-          subsystemClaw.percentOut(0);
-          subsystemClaw.setAxis(20_deg);
-        } else {
-          subsystemClaw.setAxis(0_deg);
-          subsystemClaw.percentOut(-0.2);
-        }
-      }
-
-      if (systemJoystick.POVUp().Get() == true)
-        subsystemClaw.setAxis(40_deg);
-      if (systemJoystick.POVLeft().Get() == true)
-        subsystemClaw.setAxis(20_deg);
-      if (systemJoystick.POVDown().Get() == true)
-        subsystemClaw.setAxis(0_deg);
-      if (systemJoystick.POVRight().Get() == true)
-        subsystemClaw.setAxis(150_deg);
-
-      //   if(driverJoystick.Y().Get() == true) subsystemClaw.setAxis(90_deg);
-      //   if(driverJoystick.X().Get() == true) subsystemClaw.setAxis(120_deg);
-      if (systemJoystick.A().Get() == true) {
-        subsystemClaw.setAxis(20_deg);
-        // if(subsystemClaw.getAngle() ==
-        // 20_deg)subsystemElevator.setHeight(0_tr);
-        if (subsystemClaw.acceptableAngle() == true)
-          subsystemElevator.setHeight(0_tr);
-      } // 2.5 tr = l3 at 30 deg
-      if (systemJoystick.B().Get() == true) {
-        subsystemClaw.setAxis(20_deg);
-        if (subsystemClaw.acceptableAngle() == true)
-          subsystemElevator.setHeight(1_tr);
-      } // 2.5 tr = l3 at 30 deg
-
-      if (systemJoystick.X().Get() == true) {
-        subsystemClaw.setAxis(20_deg);
-        if (subsystemClaw.acceptableAngle() == true)
-          subsystemElevator.setHeight(2.3_tr);
-      }
-      // 2.5 tr = l3 at 30 deg
-      // 4tr? l4 90 deg
-      if (systemJoystick.Y().Get() == true) {
-        subsystemClaw.setAxis(20_deg);
-
-        if (subsystemClaw.acceptableAngle() == true)
-          subsystemElevator.setHeight(4.3_tr);
-      }
-      if (systemJoystick.RightBumper().Get() == true)
-        subsystemClaw.percentOut(-0.2);
-      if (systemJoystick.LeftBumper().Get() == true)
-        subsystemClaw.percentOut(0);
-
-      // frc::SmartDashboard::PutNumberArray("LL pose"
-      // [visionEstimate.X().value(),visionEstimate.Y().value()]);
+      algea = true;
+    } else if (algea == true) {
+      algea = false;
     }
-
-  void RobotContainer::GetStartingPose() {
-    auto pathName = paths.GetSelected();
-    const frc::Pose2d pose =
-        pathplanner::PathPlannerAuto(pathName->GetName()).getStartingPose();
-    drivetrain.ResetPose(pose);
   }
+  frc::SmartDashboard::PutBoolean("alg", algea);
+  if (driverJoystick.RightTrigger().Get()) {
+    MaxSpeed = 0.5_mps;
+    MaxAngularRate = 0.3_tps;
+  } else {
+    MaxSpeed = 4.91_mps;
+    MaxAngularRate = 1.0_tps;
+  };
 
-  frc2::Command *RobotContainer::GetAutonomousCommand() {
-    return paths.GetSelected();
+  auto rt = systemJoystick.GetRightTriggerAxis();
+  auto lt = systemJoystick.GetLeftTriggerAxis();
+  if (rt > 0.1) {
+    subsystemClaw.percentOut(-rt);
+  } else if (lt > 0.2) {
+    subsystemClaw.percentOut(lt);
+  } else {
+    subsystemClaw.percentOut(0);
   }
+  if (systemJoystick.GetStartButton()) {
+    if (subsystemClaw.hasCoral()) {
+      subsystemClaw.percentOut(0);
+      subsystemClaw.setAxis(20_deg);
+    } else {
+      subsystemClaw.setAxis(0_deg);
+      subsystemClaw.percentOut(-0.2);
+    }
+  }
+  // up 0
+  // right 90
+  // down 180 ?
+  // left 270
+  if (systemJoystick.GetPOV() == 0)
+    subsystemClaw.setAxis(40_deg);
+  if (systemJoystick.GetPOV() == 90)
+    subsystemClaw.setAxis(20_deg);
+  if (systemJoystick.GetPOV() == 180)
+    subsystemClaw.setAxis(0_deg);
+  if (systemJoystick.GetPOV() ==  270)
+    subsystemClaw.setAxis(150_deg);
+
+  //   if(driverJoystick.Y().Get() == true) subsystemClaw.setAxis(90_deg);
+  //   if(driverJoystick.X().Get() == true) subsystemClaw.setAxis(120_deg);
+  if (systemJoystick.GetAButtonPressed() == true) {
+    subsystemClaw.setAxis(20_deg);
+    // if(subsystemClaw.getAngle() ==
+    // 20_deg)subsystemElevator.setHeight(0_tr);
+    if (subsystemClaw.acceptableAngle() == true)
+      subsystemElevator.setHeight(0_tr);
+  } // 2.5 tr = l3 at 30 deg
+  if (systemJoystick.GetBButtonPressed() == true) {
+    subsystemClaw.setAxis(20_deg);
+    if (subsystemClaw.acceptableAngle() == true)
+      subsystemElevator.setHeight(1_tr);
+  } // 2.5 tr = l3 at 30 deg
+
+  if (systemJoystick.GetXButtonPressed() == true) {
+    subsystemClaw.setAxis(20_deg);
+    if (subsystemClaw.acceptableAngle() == true)
+      subsystemElevator.setHeight(2.3_tr);
+  }
+  // 2.5 tr = l3 at 30 deg
+  // 4tr? l4 90 deg
+  if (systemJoystick.GetYButtonPressed() == true) {
+    subsystemClaw.setAxis(20_deg);
+
+    if (subsystemClaw.acceptableAngle() == true)
+      subsystemElevator.setHeight(4.35_tr);
+  }
+  if (systemJoystick.GetLeftBumperButton() == true)
+    subsystemClaw.percentOut(-0.2);
+  if (systemJoystick.GetRightBumperButton() == true)
+    subsystemClaw.percentOut(0);
+
+  // frc::SmartDashboard::PutNumberArray("LL pose"
+  // [visionEstimate.X().value(),visionEstimate.Y().value()]);
+}
+
+void RobotContainer::GetStartingPose() {
+  auto pathName = paths.GetSelected();
+  const frc::Pose2d pose =
+      pathplanner::PathPlannerAuto(pathName->GetName()).getStartingPose();
+  drivetrain.ResetPose(pose);
+}
+
+frc2::Command *RobotContainer::GetAutonomousCommand() {
+  return paths.GetSelected();
+}

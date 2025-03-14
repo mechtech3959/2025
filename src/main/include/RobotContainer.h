@@ -21,6 +21,7 @@
 #include "Commands/ScoreL3.h"
 #include "Commands/Claw/setClawIntake.h"
 #include "Commands/Claw/setClawFeedStart.h"
+#include <frc/XboxController.h>
 class RobotContainer {
 private:
   units::meters_per_second_t MaxSpeed =
@@ -48,7 +49,7 @@ private:
    */
   Telemetry logger{MaxSpeed};
     frc2::CommandXboxController driverJoystick{0};
-  frc2::CommandXboxController systemJoystick{1};
+  frc::XboxController systemJoystick{1};
 
 public:
   subsystems::Claw subsystemClaw;
