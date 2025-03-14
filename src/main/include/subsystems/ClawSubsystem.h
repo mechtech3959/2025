@@ -7,6 +7,8 @@
 #include <frc2/command/Subsystem.h>
 #include <frc2/command/SubsystemBase.h>
 #include <frc2/command/sysid/SysIdRoutine.h>
+#include <frc/Preferences.h>
+#include <string>
 
 namespace subsystems {
 
@@ -16,16 +18,36 @@ private:
   ctre::phoenix6::hardware::TalonFX axisMotor;
   ctre::phoenix6::hardware::CANcoder axisEncoder;
   ctre::phoenix6::controls::MotionMagicVoltage axisMotion;
+  ctre::phoenix6::controls::MotionMagicVoltage zeroAxis;
+
   ctre::phoenix6::controls::VoltageOut sysReq{0_V};
+   std::string_view clawPositionKey = "ClawPosition";
+  std::string_view ClawPKey = "ClawP";
+  std::string_view ClawIKey = "ClawI";
+  std::string_view ClawDKey = "ClawD";
+  std::string_view ClawAKey = "ClawA";
+  std::string_view ClawSKey = "ClawS";
+  std::string_view ClawGKey = "ClawG";
+  std::string_view ClawVKey = "ClawV";
+
+  double DefaultClawKp = 15.0;
+  double DefaultClawKi = 12.0;
+  double DefaultClawKd = 0;
+  double DefaultClawKa = 0;
+  double DefaultClawKs = 0;
+  double DefaultClawKg = 0;
+  double DefaultClawKv = 15.0;
+
+  double DefaultClawSetpoint = 0;
   ctre::phoenix6::configs::Slot0Configs axisSlot =
       ctre::phoenix6::configs::Slot0Configs{}
           .WithKS(0.3)
           .WithKA(0)
-          .WithKG(0)
-          .WithKI(12)//.2 .5 1
-          .WithKD(0)//.1 .5
-          .WithKV(0.001)
-          .WithKP(15)
+          .WithKG(0.3)
+          .WithKI(2)//.2 .5 1 12
+          .WithKD(0.1)//.1 .5
+          .WithKV(0.1)
+          .WithKP(12) //15
           .WithGravityType(
               ctre::phoenix6::signals::GravityTypeValue::Arm_Cosine)
           .WithStaticFeedforwardSign(
@@ -37,7 +59,7 @@ private:
           .WithFeedbackRemoteSensorID(15)
           .WithFeedbackSensorSource(
               ctre::phoenix6::signals::FeedbackSensorSourceValue::FusedCANcoder)
-          .WithRotorToSensorRatio(16.0)
+          .WithRotorToSensorRatio(36.0)
           .WithSensorToMechanismRatio(1.0);
   ctre::phoenix6::configs::TalonFXConfiguration axisConfig =
       ctre::phoenix6::configs::TalonFXConfiguration{}
@@ -57,7 +79,7 @@ private:
                                .WithMotionMagicAcceleration(80_tr_per_s_sq)
                                .WithMotionMagicJerk(1600_tr_per_s_cu))
           .WithCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs{}
-                                 .WithSupplyCurrentLimit(15_A)
+                                 .WithSupplyCurrentLimit(10_A)//15
                                  .WithSupplyCurrentLimitEnable(true));
   ctre::phoenix6::configs::CANcoderConfiguration encoderConfigs =
       ctre::phoenix6::configs::CANcoderConfiguration{}.WithMagnetSensor(
@@ -116,6 +138,7 @@ frc2::CommandPtr SysIdDynamic(frc2::sysid::Direction direction)
   units::angle::degree_t getAngle();
   bool hasCoral();
   bool acceptableAngle();
+  void LoadPreferences();
 };
 
 } // namespace subsystems

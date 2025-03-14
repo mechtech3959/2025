@@ -28,8 +28,8 @@ private:
       ctre::phoenix6::configs::Slot0Configs{}
           .WithGravityType(
               ctre::phoenix6::signals::GravityTypeValue::Elevator_Static)
-          .WithKP(3.5)
-          .WithKI(1)
+          .WithKP(7)//3.5 5
+          .WithKI(0.8)//1 
           .WithKD(0.1)
           .WithKS(0.4)
           .WithKG(0.3)
@@ -42,15 +42,15 @@ private:
   ctre::phoenix6::configs::MotionMagicConfigs magicMotionConfigs =
       ctre::phoenix6::configs::MotionMagicConfigs{}
           .WithMotionMagicJerk(2000_tr_per_s_cu)
-          .WithMotionMagicCruiseVelocity(10_tps)
-          .WithMotionMagicAcceleration(10_tr_per_s_sq)
+          .WithMotionMagicCruiseVelocity(20_tps)//10 11
+          .WithMotionMagicAcceleration(20_tr_per_s_sq)//10 11
           .WithMotionMagicExpo_kA(
               ctre::unit::volts_per_turn_per_second_squared_t{0.3});
 
   ctre::phoenix6::configs::FeedbackConfigs fbConfigs =
       ctre::phoenix6::configs::FeedbackConfigs{}
           .WithRotorToSensorRatio(1)
-          .WithSensorToMechanismRatio(8)
+          .WithSensorToMechanismRatio(18)
           .WithFeedbackRemoteSensorID(9);
   ctre::phoenix6::configs::TalonFXConfiguration elevatorConfigs =
       ctre::phoenix6::configs::TalonFXConfiguration{}
@@ -60,10 +60,10 @@ private:
                                .WithInverted(0)
                                .WithNeutralMode(1))
           .WithCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs{}
-                                 .WithSupplyCurrentLimit(65_A)
-                                 .WithSupplyCurrentLowerLimit(30_A)
+                                 .WithSupplyCurrentLimit(50_A)//60
+                                 .WithSupplyCurrentLowerLimit(20_A)//30
                                  .WithSupplyCurrentLowerTime(1_s)
-                                 .WithSupplyCurrentLimitEnable(true))
+                                 .WithSupplyCurrentLimitEnable(false))
           .WithFeedback(fbConfigs);
   ctre::phoenix6::configs::CANcoderConfiguration encoderConfigs =
       ctre::phoenix6::configs::CANcoderConfiguration{};

@@ -6,7 +6,9 @@
 
 #include <frc2/command/CommandScheduler.h>
 
-Robot::Robot() {}
+Robot::Robot() {
+    frc::CameraServer::StartAutomaticCapture().SetFPS(30);
+}
 
 void Robot::RobotPeriodic() {
   frc2::CommandScheduler::GetInstance().Run();
@@ -29,7 +31,7 @@ void Robot::DisabledExit() {}
 
 void Robot::AutonomousInit() {
 
-  //m_autonomousCommand = m_container.GetAutonomousCommand();
+  m_autonomousCommand = m_container.GetAutonomousCommand();
 
   if (m_autonomousCommand) {
     m_autonomousCommand.value()->Schedule();
@@ -47,7 +49,7 @@ void Robot::TeleopInit() {
 }
 
 void Robot::TeleopPeriodic() {
-  m_container.ConfigureDashboard();
+  m_container.ConfigureTeli();
 }
 
 void Robot::TeleopExit() {}
