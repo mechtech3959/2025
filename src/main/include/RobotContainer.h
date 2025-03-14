@@ -22,6 +22,7 @@
 #include "Commands/Claw/setClawIntake.h"
 #include "Commands/Claw/setClawFeedStart.h"
 #include <frc/XboxController.h>
+#include <pathplanner/lib/auto/NamedCommands.h>
 class RobotContainer {
 private:
   units::meters_per_second_t MaxSpeed =
