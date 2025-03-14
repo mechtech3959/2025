@@ -86,8 +86,8 @@ void RobotContainer::ConfigureBindings() {
   // driverJoystick.X().WhileTrue(&smartIntake);
 }
 void RobotContainer::ConfigureDashboard() {
-  // logger.subsystemTelemeterize(subsystemClaw.clawLog,
-  //                       subsystemElevator.elevatorLog);
+  logger.subsystemTelemeterize(subsystemClaw.clawLog,
+                               subsystemElevator.elevatorLog);
   frc::SmartDashboard::PutData("autochooser", &paths);
 }
 void RobotContainer::ConfigureTeli() {
@@ -136,36 +136,53 @@ void RobotContainer::ConfigureTeli() {
     subsystemClaw.setAxis(20_deg);
   if (systemJoystick.GetPOV() == 180)
     subsystemClaw.setAxis(0_deg);
-  if (systemJoystick.GetPOV() ==  270)
+  if (systemJoystick.GetPOV() == 270)
     subsystemClaw.setAxis(150_deg);
 
   //   if(driverJoystick.Y().Get() == true) subsystemClaw.setAxis(90_deg);
   //   if(driverJoystick.X().Get() == true) subsystemClaw.setAxis(120_deg);
   if (systemJoystick.GetAButtonPressed() == true) {
-    subsystemClaw.setAxis(20_deg);
-    // if(subsystemClaw.getAngle() ==
-    // 20_deg)subsystemElevator.setHeight(0_tr);
-    if (subsystemClaw.acceptableAngle() == true)
-      subsystemElevator.setHeight(0_tr);
+    if (algea) {
+      subsystemClaw.setAxis(150_deg); // CHECKK!!! might be weird........ set diff just in case ELE slam
+      if (subsystemClaw.acceptableAngle() == true)subsystemElevator.setHeight(0_tr); // CHECK
+    } else if (!algea) {
+      subsystemClaw.setAxis(20_deg);
+      // if(subsystemClaw.getAngle() ==
+      // 20_deg)subsystemElevator.setHeight(0_tr);
+      if (subsystemClaw.acceptableAngle() == true)subsystemElevator.setHeight(0_tr);
+    }
   } // 2.5 tr = l3 at 30 deg
   if (systemJoystick.GetBButtonPressed() == true) {
-    subsystemClaw.setAxis(20_deg);
-    if (subsystemClaw.acceptableAngle() == true)
-      subsystemElevator.setHeight(1_tr);
-  } // 2.5 tr = l3 at 30 deg
+    if (algea) {
+      subsystemClaw.setAxis(180_deg); // CHECKK!!!
+      if (subsystemClaw.acceptableAngle() == true)subsystemElevator.setHeight(1.65_tr); // CHECK
+    } else if (!algea) {
+      subsystemClaw.setAxis(20_deg);
+      if (subsystemClaw.acceptableAngle() == true)subsystemElevator.setHeight(1_tr);
+    }
+  }
+  // 2.5 tr = l3 at 30 deg
 
   if (systemJoystick.GetXButtonPressed() == true) {
-    subsystemClaw.setAxis(20_deg);
-    if (subsystemClaw.acceptableAngle() == true)
-      subsystemElevator.setHeight(2.3_tr);
+    if (algea) {
+      subsystemClaw.setAxis(180_deg); // CHECKK!!!
+      if (subsystemClaw.acceptableAngle() == true)subsystemElevator.setHeight(3.8_tr); // CHECK
+    } else if (!algea) {
+      subsystemClaw.setAxis(20_deg);
+      if (subsystemClaw.acceptableAngle() == true)subsystemElevator.setHeight(2.3_tr);
+    }
   }
   // 2.5 tr = l3 at 30 deg
   // 4tr? l4 90 deg
   if (systemJoystick.GetYButtonPressed() == true) {
-    subsystemClaw.setAxis(20_deg);
+    if (algea) {
+      subsystemClaw.setAxis(90_deg); // CHECKK!!!???
+      if (subsystemClaw.acceptableAngle() == true)subsystemElevator.setHeight(5_tr); // CHECK
+    } else if (!algea) {
+      subsystemClaw.setAxis(20_deg);
 
-    if (subsystemClaw.acceptableAngle() == true)
-      subsystemElevator.setHeight(4.35_tr);
+      if (subsystemClaw.acceptableAngle() == true)subsystemElevator.setHeight(4.35_tr);
+    }
   }
   if (systemJoystick.GetLeftBumperButton() == true)
     subsystemClaw.percentOut(-0.2);
