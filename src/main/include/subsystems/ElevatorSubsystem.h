@@ -42,8 +42,8 @@ private:
   ctre::phoenix6::configs::MotionMagicConfigs magicMotionConfigs =
       ctre::phoenix6::configs::MotionMagicConfigs{}
           .WithMotionMagicJerk(2000_tr_per_s_cu)
-          .WithMotionMagicCruiseVelocity(20_tps)//10 11
-          .WithMotionMagicAcceleration(20_tr_per_s_sq)//10 11
+          .WithMotionMagicCruiseVelocity(40_tps)//10 11
+          .WithMotionMagicAcceleration(40_tr_per_s_sq)//10 11
           .WithMotionMagicExpo_kA(
               ctre::unit::volts_per_turn_per_second_squared_t{0.3});
 

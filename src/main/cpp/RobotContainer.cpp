@@ -4,20 +4,27 @@
 
 #include "RobotContainer.h"
 #include <frc2/command/Commands.h>
-
+frc2::CommandPtr RobotContainer::seta(){
+  return frc2::InstantCommand([this]{this->subsystemClaw.setAxis(20_deg);}).ToPtr();
+}
+//frc2::CommandPtr RobotContainer::feed(){
+ // return  ;
+//}
+frc2::CommandPtr RobotContainer::feedStop(){
+  return frc2::InstantCommand([this]{this->subsystemClaw.percentOut(0);}).ToPtr();
+}
 RobotContainer::RobotContainer() {
   pathplanner::NamedCommands::registerCommand(
-      "coralangle",
-      frc2::cmd::RunOnce([this] { subsystemClaw.setAxis(20_deg); }));
+      "coralangle",  std::move(frc2::cmd::RunOnce([this]{ this->subsystemClaw.setAxis(20_deg);},{&subsystemClaw})));
       pathplanner::NamedCommands::registerCommand(
       "zeroangle",
-      frc2::cmd::RunOnce([this] { subsystemClaw.setAxis(0_deg); }));
+        std::move(frc2::cmd::RunOnce([this]{ this->subsystemClaw.setAxis(0_deg);},{&subsystemClaw})));
        pathplanner::NamedCommands::registerCommand(
       "coralout",
-      frc2::cmd::RunOnce([this] { subsystemClaw.percentOut(0.2); }));
+      std::move(frc2::cmd::RunOnce([this]{ this->subsystemClaw.percentOut(-0.2);},{&subsystemClaw})));
   pathplanner::NamedCommands::registerCommand(
       "feedstop",
-      frc2::cmd::RunOnce([this] { subsystemClaw.percentOut(0.0); }));
+        std::move(frc2::cmd::RunOnce([this]{ this->subsystemClaw.percentOut(0);},{&subsystemClaw})));
   pathplanner::NamedCommands::registerCommand(
       "intake", frc2::cmd::RunOnce([this] {
         if (subsystemClaw.hasCoral()) {
@@ -28,7 +35,8 @@ RobotContainer::RobotContainer() {
           subsystemClaw.percentOut(-0.2);
         }
       }));
-      
+        pathplanner::NamedCommands::registerCommand(
+      "test",  std::move(frc2::PrintCommand("Working").ToPtr()));
 
   ConfigureBindings();
   // ConfigureDashboard();
@@ -170,7 +178,7 @@ void RobotContainer::ConfigureTeli() {
       subsystemClaw.setAxis(150_deg); // CHECKK!!! might be weird........ set
                                       // diff just in case ELE slam
       if (subsystemClaw.acceptableAngle() == true)
-        subsystemElevator.setHeight(0_tr); // CHECK
+        subsystemElevator.setHeight(0.0_tr); // CHECK
     } else if (!algea) {
       subsystemClaw.setAxis(20_deg);
       // if(subsystemClaw.getAngle() ==
@@ -182,8 +190,8 @@ void RobotContainer::ConfigureTeli() {
   if (systemJoystick.GetBButtonPressed() == true) {
     if (algea) {
       subsystemClaw.setAxis(180_deg); // CHECKK!!!
-      if (subsystemClaw.acceptableAngle() == true)
-        subsystemElevator.setHeight(1.65_tr); // CHECK
+      if (subsystemClaw.getAngle()  > 30_deg)
+        subsystemElevator.setHeight(1.9_tr); // CHECK
     } else if (!algea) {
       subsystemClaw.setAxis(20_deg);
       if (subsystemClaw.acceptableAngle() == true)
@@ -195,7 +203,7 @@ void RobotContainer::ConfigureTeli() {
   if (systemJoystick.GetXButtonPressed() == true) {
     if (algea) {
       subsystemClaw.setAxis(180_deg); // CHECKK!!!
-      if (subsystemClaw.acceptableAngle() == true)
+      if (subsystemClaw.getAngle()  > 30_deg)
         subsystemElevator.setHeight(3.8_tr); // CHECK
     } else if (!algea) {
       subsystemClaw.setAxis(20_deg);
@@ -207,9 +215,9 @@ void RobotContainer::ConfigureTeli() {
   // 4tr? l4 90 deg
   if (systemJoystick.GetYButtonPressed() == true) {
     if (algea) {
-      subsystemClaw.setAxis(90_deg); // CHECKK!!!???
-      if (subsystemClaw.acceptableAngle() == true)
-        subsystemElevator.setHeight(5_tr); // CHECK
+      subsystemClaw.setAxis(120_deg); // CHECKK!!!???
+      if (subsystemClaw.getAngle()  > 30_deg)
+        subsystemElevator.setHeight(5.2_tr); // CHECK
     } else if (!algea) {
       subsystemClaw.setAxis(20_deg);
 
@@ -217,9 +225,9 @@ void RobotContainer::ConfigureTeli() {
         subsystemElevator.setHeight(4.35_tr);
     }
   }
-  if (systemJoystick.GetLeftBumperButton() == true)
-    subsystemClaw.percentOut(-0.2);
   if (systemJoystick.GetRightBumperButton() == true)
+    subsystemClaw.percentOut(-0.2);
+  if (systemJoystick.GetLeftBumperButton() == true)
     subsystemClaw.percentOut(0);
 
   // frc::SmartDashboard::PutNumberArray("LL pose"
