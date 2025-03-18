@@ -1,5 +1,8 @@
 ﻿# Mech Tech 3959 FRC 2025 Reefscape Season code 
- Competed Week 3 at the Rocket City Regional
+ 
+ 
+ 
+ Competed at Week 3 at the Rocket City Regional
  Made to semi-finals - Match 10
  Two Stage elevator with 270_DOF Claw 
  PathPlanner integration
