@@ -21,8 +21,12 @@
 #include "Commands/ScoreL3.h"
 #include "Commands/Claw/setClawIntake.h"
 #include "Commands/Claw/setClawFeedStart.h"
+#include "Commands/Claw/setClawFeedStop.h"
+
 #include <frc/XboxController.h>
 #include <pathplanner/lib/auto/NamedCommands.h>
+#include <frc2/command/InstantCommand.h>
+
 class RobotContainer {
 private:
   units::meters_per_second_t MaxSpeed =
@@ -37,7 +41,7 @@ private:
           .WithRotationalDeadband(MaxAngularRate * 0.05) //0.1 Add a 10% deadband
           .WithDriveRequestType(
               swerve::DriveRequestType::
-                  OpenLoopVoltage); // Use open-loop control for drive motors
+                  OpenLoopVoltage).WithForwardPerspective(TunerConstants ); // Use open-loop control for drive motors
   swerve::requests::SwerveDriveBrake brake{};
   swerve::requests::PointWheelsAt point{};
   swerve::requests::RobotCentric rDrive =
@@ -57,6 +61,7 @@ public:
   subsystems::Elevator subsystemElevator;
     ScoreL3 L3{&subsystemClaw,&subsystemElevator};
     setClawIntake smartIntake{&subsystemClaw};
+    setClawFeedStop stop{&subsystemClaw};
     setClawFeedStart start{&subsystemClaw};
   subsystems::CommandSwerveDrivetrain drivetrain{
      TunerConstants::CreateDrivetrain()};
@@ -71,8 +76,16 @@ public:
     pathplanner::AutoBuilder::buildAutoChooser("Def");
   std::string autopose;
 bool algea = false;
-  RobotContainer();
+  frc2::InstantCommand outtakeCoral{[this]{subsystemClaw.percentOut(-0.2);},{}};
+  // frc2::InstantCommand feedStop{[this]{subsystemClaw.percentOut(0);},{}};
+  frc2::InstantCommand setANgle{[this]{subsystemClaw.setAxis(20_deg); },{}};
+    
 
+
+  RobotContainer();
+ frc2::CommandPtr seta();
+ frc2::CommandPtr feed();
+ frc2::CommandPtr feedStop();
   frc2::Command* GetAutonomousCommand();
   void GetStartingPose();
 

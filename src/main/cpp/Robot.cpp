@@ -30,7 +30,7 @@ void Robot::DisabledPeriodic() {}
 void Robot::DisabledExit() {}
 
 void Robot::AutonomousInit() {
-
+autonT.Start();
   m_autonomousCommand = m_container.GetAutonomousCommand();
 
   if (m_autonomousCommand) {
@@ -38,11 +38,18 @@ void Robot::AutonomousInit() {
   }
 }
 
-void Robot::AutonomousPeriodic() {}
+void Robot::AutonomousPeriodic() {
+  if(autonT.Get() >= 6_s){
+    m_container.subsystemClaw.setAxis(20_deg);
+   if(autonT.Get() >= 7_s){
+    m_container.subsystemClaw.percentOut(-0.2);
+    }  };
+}
 
 void Robot::AutonomousExit() {}
 
-void Robot::TeleopInit() {
+void Robot::TeleopInit() {                       
+  autonT.Stop();
   if (m_autonomousCommand) {
     m_autonomousCommand.value()->Cancel();
   }

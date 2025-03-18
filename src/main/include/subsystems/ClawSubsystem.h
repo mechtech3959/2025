@@ -9,6 +9,7 @@
 #include <frc2/command/sysid/SysIdRoutine.h>
 #include <frc/Preferences.h>
 #include <string>
+#include <frc2/command/InstantCommand.h>
 
 namespace subsystems {
 

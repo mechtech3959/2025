@@ -79,6 +79,8 @@ void Claw::LoadPreferences(){
 
  //}
 };
+
+
 void Claw::Periodic() {
   acceptableAngle();
   hasCoral();

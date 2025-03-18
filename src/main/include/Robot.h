@@ -9,11 +9,12 @@
 #include <frc/TimedRobot.h>
 #include <frc2/command/CommandPtr.h>
 #include <cameraserver/CameraServer.h>
-
+#include <frc/Timer.h>
 #include "RobotContainer.h"
 
 class Robot : public frc::TimedRobot {
 public:
+frc::Timer autonT;
   Robot();
   void RobotPeriodic() override;
   void DisabledInit() override;

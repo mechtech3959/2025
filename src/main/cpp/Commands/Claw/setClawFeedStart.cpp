@@ -12,9 +12,10 @@ void setClawFeedStart::Initialize() {
 }
 
 bool setClawFeedStart::IsFinished() {
-  if (Claw->endIntake == true) {
-    return true;
-  } else {
-    return false;
-  };
+//  if (Claw->endIntake == true) {
+ //   return true;
+ // } else {
+   // return false;
+//  };
+return true;
 }
