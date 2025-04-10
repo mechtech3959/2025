@@ -4,6 +4,10 @@
 
 #pragma once
 
+#include "Commands/Claw/setClawFeedStart.h"
+#include "Commands/Claw/setClawFeedStop.h"
+#include "Commands/Claw/setClawIntake.h"
+#include "Commands/ScoreL3.h"
 #include "Telemetry.h"
 #include "subsystems/ClawSubsystem.h"
 #include "subsystems/CommandSwerveDrivetrain.h"
@@ -12,20 +16,16 @@
 #include <frc/smartdashboard/Field2d.h>
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc/smartdashboard/SmartDashboard.h>
-#include <frc2/command/CommandPtr.h>
 #include <frc2/command/Command.h>
+#include <frc2/command/CommandPtr.h>
 #include <frc2/command/button/CommandXboxController.h>
 #include <pathplanner/lib/auto/AutoBuilder.h>
 #include <pathplanner/lib/commands/PathPlannerAuto.h>
 #include <pathplanner/lib/path/PathPlannerPath.h>
-#include "Commands/ScoreL3.h"
-#include "Commands/Claw/setClawIntake.h"
-#include "Commands/Claw/setClawFeedStart.h"
-#include "Commands/Claw/setClawFeedStop.h"
 
 #include <frc/XboxController.h>
-#include <pathplanner/lib/auto/NamedCommands.h>
 #include <frc2/command/InstantCommand.h>
+#include <pathplanner/lib/auto/NamedCommands.h>
 
 class RobotContainer {
 private:
@@ -37,11 +37,12 @@ private:
   /* Setting up bindings for necessary control of the swerve drive platform */
   swerve::requests::FieldCentric drive =
       swerve::requests::FieldCentric{}
-          .WithDeadband(MaxSpeed * 0.05)//0.1
-          .WithRotationalDeadband(MaxAngularRate * 0.05) //0.1 Add a 10% deadband
+          .WithDeadband(MaxSpeed * 0.05) // 0.1
+          .WithRotationalDeadband(MaxAngularRate *
+                                  0.05) // 0.1 Add a 10% deadband
           .WithDriveRequestType(
               swerve::DriveRequestType::
-                  OpenLoopVoltage).WithForwardPerspective(TunerConstants ); // Use open-loop control for drive motors
+                  OpenLoopVoltage); // Use open-loop control for drive motors
   swerve::requests::SwerveDriveBrake brake{};
   swerve::requests::PointWheelsAt point{};
   swerve::requests::RobotCentric rDrive =
@@ -53,40 +54,39 @@ private:
    * to define a destructor to un-register the telemetry from the drivetrain
    */
   Telemetry logger{MaxSpeed};
-    frc2::CommandXboxController driverJoystick{0};
+  frc2::CommandXboxController driverJoystick{0};
   frc::XboxController systemJoystick{1};
 
 public:
   subsystems::Claw subsystemClaw;
   subsystems::Elevator subsystemElevator;
-    ScoreL3 L3{&subsystemClaw,&subsystemElevator};
-    setClawIntake smartIntake{&subsystemClaw};
-    setClawFeedStop stop{&subsystemClaw};
-    setClawFeedStart start{&subsystemClaw};
+  ScoreL3 L3{&subsystemClaw, &subsystemElevator};
+  setClawIntake smartIntake{&subsystemClaw};
+  setClawFeedStop stop{&subsystemClaw};
+  setClawFeedStart start{&subsystemClaw};
   subsystems::CommandSwerveDrivetrain drivetrain{
-     TunerConstants::CreateDrivetrain()};
+      TunerConstants::CreateDrivetrain()};
 
- // subsystems::LimeLight frontLimeLight{"limelight-front"};
-  //subsystems::LimeLight backLimeLight{"limelight-back"};
+  // subsystems::LimeLight frontLimeLight{"limelight-front"};
+  // subsystems::LimeLight backLimeLight{"limelight-back"};
   frc::Pose2d visionEstimate;
 
   std::shared_ptr<pathplanner::PathPlannerPath> SetAutonomousPath();
   std::unique_ptr<frc2::Command> exampleAuto;
   frc::SendableChooser<frc2::Command *> paths =
-    pathplanner::AutoBuilder::buildAutoChooser("Def");
+      pathplanner::AutoBuilder::buildAutoChooser("Def");
   std::string autopose;
-bool algea = false;
-  frc2::InstantCommand outtakeCoral{[this]{subsystemClaw.percentOut(-0.2);},{}};
+  bool algea = false;
+  frc2::InstantCommand outtakeCoral{[this] { subsystemClaw.percentOut(-0.2); },
+                                    {}};
   // frc2::InstantCommand feedStop{[this]{subsystemClaw.percentOut(0);},{}};
-  frc2::InstantCommand setANgle{[this]{subsystemClaw.setAxis(20_deg); },{}};
-    
-
+  frc2::InstantCommand setANgle{[this] { subsystemClaw.setAxis(20_deg); }, {}};
 
   RobotContainer();
- frc2::CommandPtr seta();
- frc2::CommandPtr feed();
- frc2::CommandPtr feedStop();
-  frc2::Command* GetAutonomousCommand();
+  frc2::CommandPtr seta();
+  frc2::CommandPtr feed();
+  frc2::CommandPtr feedStop();
+  frc2::Command *GetAutonomousCommand();
   void GetStartingPose();
 
   void ConfigureTeli();

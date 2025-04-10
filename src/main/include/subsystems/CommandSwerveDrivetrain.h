@@ -30,7 +30,7 @@ class CommandSwerveDrivetrain : public frc2::SubsystemBase,
   /* Red alliance sees forward as 180 degrees (toward blue alliance wall) */
   static constexpr frc::Rotation2d kRedAlliancePerspectiveRotation{0_deg}; //swap?
   /* Keep track if we've ever applied the operator perspective before or not */
-  bool m_hasAppliedOperatorPerspective = false;
+  bool m_hasAppliedOperatorPerspective = true;
 
   /** Swerve request to apply during robot-centric path following */
   swerve::requests::ApplyRobotSpeeds m_pathApplyRobotSpeeds;

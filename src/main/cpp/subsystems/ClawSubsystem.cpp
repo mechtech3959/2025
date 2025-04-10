@@ -4,25 +4,31 @@ using namespace subsystems;
 
 Claw::Claw()
     : feedMotor{30, rev::spark::SparkMax::MotorType::kBrushless},
-      axisMotor{14, "CanBus"}, axisEncoder{15, "CanBus"}, axisMotion{0_deg}, zeroAxis{0_tr} {
+      axisMotor{14, "CanBus"}, axisEncoder{15, "CanBus"}, axisMotion{0_deg},
+      zeroAxis{0_tr} {
   axisMotor.SetPosition(0_deg);
   axisEncoder.SetPosition(0_deg);
   axisEncoder.GetConfigurator().Apply(encoderConfigs);
   axisMotor.GetConfigurator().Apply(axisConfig);
 
-  frc::Preferences::InitDouble(Claw::clawPositionKey,Claw::DefaultClawSetpoint);
-  frc::Preferences::InitDouble(Claw::ClawPKey,Claw::DefaultClawKp);
-  frc::Preferences::InitDouble(Claw::ClawIKey,Claw::DefaultClawKi);
-  frc::Preferences::InitDouble(Claw::ClawDKey,Claw::DefaultClawKd);
-
+  frc::Preferences::InitDouble(Claw::clawPositionKey,
+                               Claw::DefaultClawSetpoint);
+  frc::Preferences::InitDouble(Claw::ClawPKey, Claw::DefaultClawKp);
+  frc::Preferences::InitDouble(Claw::ClawIKey, Claw::DefaultClawKi);
+  frc::Preferences::InitDouble(Claw::ClawDKey, Claw::DefaultClawKd);
 };
 units::angle::degree_t Claw::getAngle() {
   return (axisEncoder.GetPosition().GetValue());
 };
 void Claw::setAxis(units::degree_t angle) {
-  if (angle == 0_deg){
-    axisMotor.SetControl(zeroAxis.WithPosition(0_tr).WithUseTimesync(true).WithEnableFOC(true));
-  }else{  axisMotor.SetControl(axisMotion.WithPosition(angle).WithUseTimesync(true).WithEnableFOC(true));};
+  if (angle == 0_deg) {
+    axisMotor.SetControl(
+        zeroAxis.WithPosition(0_tr).WithUseTimesync(true).WithEnableFOC(true));
+  } else {
+    axisMotor.SetControl(
+        axisMotion.WithPosition(angle).WithUseTimesync(true).WithEnableFOC(
+            true));
+  };
   lastKnownAngle = angle;
   // status signal for motor output
   (axisMotor.GetMotorOutputStatus().GetValue() == 2) ? state = onTarget
@@ -51,7 +57,7 @@ void Claw::sendData() {
   clawLog.encoderPose = axisEncoder.GetPosition().GetValueAsDouble();
   clawLog.encoderABSPose = axisEncoder.GetAbsolutePosition().GetValueAsDouble();
   clawLog.currentAngle = double{getAngle()};
-  clawLog.acceptableAngle = acceptableAngle();    
+  clawLog.acceptableAngle = acceptableAngle();
   clawLog.coralDetected = hasCoral();
 };
 bool Claw::hasCoral() {
@@ -72,23 +78,23 @@ bool Claw::acceptableAngle() {
     return false;
   }
 };
-void Claw::LoadPreferences(){
-  double p,i,d;
+void Claw::LoadPreferences() {
+  double p, i, d;
 
-// if(p !=  frc::Preferences::GetDouble(Claw::ClawPKey,DefaultClawKp){
+  // if(p !=  frc::Preferences::GetDouble(Claw::ClawPKey,DefaultClawKp){
 
- //}
+  //}
 };
-
 
 void Claw::Periodic() {
   acceptableAngle();
   hasCoral();
   sendData();
   getAngle();
-  frc::SmartDashboard::PutBoolean("acceptable angle?",acceptableAngle());
+  frc::SmartDashboard::PutBoolean("acceptable angle?", acceptableAngle());
   frc::SmartDashboard::PutNumber("axis Angle", double{getAngle()});
-  frc::SmartDashboard::PutBoolean("Coral",hasCoral());
-  //frc::SmartDashboard::PutNumber("sensorV", feedMotor.GetAnalog().GetVoltage());
- // frc::SmartDashboard::PutNumber("c", feedMotor.GetBusVoltage());
+  frc::SmartDashboard::PutBoolean("Coral", hasCoral());
+  // frc::SmartDashboard::PutNumber("sensorV",
+  // feedMotor.GetAnalog().GetVoltage());
+  // frc::SmartDashboard::PutNumber("c", feedMotor.GetBusVoltage());
 };

@@ -50,7 +50,7 @@ void CommandSwerveDrivetrain::Periodic() {
    * doesn't change until an explicit disable event occurs during testing.
    */
   if (!m_hasAppliedOperatorPerspective || frc::DriverStation::IsDisabled()) {
-    auto const allianceColor = frc::DriverStation::GetAlliance();
+    auto const allianceColor = frc::DrifverStation::GetAlliance();
     if (allianceColor) {
       SetOperatorPerspectiveForward(*allianceColor ==
                                             frc::DriverStation::Alliance::kRed
