@@ -1,15 +1,15 @@
 #pragma once
 
 #include "SystemConstants.h"
+#include <ctre/phoenix6/SignalLogger.hpp>
 #include <ctre/phoenix6/TalonFX.hpp>
 #include <ctre/phoenix6/configs/Configs.hpp>
-#include <ctre/phoenix6/SignalLogger.hpp>
+#include <frc/Preferences.h>
+#include <frc2/command/InstantCommand.h>
 #include <frc2/command/Subsystem.h>
 #include <frc2/command/SubsystemBase.h>
 #include <frc2/command/sysid/SysIdRoutine.h>
-#include <frc/Preferences.h>
 #include <string>
-#include <frc2/command/InstantCommand.h>
 
 namespace subsystems {
 
@@ -22,7 +22,7 @@ private:
   ctre::phoenix6::controls::MotionMagicVoltage zeroAxis;
 
   ctre::phoenix6::controls::VoltageOut sysReq{0_V};
-   std::string_view clawPositionKey = "ClawPosition";
+  std::string_view clawPositionKey = "ClawPosition";
   std::string_view ClawPKey = "ClawP";
   std::string_view ClawIKey = "ClawI";
   std::string_view ClawDKey = "ClawD";
@@ -45,10 +45,10 @@ private:
           .WithKS(0.3)
           .WithKA(0)
           .WithKG(0.3)
-          .WithKI(2)//.2 .5 1 12
-          .WithKD(0.1)//.1 .5
+          .WithKI(2)   //.2 .5 1 12
+          .WithKD(0.1) //.1 .5
           .WithKV(0.1)
-          .WithKP(12) //15
+          .WithKP(12) // 15
           .WithGravityType(
               ctre::phoenix6::signals::GravityTypeValue::Arm_Cosine)
           .WithStaticFeedforwardSign(
@@ -80,7 +80,7 @@ private:
                                .WithMotionMagicAcceleration(80_tr_per_s_sq)
                                .WithMotionMagicJerk(1600_tr_per_s_cu))
           .WithCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs{}
-                                 .WithSupplyCurrentLimit(10_A)//15
+                                 .WithSupplyCurrentLimit(10_A) // 15
                                  .WithSupplyCurrentLimitEnable(true));
   ctre::phoenix6::configs::CANcoderConfiguration encoderConfigs =
       ctre::phoenix6::configs::CANcoderConfiguration{}.WithMagnetSensor(
@@ -100,8 +100,8 @@ public:
   states state;
   ClawState clawLog;
   bool endIntake = false;
-  
-frc2::sysid::SysIdRoutine m_sysIdRoutine_Claw{
+
+  frc2::sysid::SysIdRoutine m_sysIdRoutine_Claw{
       frc2::sysid::Config{
           std::nullopt, // Use default ramp rate (1 V/s)
           4_V, // Reduce dynamic step voltage to 4 V to prevent brownout
@@ -112,20 +112,20 @@ frc2::sysid::SysIdRoutine m_sysIdRoutine_Claw{
                 "SysIdCLaw_State",
                 frc::sysid::SysIdRoutineLog::StateEnumToString(state));
           }},
-      frc2::sysid::Mechanism{
-          [this](units::volt_t output) {
-         axisMotor.SetControl(sysReq.WithOutput(output).WithLimitForwardMotion(true).WithLimitReverseMotion(true));
-          },
-          {},
-          this}};   
-frc2::CommandPtr SysIdQuasistatic(frc2::sysid::Direction direction)
-{
-   return m_sysIdRoutine_Claw.Quasistatic(direction);
-}
-frc2::CommandPtr SysIdDynamic(frc2::sysid::Direction direction)
-{
-   return m_sysIdRoutine_Claw.Dynamic(direction);
-}
+      frc2::sysid::Mechanism{[this](units::volt_t output) {
+                               axisMotor.SetControl(
+                                   sysReq.WithOutput(output)
+                                       .WithLimitForwardMotion(true)
+                                       .WithLimitReverseMotion(true));
+                             },
+                             {},
+                             this}};
+  frc2::CommandPtr SysIdQuasistatic(frc2::sysid::Direction direction) {
+    return m_sysIdRoutine_Claw.Quasistatic(direction);
+  }
+  frc2::CommandPtr SysIdDynamic(frc2::sysid::Direction direction) {
+    return m_sysIdRoutine_Claw.Dynamic(direction);
+  }
   Claw();
   void Periodic() override;
   void setFeedStop();

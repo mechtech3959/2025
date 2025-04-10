@@ -4,27 +4,34 @@
 
 #include "RobotContainer.h"
 #include <frc2/command/Commands.h>
-frc2::CommandPtr RobotContainer::seta(){
-  return frc2::InstantCommand([this]{this->subsystemClaw.setAxis(20_deg);}).ToPtr();
+frc2::CommandPtr RobotContainer::seta() {
+  return frc2::InstantCommand([this] { this->subsystemClaw.setAxis(20_deg); })
+      .ToPtr();
 }
-//frc2::CommandPtr RobotContainer::feed(){
- // return  ;
+// frc2::CommandPtr RobotContainer::feed(){
+//  return  ;
 //}
-frc2::CommandPtr RobotContainer::feedStop(){
-  return frc2::InstantCommand([this]{this->subsystemClaw.percentOut(0);}).ToPtr();
+frc2::CommandPtr RobotContainer::feedStop() {
+  return frc2::InstantCommand([this] { this->subsystemClaw.percentOut(0); })
+      .ToPtr();
 }
 RobotContainer::RobotContainer() {
   pathplanner::NamedCommands::registerCommand(
-      "coralangle",  std::move(frc2::cmd::RunOnce([this]{ this->subsystemClaw.setAxis(20_deg);},{&subsystemClaw})));
-      pathplanner::NamedCommands::registerCommand(
+      "coralangle",
+      std::move(frc2::cmd::RunOnce(
+          [this] { this->subsystemClaw.setAxis(20_deg); }, {&subsystemClaw})));
+  pathplanner::NamedCommands::registerCommand(
       "zeroangle",
-        std::move(frc2::cmd::RunOnce([this]{ this->subsystemClaw.setAxis(0_deg);},{&subsystemClaw})));
-       pathplanner::NamedCommands::registerCommand(
+      std::move(frc2::cmd::RunOnce(
+          [this] { this->subsystemClaw.setAxis(0_deg); }, {&subsystemClaw})));
+  pathplanner::NamedCommands::registerCommand(
       "coralout",
-      std::move(frc2::cmd::RunOnce([this]{ this->subsystemClaw.percentOut(-0.2);},{&subsystemClaw})));
+      std::move(frc2::cmd::RunOnce(
+          [this] { this->subsystemClaw.percentOut(-0.2); }, {&subsystemClaw})));
   pathplanner::NamedCommands::registerCommand(
       "feedstop",
-        std::move(frc2::cmd::RunOnce([this]{ this->subsystemClaw.percentOut(0);},{&subsystemClaw})));
+      std::move(frc2::cmd::RunOnce(
+          [this] { this->subsystemClaw.percentOut(0); }, {&subsystemClaw})));
   pathplanner::NamedCommands::registerCommand(
       "intake", frc2::cmd::RunOnce([this] {
         if (subsystemClaw.hasCoral()) {
@@ -35,8 +42,8 @@ RobotContainer::RobotContainer() {
           subsystemClaw.percentOut(-0.2);
         }
       }));
-        pathplanner::NamedCommands::registerCommand(
-      "test",  std::move(frc2::PrintCommand("Working").ToPtr()));
+  pathplanner::NamedCommands::registerCommand(
+      "test", std::move(frc2::PrintCommand("Working").ToPtr()));
 
   ConfigureBindings();
   // ConfigureDashboard();
@@ -190,7 +197,7 @@ void RobotContainer::ConfigureTeli() {
   if (systemJoystick.GetBButtonPressed() == true) {
     if (algea) {
       subsystemClaw.setAxis(180_deg); // CHECKK!!!
-      if (subsystemClaw.getAngle()  > 30_deg)
+      if (subsystemClaw.getAngle() > 30_deg)
         subsystemElevator.setHeight(1.9_tr); // CHECK
     } else if (!algea) {
       subsystemClaw.setAxis(20_deg);
@@ -203,7 +210,7 @@ void RobotContainer::ConfigureTeli() {
   if (systemJoystick.GetXButtonPressed() == true) {
     if (algea) {
       subsystemClaw.setAxis(180_deg); // CHECKK!!!
-      if (subsystemClaw.getAngle()  > 30_deg)
+      if (subsystemClaw.getAngle() > 30_deg)
         subsystemElevator.setHeight(3.8_tr); // CHECK
     } else if (!algea) {
       subsystemClaw.setAxis(20_deg);
@@ -216,7 +223,7 @@ void RobotContainer::ConfigureTeli() {
   if (systemJoystick.GetYButtonPressed() == true) {
     if (algea) {
       subsystemClaw.setAxis(120_deg); // CHECKK!!!???
-      if (subsystemClaw.getAngle()  > 30_deg)
+      if (subsystemClaw.getAngle() > 30_deg)
         subsystemElevator.setHeight(5.2_tr); // CHECK
     } else if (!algea) {
       subsystemClaw.setAxis(20_deg);

@@ -4,10 +4,6 @@
 
 #pragma once
 
-#include "Commands/Claw/setClawFeedStart.h"
-#include "Commands/Claw/setClawFeedStop.h"
-#include "Commands/Claw/setClawIntake.h"
-#include "Commands/ScoreL3.h"
 #include "Telemetry.h"
 #include "subsystems/ClawSubsystem.h"
 #include "subsystems/CommandSwerveDrivetrain.h"
@@ -60,10 +56,6 @@ private:
 public:
   subsystems::Claw subsystemClaw;
   subsystems::Elevator subsystemElevator;
-  ScoreL3 L3{&subsystemClaw, &subsystemElevator};
-  setClawIntake smartIntake{&subsystemClaw};
-  setClawFeedStop stop{&subsystemClaw};
-  setClawFeedStart start{&subsystemClaw};
   subsystems::CommandSwerveDrivetrain drivetrain{
       TunerConstants::CreateDrivetrain()};
 
