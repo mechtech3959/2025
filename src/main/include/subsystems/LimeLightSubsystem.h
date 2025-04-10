@@ -18,7 +18,6 @@ private:
   std::string name;
 
 public:
-  void limelightPeriodic();
   double drivecmd, turncmd, distance;
   units::time::second_t timestamp;
   bool LLHasTarget;

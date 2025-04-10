@@ -6,15 +6,15 @@
 
 #include <optional>
 
-#include <frc/TimedRobot.h>
-#include <frc2/command/CommandPtr.h>
-#include <cameraserver/CameraServer.h>
-#include <frc/Timer.h>
 #include "RobotContainer.h"
+#include <cameraserver/CameraServer.h>
+#include <frc/TimedRobot.h>
+#include <frc/Timer.h>
+#include <frc2/command/CommandPtr.h>
 
 class Robot : public frc::TimedRobot {
 public:
-frc::Timer autonT;
+  frc::Timer autonT;
   Robot();
   void RobotPeriodic() override;
   void DisabledInit() override;

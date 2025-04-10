@@ -27,7 +27,6 @@ void LimeLight::updateTracking() {
     drivecmd = ta;
   }
 };
-
 frc::Pose2d LimeLight::poseEst() {
   if (LLHasTarget && (tx < 0.1 || tx > -0.1)) {
     std::optional<LimelightHelpers::PoseEstimate> posEst =
@@ -37,7 +36,6 @@ frc::Pose2d LimeLight::poseEst() {
     return p;
   }
 };
-void LimeLight::limelightPeriodic() {};
 void LimeLight::Periodic() {
   updateTracking();
   poseEst();
