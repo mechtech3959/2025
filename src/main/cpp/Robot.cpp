@@ -6,16 +6,15 @@
 
 #include <frc2/command/CommandScheduler.h>
 
-Robot::Robot() {
-    frc::CameraServer::StartAutomaticCapture().SetFPS(30);
-}
+Robot::Robot() { frc::CameraServer::StartAutomaticCapture().SetFPS(30); }
 
 void Robot::RobotPeriodic() {
   frc2::CommandScheduler::GetInstance().Run();
-   // m_container.subsystemClaw.clawPeriodic();
-    //m_container.ConfigureBindings();
-    m_container.ConfigureDashboard();
-      frc::SmartDashboard::PutBoolean("coral",m_container.subsystemClaw.hasCoral());
+  // m_container.subsystemClaw.clawPeriodic();
+  // m_container.ConfigureBindings();
+  m_container.ConfigureDashboard();
+  frc::SmartDashboard::PutBoolean("coral",
+                                  m_container.subsystemClaw.hasCoral());
 
   /*/ m_container.frontLimeLight.updateTracking();
    m_container.frontLimeLight.poseEst();
@@ -30,7 +29,7 @@ void Robot::DisabledPeriodic() {}
 void Robot::DisabledExit() {}
 
 void Robot::AutonomousInit() {
-autonT.Start();
+  autonT.Start();
   m_autonomousCommand = m_container.GetAutonomousCommand();
 
   if (m_autonomousCommand) {
@@ -39,25 +38,24 @@ autonT.Start();
 }
 
 void Robot::AutonomousPeriodic() {
-  if(autonT.Get() >= 6_s){
+  if (autonT.Get() >= 6_s) {
     m_container.subsystemClaw.setAxis(20_deg);
-   if(autonT.Get() >= 7_s){
-    m_container.subsystemClaw.percentOut(-0.2);
-    }  };
+    if (autonT.Get() >= 7_s) {
+      m_container.subsystemClaw.percentOut(-0.2);
+    }
+  };
 }
 
 void Robot::AutonomousExit() {}
 
-void Robot::TeleopInit() {                       
+void Robot::TeleopInit() {
   autonT.Stop();
   if (m_autonomousCommand) {
     m_autonomousCommand.value()->Cancel();
   }
 }
 
-void Robot::TeleopPeriodic() {
-  m_container.ConfigureTeli();
-}
+void Robot::TeleopPeriodic() { m_container.ConfigureTeli(); }
 
 void Robot::TeleopExit() {}
 

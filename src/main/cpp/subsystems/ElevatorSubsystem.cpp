@@ -17,10 +17,13 @@ Elevator::Elevator()
 // hypothetical 1 rotation = 6inches? 8:1 ratio
 void Elevator::setHeight(units::turn_t pos) {
 
-  masterM.SetControl(elevatorMotion.WithPosition(pos).WithUseTimesync(true).WithEnableFOC(true).WithOverrideBrakeDurNeutral(true));
+  masterM.SetControl(elevatorMotion.WithPosition(pos)
+                         .WithUseTimesync(true)
+                         .WithEnableFOC(true)
+                         .WithOverrideBrakeDurNeutral(true));
   target = pos;
 }
-void Elevator::coastOut(){
+void Elevator::coastOut() {
   masterM.SetControl(ctre::phoenix6::controls::CoastOut{});
   target = 0_tr;
 }
@@ -41,9 +44,11 @@ void Elevator::sendData() {
       elevatorEncoder.GetAbsolutePosition().GetValueAsDouble();
   frc::SmartDashboard::PutString("Elevator/Master Control Mode",
                                  masterM.GetControlMode().ToString());
- frc::SmartDashboard::PutNumber("Elevator pose", masterM.GetPosition().GetValueAsDouble());
-  frc::SmartDashboard::PutNumber("Elevator Encoder pose", elevatorEncoder.GetPosition().GetValueAsDouble());
+  frc::SmartDashboard::PutNumber("Elevator pose",
+                                 masterM.GetPosition().GetValueAsDouble());
+  frc::SmartDashboard::PutNumber(
+      "Elevator Encoder pose",
+      elevatorEncoder.GetPosition().GetValueAsDouble());
   frc::SmartDashboard::PutBoolean("Elevator at Target?", isAtTarget());
-
 }
 void Elevator::Periodic() { sendData(); }

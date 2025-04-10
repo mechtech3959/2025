@@ -14,7 +14,6 @@ struct ElevatorState {
   double currentAmperage;
   double CurrentMvoltage;
   double CurrentSvoltage;
-
 };
 struct ClawState {
   double axisMotorPose;
