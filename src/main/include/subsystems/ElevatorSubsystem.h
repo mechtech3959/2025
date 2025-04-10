@@ -28,8 +28,8 @@ private:
       ctre::phoenix6::configs::Slot0Configs{}
           .WithGravityType(
               ctre::phoenix6::signals::GravityTypeValue::Elevator_Static)
-          .WithKP(7)//3.5 5
-          .WithKI(0.8)//1 
+          .WithKP(7)   // 3.5 5
+          .WithKI(0.8) // 1
           .WithKD(0.1)
           .WithKS(0.4)
           .WithKG(0.3)
@@ -42,8 +42,8 @@ private:
   ctre::phoenix6::configs::MotionMagicConfigs magicMotionConfigs =
       ctre::phoenix6::configs::MotionMagicConfigs{}
           .WithMotionMagicJerk(2000_tr_per_s_cu)
-          .WithMotionMagicCruiseVelocity(40_tps)//10 11
-          .WithMotionMagicAcceleration(40_tr_per_s_sq)//10 11
+          .WithMotionMagicCruiseVelocity(40_tps)       // 10 11
+          .WithMotionMagicAcceleration(40_tr_per_s_sq) // 10 11
           .WithMotionMagicExpo_kA(
               ctre::unit::volts_per_turn_per_second_squared_t{0.3});
 
@@ -60,8 +60,8 @@ private:
                                .WithInverted(0)
                                .WithNeutralMode(1))
           .WithCurrentLimits(ctre::phoenix6::configs::CurrentLimitsConfigs{}
-                                 .WithSupplyCurrentLimit(50_A)//60
-                                 .WithSupplyCurrentLowerLimit(20_A)//30
+                                 .WithSupplyCurrentLimit(50_A)      // 60
+                                 .WithSupplyCurrentLowerLimit(20_A) // 30
                                  .WithSupplyCurrentLowerTime(1_s)
                                  .WithSupplyCurrentLimitEnable(false))
           .WithFeedback(fbConfigs);
