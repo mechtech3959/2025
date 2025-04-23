@@ -3,7 +3,7 @@
  
  
  Competed at Week 3 at the Rocket City Regional
- Made to semi-finals - Match 10
+ Made it to semi-finals - Match 10
  
  *Two Stage elevator with 270_DOF Claw 
  
@@ -11,7 +11,8 @@
  
  *Full drivetrain and Super-Structure data logging 
  
-# Solely programmed by @DEKE21
+# CONTRIBUTORS
+Solely programmed by [@DEKE21] (https://www.github.com/DEKE21) 
  
 # SEE MORE OF THIS ROBOT
   
