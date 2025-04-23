@@ -12,7 +12,7 @@
  *Full drivetrain and Super-Structure data logging 
  
 # CONTRIBUTORS
-Solely programmed by [@DEKE21] (https://www.github.com/DEKE21) 
+Solely programmed by [@username] (https://www.github.com/DEKE21) 
  
 # SEE MORE OF THIS ROBOT
   
