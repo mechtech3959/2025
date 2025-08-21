@@ -22,9 +22,10 @@ Solely programmed by [@DEKE21](https://www.github.com/DEKE21)
  
 # SEE MORE OF THIS ROBOT
   
-   https://www.thebluealliance.com/team/3959
+   [The Blue Alliance](https://www.thebluealliance.com/team/3959)
    
-   https://www.instagram.com/mechtech_3959
+   [Instagram](https://www.instagram.com/mechtech_3959)
    
-   https://www.facebook.com/mcMechTech
+   [Facebook](https://www.facebook.com/mcMechTech)
+
 
